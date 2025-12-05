@@ -51,3 +51,5 @@ This will automatically install the app on your system.
 Enter it, click **Submit**, and talk to Cortana at your heart's content!
 
 A personal reccomendation of mine is to install Microsoft Powertoys and use it's keyboard manager to bind the shortcut Win+C to open Cortana. it should be located in C:/Program Files/Cortana
+Cortana SVGs provided by Icons8:
+<a target="_blank" href="https://icons8.com/icon/63758/cortana">Cortana</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
