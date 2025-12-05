@@ -1,0 +1,52 @@
+{
+  "name": "cortana",
+  "version": "1.5.0",
+  "description": "Electron frontend for DeepSeek",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-packager . Cortana --platform=win32 --arch=x64 --overwrite",
+    "dist": "electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^39.2.5",
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "remove-markdown": "^0.6.2",
+    "undici": "^7.16.0"
+  },
+  
+  "build": {
+    "appId": "com.blackinkgames.cortanaremake",
+    "productName": "Cortana",
+    "directories": {
+      "output": "dist"
+    },
+
+    "files": [
+      "**/*"
+    ],
+
+    "win": {
+      "target": "nsis",
+      "icon": "Images/icon.ico"
+    },
+
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true
+    }
+  }
+  
+}
+
