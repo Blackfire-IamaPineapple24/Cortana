@@ -1,9 +1,9 @@
 # How to Set Up
 
-## 1. Get an ArlaAI API Key
+## 1. Get an ArliAI API Key
 
-### Step 1: Create an ArlaAI Account
-1. Go to [ArlaAI's sign-up page](https://www.arliai.com/signup) and create an account.
+### Step 1: Create an ArliAI Account
+1. Go to [ArliAI's sign-up page](https://www.arliai.com/signup) and create an account.  
 2. Access the account panel.
 
 <img width="1359" height="785" alt="Sign-up page screenshot" src="https://github.com/user-attachments/assets/c98bd9e3-f5c7-42dc-a1a6-af92c8dbbb6c" />
@@ -26,14 +26,13 @@
 
 <img width="1081" height="119" alt="Set model parameters" src="https://github.com/user-attachments/assets/42c481c3-2a9e-4554-9248-23985d4a69f7" />
 
-You do not need to change any other parameters.  
-Copy your API key using the **Copy** button and save it somewhere safe, either on your clipboard or in a text file.
+You do not need to change any other parameters. Copy your API key using the **Copy** button and save it somewhere safe, either on your clipboard or in a text file.
 
 ---
 
 ## 2. Install the App
 
-### Step 1: Install the App to Your System
+### Step 1: Install the App on Your System
 1. Download the installer file and run it.
 
 <img width="591" height="466" alt="image" src="https://github.com/user-attachments/assets/ec1b5486-8681-4982-8a76-ea0e33112c1a" />
@@ -43,13 +42,20 @@ This will automatically install the app on your system.
 
 <img width="597" height="167" alt="image" src="https://github.com/user-attachments/assets/0ee46603-5126-4efe-b6a4-7e3343724bee" />
 
-### Step 2: Input your API key
+### Step 2: Input Your API Key
 1. You will be prompted to enter an API key:
 
 <img width="434" height="424" alt="image" src="https://github.com/user-attachments/assets/fac91704-4790-41c3-9cd6-a5e30ddd43a1" />
 
-Enter it, click **Submit**, and talk to Cortana at your heart's content!
+Enter it, click **Submit**, and start chatting with Cortana!
 
-A personal reccomendation of mine is to install Microsoft Powertoys and use it's keyboard manager to bind the shortcut Win+C to open Cortana. it should be located in C:/Program Files/Cortana
-Cortana SVGs provided by Icons8:
+**Tip:** You can use Microsoft PowerToys’ Keyboard Manager to bind a shortcut (e.g., Win+C) to open Cortana. The app should be located in `C:/Program Files/Cortana`.
+
+---
+
+## Legal & Attribution
+
+Cortana SVGs provided by Icons8:  
 <a target="_blank" href="https://icons8.com/icon/63758/cortana">Cortana</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+This is **not Cortana**. This program is intended to resemble and behave like Cortana. It runs on ARLI AI's Google Gemma 3 model. Microsoft owns the trademarks for the Cortana name and logo; I do not claim ownership of any of these assets. Microsoft was not involved in the creation or production of this program.
