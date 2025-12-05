@@ -3,13 +3,14 @@ const path = require('path');
 const fs = require('fs');
 const removeMarkdown = require('remove-markdown');
 
-const ARLI_API_KEY = '6e068802-c97c-486b-9793-b5cc7114907d';
 const MODEL = 'Gemma-3-27B-ArliAI-RPMax-v3';
-
 let conversationHistory = [];
 const boundsFile = path.join(app.getPath('userData'), 'window-bounds.json');
+const apiKeyFile = path.join(app.getPath('userData'), 'api-key.txt');
 
-function createWindow() {
+let ARLI_API_KEY = null;
+
+function createMainWindow() {
   let bounds = { width: 420, height: 680 };
   try {
     const data = fs.readFileSync(boundsFile, 'utf8');
@@ -43,8 +44,6 @@ function createWindow() {
   win.once('ready-to-show', () => {
     win.show();
     win.focus();
-
-    // Focus text input automatically
     win.webContents.executeJavaScript(`document.getElementById('input').focus();`);
   });
 
@@ -52,16 +51,59 @@ function createWindow() {
     fs.writeFileSync(boundsFile, JSON.stringify(win.getBounds()));
   });
 
-  // Close window on ESC key press
   win.webContents.on('before-input-event', (event, input) => {
     if (input.key === 'Escape') {
       event.preventDefault();
       win.close();
     }
   });
+
+  return win;
 }
 
-app.whenReady().then(createWindow);
+function createApiKeyWindow() {
+  const win = new BrowserWindow({
+    width: 420,
+    height: 400,
+    resizable: false,
+    minimizable: false,
+    maximizable: false,
+    autoHideMenuBar: true,
+    show: false,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload-api.js'),
+      contextIsolation: true,
+      nodeIntegration: false
+    }
+  });
+
+  win.loadFile('api-key.html');
+
+  win.once('ready-to-show', () => win.show());
+  return win;
+}
+
+app.whenReady().then(() => {
+  if (fs.existsSync(apiKeyFile)) {
+    ARLI_API_KEY = fs.readFileSync(apiKeyFile, 'utf8').trim();
+    createMainWindow();
+  } else {
+    const apiWin = createApiKeyWindow();
+  }
+});
+
+// IPC handlers
+ipcMain.on('api-key-submitted', (_, key) => {
+  const trimmed = key.trim();
+  if (!trimmed) return;
+
+  ARLI_API_KEY = trimmed;
+  fs.writeFileSync(apiKeyFile, ARLI_API_KEY, 'utf8');
+
+  const mainWin = createMainWindow();
+  const apiWin = BrowserWindow.getFocusedWindow();
+  if (apiWin) apiWin.close();
+});
 
 ipcMain.on('close-window', () => {
   const win = BrowserWindow.getFocusedWindow();
@@ -69,8 +111,8 @@ ipcMain.on('close-window', () => {
 });
 
 ipcMain.handle('ask-ai', async (event, prompt) => {
+  if (!ARLI_API_KEY) throw new Error('API key not set');
 
-  // --- Hard-coded instant Cortana responses ---
   const specialReplies = {
     "open the pod bay doors": "I'm sorry Dave; I can't do that.",
     "do you like xbox?": "Halo Is Where the Heart Is, Home is Where The Halo Is",
@@ -85,11 +127,8 @@ ipcMain.handle('ask-ai', async (event, prompt) => {
   };
 
   const lower = prompt.trim().toLowerCase();
-  if (specialReplies[lower]) {
-    return specialReplies[lower];
-  }
+  if (specialReplies[lower]) return specialReplies[lower];
 
-  // --- Streamlined system behaviour prompt ---
   const systemMessage = {
     role: 'system',
     content: `You are Microsoft’s Cortana assistant.
@@ -112,7 +151,7 @@ ipcMain.handle('ask-ai', async (event, prompt) => {
     },
     body: JSON.stringify({
       model: MODEL,
-      messages: messages,
+      messages,
       temperature: 0.7
     })
   });
