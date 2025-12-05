@@ -33,7 +33,7 @@ You do not need to change any other parameters. Copy your API key using the **Co
 ## 2. Install the App
 
 ### Step 1: Install the App on Your System
-1. Download the installer file and run it.
+1. Download the installer file from [here](https://github.com/Blackfire-IamaPineapple24/Cortana/releases) and run it.
 
 <img width="591" height="466" alt="image" src="https://github.com/user-attachments/assets/ec1b5486-8681-4982-8a76-ea0e33112c1a" />
 
