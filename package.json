@@ -1,7 +1,7 @@
 {
   "name": "cortana",
   "version": "1.6.1",
-  "description": "Electron frontend for DeepSeek",
+  "description": "Electron frontend for Gemma 3",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
