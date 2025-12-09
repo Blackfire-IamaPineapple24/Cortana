@@ -1,89 +1,108 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enter API Key</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    background: #000;
-    font-family: "Segoe UI Semilight","Segoe UI",sans-serif;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-  }
+  <head>
+    <!-- This is the meta. (Someone call Matthew Patthew) Metadata and Viewport settings. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter API Key</title>
 
-  .header-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+    <!-- Style in CSS. -->
+    <style>
 
-  .header {
-    font-size: 28px;
-    font-weight: 300;
-    text-align: center;
-    margin-bottom: 24px;
-  }
+      body /* Main page layout. Can be overwritten by other CSS. */
+      {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        font-family: "Segoe UI Semilight","Segoe UI",sans-serif;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
 
-  .cortana {
-    height: 100px;
-    width: auto;
-    margin-bottom: 16px;
-  }
+      .header-container /* This is the container for the Logo and Header text ("Cortana"). */
+      {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-  .input-bar {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    gap: 12px;
-    align-items: stretch;
-  }
+      .header /* This is the Text that says "Cortana". */
+      {
+        font-size: 28px;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 24px;
+      }
 
-  .input-bar input {
-    padding: 12px 16px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    background: rgba(255,255,255,0.08);
-    color: white;
-  }
+      .cortana /* This is the logo. */
+      {
+        height: 100px;
+        width: auto;
+        margin-bottom: 16px;
+      }
 
-  .input-bar button {
-    padding: 12px;
-    font-size: 16px;
-    cursor: pointer;
-    background: rgba(3, 168, 244, 0.664);
-    border: none;
-    color: white;
-  }
-</style>
-</head>
-<body>
+      .input-bar /* Global style for the Input box. */
+      {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        gap: 12px;
+        align-items: stretch;
+      }
 
-<div class="header-container">
-  <img src="Images/cortana.svg" class="cortana">
-  <div class="header">Cortana</div>
-</div>
+      .input-bar input /* This is the bit where you put your API key in. */
+      {
+        padding: 12px 16px;
+        font-size: 16px;
+        border: none;
+        outline: none;
+        background: rgba(255,255,255,0.08);
+        color: white;
+      }
 
-<div class="input-bar">
-  <input id="apikey" type="password" placeholder="Enter your API Key">
-  <button onclick="submitKey()">Submit</button>
-</div>
+      .input-bar button /* The "Submit" button. Submit to our corporate overlords. */
+      {
+        padding: 12px;
+        font-size: 16px;
+        cursor: pointer;
+        background: rgba(3, 168, 244, 0.664);
+        border: none;
+        color: white;
+      }
 
-<script>
-const input = document.getElementById('apikey');
-function submitKey() {
-  const val = input.value.trim();
-  if(val) window.apiKeyAPI.submitKey(val);
-}
-input.addEventListener('keypress', e => { if(e.key==='Enter') submitKey(); });
-</script>
+    </style>
+  </head>
 
-</body>
+  <body>
+    <!-- The header. This is the bit that shows the Logo and says "Cortana". -->
+    <div class="header-container">
+      <img src="Images/cortana.svg" class="cortana"> <!-- Logo -->
+      <div class="header">Cortana</div> <!-- "Cortana" -->
+    </div>
+
+    <!-- The part that shows the input box and allows you to type (or paste) in it. -->
+    <div class="input-bar">
+      <input id="apikey" type="password" placeholder="Enter your API Key"> <!-- Input box. -->
+      <button onclick="submitKey()">Submit</button> <!-- Submit button. -->
+    </div>
+
+    <!-- This is the script. (The part that actually takes your sweet, sweet API key and sends it to the main app.) -->
+    <script>
+      const input = document.getElementById('apikey'); // Make a reference to the input box in the HTML "input-bar" div.
+
+      // Trim the key (remove unnecessary whitespace) and send it to the main process.
+      function submitKey()
+      {
+        const val = input.value.trim();
+        if(val) window.apiKeyAPI.submitKey(val);
+      }
+
+      input.addEventListener('keypress', e => { if(e.key==='Enter') submitKey(); }); // Make it so you can press "Enter" instead of clicking "Submit" if that floats your boat.
+    </script>
+  </body>
 </html>

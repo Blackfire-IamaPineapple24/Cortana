@@ -1,207 +1,244 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cortana</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    background: #000;
-    font-family: "Segoe UI Semilight","Segoe UI",sans-serif;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-  }
+  <head>
+    <!-- This is the meta. (Someone call Matthew Patthew) Metadata and Viewport settings. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cortana</title>
 
-  .header-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+    <!-- Style in CSS. -->
+    <style>
 
-  .header {
-    padding: 24px;
-    font-size: 28px;
-    font-weight: 300;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;  
-    user-select: none;
-  }
+      body /* Main page layout. Can be overwritten by other CSS. */
+      {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        font-family: "Segoe UI Semilight","Segoe UI",sans-serif;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+      }
 
-  .cortana {
-    height: 100px;
-    width: auto;
-    user-select: none;
-  }
+      .header-container /* This is the container for the Logo and Header text ("Cortana"). */
+      {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
 
-  .welcome {
-    padding: 0 24px;
-    font-size: 22px;
-    opacity: 0.8;
-    margin-bottom: 32px;
-    text-align: center;
-    font-weight: 300;
-    user-select: none;
-  }
+      .header /* This is the Logo and Header text. */
+      {
+        padding: 24px;
+        font-size: 28px;
+        font-weight: 300;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;  
+        user-select: none;
+      }
 
-  .chat-container {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: flex-start;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
+      .cortana /* The logo. */
+      {
+        height: 100px;
+        width: auto;
+        user-select: none;
+      }
 
-  .input-bar {
-    padding: 16px 24px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    gap: 12px;
-    user-select: none;
-  }
+      .welcome /* "What can I help you with?" */
+      {
+        padding: 0 24px;
+        font-size: 22px;
+        opacity: 0.8;
+        margin-bottom: 32px;
+        text-align: center;
+        font-weight: 300;
+        user-select: none;
+      }
 
-  .input-bar input {
-    flex: 1;
-    background: rgba(255,255,255,0.08);
-    border: none;
-    padding: 12px 16px;
-    color: white;
-    font-size: 16px;
-    outline: none;
-    user-select: none;
-  }
+      .chat-container /* A container for the actual AI chat. */
+      {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        align-content: flex-start;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
 
-  .input-bar button {
-    background: rgba(255,255,255,0.15);
-    border: none;
-    padding: 12px 20px;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    user-select: none;
-  }
+      .input-bar /* Global style for the chat Input box. */
+      {
+        padding: 16px 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        gap: 12px;
+        user-select: none;
+      }
 
-  .message {
-    margin-bottom: 16px;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.123);
-    max-width: 80%;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-    user-select: none;
-  }
+      .input-bar input /* This is the bit where you type your message to Cortana. (She is code.) */
+      {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.08);
+        border: none;
+        padding: 12px 16px;
+        color: white;
+        font-size: 16px;
+        outline: none;
+        user-select: none;
+      }
 
-  .assistant {
-    align-self: flex-start;
-    text-align: left;
-    margin-right: auto;
-  }
+      .input-bar button /* This is the "Send" button. Click it to make sure Cortana gets your death threats! (Disclaimer: Do not send death threats, they're not nice.) */
+      {
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        padding: 12px 20px;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        user-select: none;
+      }
 
-  .user {
-    align-self: flex-end;
-    background: rgba(3, 168, 244, 0.664);
-    text-align: right;
-    margin-left: auto;
-  }
+      .message /* Global style for messages. */
+      {
+        margin-bottom: 16px;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.123);
+        max-width: 80%;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        user-select: none;
+      }
 
-  @font-face {
-  font-family: 'Segoe Boot Semilight';
-  src: url('C:/Windows/Boot/Fonts/segoe_slboot.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-  }
+      .assistant /* Make sure messages from everyone's favourite cricket fan are on the LEFT. */
+      {
+        align-self: flex-start;
+        text-align: left;
+        margin-right: auto;
+      }
 
-</style>
-</head>
-<body>
-<div class="header-container">
-    <div class="header">
-        <img src="Images/cortana.svg" class="cortana">
-        <p>Cortana</p>
+      .user /* Make sure messages from everyone are on the RIGHT. */
+      {
+        align-self: flex-end;
+        background: rgba(3, 168, 244, 0.664);
+        text-align: right;
+        margin-left: auto;
+      }
+
+      @font-face /* Grab the font for the loading spinner. */
+      {
+      font-family: 'Segoe Boot Semilight';
+      /* Really important legal shit: Grab the font from the Windows directory so I'm not bundling a Microsoft font with my app. Fun fact: This is the
+         font Windows uses to show you that coollittle "spinning dots" animation while your computer is taking an age to boot. */
+      src: url('C:/Windows/Boot/Fonts/segoe_slboot.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: block;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <!-- The header. This is the bit that shows the Logo and says "Cortana". -->
+    <div class="header-container">
+        <div class="header">
+            <img src="Images/cortana.svg" class="cortana">
+            <p>Cortana</p>
+        </div>
     </div>
-</div>
-<div class="welcome">What can I help you with?</div>
-<div class="chat-container" id="chat"></div>
-<div class="input-bar">
-  <input id="input" placeholder="Type a message...">
-  <button id="sendBtn">Send</button>
-</div>
 
-<script>
-const input = document.getElementById('input');
-const sendBtn = document.getElementById('sendBtn');
-const chat = document.getElementById('chat');
+    <!-- Cortana asks you what tf you want. -->
+    <div class="welcome">What can I help you with?</div>
+    <div class="chat-container" id="chat"></div> <!-- This contains the chat. It's in the name. -->
 
-// Spinner characters (Windows-style)
-const spinnerChars = "".split('');
+    <!-- Ever wanted to type something in an HTML page? Well, now you can with our new patented technology! (Message from Nintendo) -->
+    <div class="input-bar">
+      <input id="input" placeholder="Type a message...">
+      <button id="sendBtn">Send</button>
+    </div>
 
-function addMessage(text, who) {
-  const div = document.createElement('div');
-  div.className = `message ${who}`;
-  div.textContent = text;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-  return div;
-}
+    <!-- This is the script. (The part that actually makes the loading spinner work. Oh, and it sends and receives the AI messages. Did I mention the loading spinner?) -->
+    <script>
+      // Make references to the chat, the input box in our HTML "input-bar" div and the "Send" button.
+      const input = document.getElementById('input');
+      const sendBtn = document.getElementById('sendBtn');
+      const chat = document.getElementById('chat');
 
-// Animate spinner
-function startSpinner(div) {
-  div.style.fontFamily = '"Segoe Boot Semilight", monospace';
-  let i = 0;
-  const interval = setInterval(() => {
-    div.textContent = spinnerChars[i % spinnerChars.length];
-    i++;
-    chat.scrollTop = chat.scrollHeight;
-  }, 23); // faster animation, adjust as needed
-  return interval;
-}
+      /* See all those funny little boxes there? Those are the frames of the spinner animation. Your browser/text editor isn't rendering them because it doesn't support
+         Segoe Boot Semilight. If you're on a Unix-based operating system; go away, this does not concern you. */
+      /* This makes a string to store those frames and split that string into individual characters so that we can loop through them for our
+         animation later. */
+      const spinnerChars = "".split('');
 
+      /* Here we ask the important philosophical question, "Who am I?" and store the answer in a variable. It also stores the text from the User or AI's message in a variable.
+         This function takes those values in and uses them. */
+      function addMessage(text, who)
+      {
+        const div = document.createElement('div'); // Make the message (wow so code)
+        div.className = `message ${who}`; // The class for the div we just made is set to the value of "who".
+        div.textContent = text; // Add the value of "text" to the message. Our message is COMPLETE!
+        chat.appendChild(div); // The rest of the function makes the div visible, scrolls to the bottom of the page and make the div available for us to use later.
+        chat.scrollTop = chat.scrollHeight;
+        return div;
+      }
 
+      // Here's the function that spits dirty s all over your screen.
+      function startSpinner(div)
+      {
+        div.style.fontFamily = '"Segoe Boot Semilight", monospace'; // Give me my fancy font. The location of this font is defined in CSS (See @font-face)
+        let i = 0; // This is a counter. Watch it go up.
+        chat.scrollTop = chat.scrollHeight; // Scroll to the bottom of the page.
+        const interval = setInterval(() => // Repeat a timer.
+        {
+          div.textContent = spinnerChars[i % spinnerChars.length]; // Set the currently active frame to the... current frame of the animation.
+          i++; // I told you it would go up.
+        }, 23); // How many times to repeat our timer. In other words, the animation speed. The lower the number, the faster the spinner. Don't make him dizzy.
+        return interval; // Make it so we can stop the animation later.
+      }
 
-async function sendMessage() {
-  const text = input.value.trim();
-  if (!text) return;
-  
-  addMessage(text, 'user'); // user message
-  input.value = '';
+      // Start an async function to send a message to the house of the rising blue circle.
+      async function sendMessage()
+      {
+        const text = input.value.trim(); // The elusive text variable that contains the message you typed.
+        if (!text) return; // If for some reason, the user clicked Send or pressed enter without typing anything, STAHP!
 
-  // Add assistant message placeholder with spinner
-  const assistantDiv = addMessage('', 'assistant');
-  const spinnerInterval = startSpinner(assistantDiv);
+        addMessage(text, 'user'); // Call the addMessage function we prepared earlier and pass in the user's message, and the word "user" (To answer the question, "who")
+        input.value = ''; // Clear the input box. Why make the user press backspace? We treat our guests well here.
 
-  try {
-    const response = await window.electronAPI.askAI(text);
+        // Add a div with Cortana's message style that shows the spinner animation.
+        const assistantDiv = addMessage('', 'assistant');
+        const spinnerInterval = startSpinner(assistantDiv);
 
-    // Stop spinner
-    clearInterval(spinnerInterval);
+        try // We're not in trouble if something goes wrong! YAY! Most likely the Arli servers are down, You've already sent a message, or I F'd up.
+        {
+          const response = await window.electronAPI.askAI(text); // Send the message to the main process, wait, and store whatever we get back in "response".
 
-    // Show final text with normal font
-    assistantDiv.style.fontFamily = '"Segoe UI Semilight", sans-serif';
-    assistantDiv.textContent = response;
+          clearInterval(spinnerInterval); // Stop the animation. We don't need it anymore.
 
-  } catch (err) {
-    clearInterval(spinnerInterval);
-    assistantDiv.style.fontFamily = '"Segoe UI Semilight", sans-serif';
-    assistantDiv.textContent = `Error: ${err.message}`;
-  }
-}
+          // Change the font back to something humans can read and put the AI response in the box.
+          assistantDiv.style.fontFamily = '"Segoe UI Semilight", sans-serif';
+          assistantDiv.textContent = response;
 
-// Event listeners
-sendBtn.addEventListener('click', sendMessage);
-input.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
-</script>
+        }
+        catch (err) // What happens if anything between here and "try" goes wrong.
+        {
+          clearInterval(spinnerInterval); // Stop the spinner. We don't need it here, either. sorry li'l guy.
+          assistantDiv.style.fontFamily = '"Segoe UI Semilight", sans-serif'; // Change the font back to something humans can read.
+          assistantDiv.textContent = `Error: ${err.message}`; // Display the error message.
+        }
+      }
 
-</body>
+      // These bits tell the program if you clicked Send or pressed enter. (You didn't type anything in, did you? You sick deviant.)
+      sendBtn.addEventListener('click', sendMessage);
+      input.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+    </script>
+  </body>
 </html>
