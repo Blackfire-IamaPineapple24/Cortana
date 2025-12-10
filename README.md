@@ -1,9 +1,9 @@
 # How to Set Up
 
-## 1. Get an ArliAI API Key
+## 1. Get an Arli AI API Key
 
-### Step 1: Create an ArliAI Account
-1. Go to [ArliAI's sign-up page](https://www.arliai.com/signup) and create an account.  
+### Step 1: Create an Arli AI Account
+1. Go to [Arli AI's sign-up page](https://www.arliai.com/signup) and create an account.  
 2. Access the account panel.
 
 <img width="1359" height="785" alt="Sign-up page screenshot" src="https://github.com/user-attachments/assets/c98bd9e3-f5c7-42dc-a1a6-af92c8dbbb6c" />
@@ -18,7 +18,7 @@
 
 <img width="319" height="93" alt="Name API key" src="https://github.com/user-attachments/assets/37113804-1dfd-497c-a0a7-07e019535663" />
 
-3. Click **Model Filter** and select `Gemma-3-27B-ArliAI-RPMax-v3`.
+3. Click **Model Filter** and select `Gemma-3-27B-Arli AI-RPMax-v3`.
 
 <img width="1117" height="111" alt="Select model filter" src="https://github.com/user-attachments/assets/3c42971a-f4c6-44f1-961a-89edceec8b2a" />
 
@@ -62,5 +62,5 @@ Enter it, click **Submit**, and start chatting with Cortana!
 Cortana SVGs provided by Icons8:  
 <a target="_blank" href="https://icons8.com/icon/63758/cortana">Cortana</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
-This is **not Cortana**. This program is intended to resemble and behave like Cortana. It runs on ARLI AI's Google Gemma 3 model. Microsoft owns the trademarks for the Cortana name and logo; I do not claim ownership of any of these assets. Microsoft was not involved in the creation or production of this program.
+This is **not Cortana**. This program is intended to resemble and behave like Cortana. It runs on Arli AI's Google Gemma 3 model. Microsoft owns the trademarks for the Cortana name and logo; I do not claim ownership of any of these assets. Microsoft was not involved in the creation or production of this program.
 I made this for myself, using ChatGPT, mostly. I do not claim to have written all of this code, but I did write some - edited CSS and instructions.
