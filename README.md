@@ -22,7 +22,7 @@
 
 <img width="1117" height="111" alt="Select model filter" src="https://github.com/user-attachments/assets/3c42971a-f4c6-44f1-961a-89edceec8b2a" />
 
-4. Click **Model Filter** again, then click **Parameters** and select the same model.
+4. Save that. Click **Model Filter** again, then click **Parameters** and select the same model before saving again.
 
 <img width="1081" height="119" alt="Set model parameters" src="https://github.com/user-attachments/assets/42c481c3-2a9e-4554-9248-23985d4a69f7" />
 
