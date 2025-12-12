@@ -53,7 +53,7 @@ Enter it, click **Submit**, and start chatting with Cortana!
 
 **[System Requirements](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/System%20Requirements.md)**
 
-**VirusTotal Scan:** SmartScreen flags the installer, so [here's](https://www.virustotal.com/gui/file/abb23ef86f67c40fcb0778938921324540f356576363963753d9a7912fc930d5?nocache=1) a scan of the file to prove it's safe.
+**VirusTotal Scan:** SmartScreen flags the installer, so [here's](https://www.virustotal.com/gui/file/1d05d54e850350a2516268824694f3ab6c97d2c4c304c6b699dd4a0ceccb9dd3?nocache=1) a scan of the file to prove it's safe.
 
 ---
 
