@@ -53,6 +53,7 @@
         width: 80%;
         gap: 12px;
         align-items: stretch;
+        background: rgba(255, 255, 255, 0.1);
       }
 
       .input-bar input /* This is the bit where you put your API key in. */
@@ -61,18 +62,35 @@
         font-size: 16px;
         border: none;
         outline: none;
-        background: rgba(255,255,255,0.08);
+        background: rgba(63, 63, 63, 1);
         color: white;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+      }
+
+      .input-bar ::placeholder
+      {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .input-bar input:hover
+      {
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
       }
 
       .input-bar button /* The "Submit" button. Submit to our corporate overlords. */
       {
         padding: 12px;
         font-size: 16px;
-        cursor: pointer;
+        cursor: normal;
         background: rgba(3, 168, 244, 0.664);
         border: none;
         color: white;
+      }
+
+      .input-bar button:hover
+      {
+        background: rgb(66, 195, 255);
+        cursor: normal;
       }
 
     </style>
