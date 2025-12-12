@@ -1,9 +1,12 @@
 // Woah, cool #includeusing;imports
-const { app, BrowserWindow, ipcMain, screen } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, systemPreferences } = require('electron');
 const path = require('path');
 const fs = require('fs'); // This is so we can store the API key.
 const removeMarkdown = require('remove-markdown'); // Naughty AI uses Markdown but we're not letting it.
+const os = require('os');
 
+//const accentColor = systemPreferences.getAccentColor(); // Get the Windows accent colour since we need to mimick the Windows titlebar.
+//const isDarkMode = systemPreferences.isDarkMode(); // Are we in dark mode? Hopefully. Any self-respecting user would be.
 const MODEL = 'Gemma-3-27B-ArliAI-RPMax-v3'; // This tells the app which AI model to use. Gemma 3 is the latest and fastest model available for free on Arli.
 let conversationHistory = []; // Conversation history. So that the AI doesn't forget what you said to it immediately.
 const boundsFile = path.join(app.getPath('userData'), 'window-bounds.json'); // These two lines...
@@ -35,6 +38,7 @@ function createMainWindow()
     y,
     minWidth: 420,
     minHeight: 680,
+    resizable: true,
     autoHideMenuBar: true, // This removes the Menubar.
     show: false,
     icon: path.join(__dirname, 'Images', 'icon.png'),
@@ -220,4 +224,8 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
 
   conversationHistory.push({ role: 'assistant', content: text });
   return text; // Return the response. This will either be the special response that should be returned, or the AI response.
+});
+
+ipcMain.handle('get-username', () => {
+  return os.userInfo().username;
 });

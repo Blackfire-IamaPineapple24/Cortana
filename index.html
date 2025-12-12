@@ -10,55 +10,20 @@
     <!-- Style in CSS. -->
     <style>
 
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------------------------- Body --------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
       body /* Main page layout. Can be overwritten by other CSS. */
       {
         margin: 0;
         padding: 0;
-        background: #000;
+        background: rgba(0, 0, 0, 1);
         font-family: "Segoe UI Semilight","Segoe UI",sans-serif;
         color: white;
         display: flex;
         flex-direction: column;
         height: 100vh;
         overflow: hidden;
-      }
-
-      .header-container /* This is the container for the Logo and Header text ("Cortana"). */
-      {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-
-      .header /* This is the Logo and Header text. */
-      {
-        padding: 24px;
-        font-size: 28px;
-        font-weight: 300;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;  
-        user-select: none;
-      }
-
-      .cortana /* The logo. */
-      {
-        height: 100px;
-        width: auto;
-        user-select: none;
-      }
-
-      .welcome /* "What can I help you with?" */
-      {
-        padding: 0 24px;
-        font-size: 22px;
-        opacity: 0.8;
-        margin-bottom: 32px;
-        text-align: center;
-        font-weight: 300;
-        user-select: none;
       }
 
       .chat-container /* A container for the actual AI chat. */
@@ -73,39 +38,123 @@
         scrollbar-width: none;
         -ms-overflow-style: none;
       }
+/* ----------------------------------------------------------------------------------------------------------------------- */
 
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------- Header -------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+      .header-container /* This is the container for the Logo and Header text ("Cortana"). */
+      {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 1);
+      }
+
+      .header /* This is the Logo and Header text. */
+      {
+        padding: 24px;
+        font-size: 35px;
+        font-weight: 300;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;  
+        user-select: none;
+        color: rgb(66, 195, 255);
+      }
+
+      .cortana /* The logo. */
+      {
+        height: 100px;
+        width: auto;
+        user-select: none;
+        background: rgba(0, 0, 0, 1);
+      }
+
+      .welcome /* "What can I help you with?" */
+      {
+        padding: 0 24px;
+        font-size: 22px;
+        opacity: 0.8;
+        margin-bottom: 32px;
+        text-align: center;
+        font-weight: 300;
+        user-select: none;
+        background: rgba(0, 0, 0, 1);
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------- Input Bar ------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
       .input-bar /* Global style for the chat Input box. */
       {
-        padding: 16px 24px;
+        box-sizing: border-box;
+        /* padding: 16px 24px; */
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         display: flex;
-        gap: 12px;
+        /* gap: 12px; */
         user-select: none;
+        height: 50px;
       }
 
       .input-bar input /* This is the bit where you type your message to Cortana. (She is code.) */
       {
         flex: 1;
-        background: rgba(255, 255, 255, 0.08);
+        background: rgba(63, 63, 63, 1);
+        /* border: 2px solid #575757; */
         border: none;
+        /* outline: 1px solid #575757; */
         padding: 12px 16px;
-        color: white;
+        color: rgba(255, 255, 255, 1);
         font-size: 16px;
         outline: none;
         user-select: none;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
       }
 
       .input-bar button /* This is the "Send" button. Click it to make sure Cortana gets your death threats! (Disclaimer: Do not send death threats, they're not nice.) */
       {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(3, 168, 244, 1);
         border: none;
         padding: 12px 20px;
-        color: white;
-        cursor: pointer;
-        font-size: 16px;
+        color: rgba(255, 255, 255, 1);
+        cursor: normal;
+        font-size: 20px;
         user-select: none;
+        font-family: 'Segoe MDL2 Assets';
       }
 
+      .input-bar ::placeholder
+      {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .input-bar input:hover
+      {
+        /* border: 4px solid #575757; */
+        /* outline: 3px solid #575757; */
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+      }
+
+      .input-bar button:hover
+      {
+        background: rgb(66, 195, 255);
+        cursor: normal;
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------- Messages ------------------------------------------------------ */
+/* ----------------------------------------------------------------------------------------------------------------------- */
       .message /* Global style for messages. */
       {
         margin-bottom: 16px;
@@ -131,7 +180,13 @@
         text-align: right;
         margin-left: auto;
       }
+/* ----------------------------------------------------------------------------------------------------------------------- */
 
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------- Fonts ------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
       @font-face /* Grab the font for the loading spinner. */
       {
       font-family: 'Segoe Boot Semilight';
@@ -143,6 +198,16 @@
       font-display: block;
       }
 
+      @font-face /* Grab the font for the titlebar icons. */
+      {
+        font-family: 'Segoe MDL2 Assets';
+        src: url('C:/Windows/Fonts/segmdl2.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
     </style>
   </head>
 
@@ -151,18 +216,17 @@
     <div class="header-container">
         <div class="header">
             <img src="Images/cortana.svg" class="cortana">
-            <p>Cortana</p>
+            <p id="greeting"></p>
         </div>
     </div>
-
     <!-- Cortana asks you what tf you want. -->
-    <div class="welcome">What can I help you with?</div>
+    <!-- <div class="welcome">What can I help you with?</div> -->
     <div class="chat-container" id="chat"></div> <!-- This contains the chat. It's in the name. -->
 
     <!-- Ever wanted to type something in an HTML page? Well, now you can with our new patented technology! (Message from Nintendo) -->
     <div class="input-bar">
       <input id="input" placeholder="Type a message...">
-      <button id="sendBtn">Send</button>
+      <button id="sendBtn"></button>
     </div>
 
     <!-- This is the script. (The part that actually makes the loading spinner work. Oh, and it sends and receives the AI messages. Did I mention the loading spinner?) -->
@@ -239,6 +303,31 @@
       // These bits tell the program if you clicked Send or pressed enter. (You didn't type anything in, did you? You sick deviant.)
       sendBtn.addEventListener('click', sendMessage);
       input.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+
+      // Get the current user's name and use it for Cortana's greeting.
+      async function setGreeting()
+      {
+        try
+        {
+          const username = await window.electronAPI.getUsername();
+          const greetingElement = document.getElementById('greeting');
+          greetingElement.textContent = `Hi, ${username}! How can I help you?`;
+
+          const welcomeElement = document.querySelector('.welcome');
+          if (welcomeElement)
+          {
+               welcomeElement.textContent = `Hi, ${username}! How can I help you?`;
+          }
+        }
+        catch (err)
+        {
+          console.error("Failed to get username:", err);
+          // Fallback greeting if it fails
+          document.getElementById('greeting').textContent = 'Hi! How can I help you?';
+        }
+      }
+
+      setGreeting();
     </script>
   </body>
 </html>
