@@ -45,7 +45,7 @@ This will automatically install the app on your system.
 ### Step 2: Input Your API Key
 1. You will be prompted to enter an API key:
 
-<img width="434" height="424" alt="image" src="https://github.com/user-attachments/assets/fac91704-4790-41c3-9cd6-a5e30ddd43a1" />
+<img width="427" height="424" alt="API key window" src="https://github.com/user-attachments/assets/019d0867-dfc4-46ff-a0ed-2cc9665ed466" />
 
 Enter it, click **Submit**, and start chatting with Cortana!
 
