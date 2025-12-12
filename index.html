@@ -74,18 +74,6 @@
         user-select: none;
         background: rgba(0, 0, 0, 1);
       }
-
-      .welcome /* "What can I help you with?" */
-      {
-        padding: 0 24px;
-        font-size: 22px;
-        opacity: 0.8;
-        margin-bottom: 32px;
-        text-align: center;
-        font-weight: 300;
-        user-select: none;
-        background: rgba(0, 0, 0, 1);
-      }
 /* ----------------------------------------------------------------------------------------------------------------------- */
 
 
@@ -220,7 +208,6 @@
         </div>
     </div>
     <!-- Cortana asks you what tf you want. -->
-    <!-- <div class="welcome">What can I help you with?</div> -->
     <div class="chat-container" id="chat"></div> <!-- This contains the chat. It's in the name. -->
 
     <!-- Ever wanted to type something in an HTML page? Well, now you can with our new patented technology! (Message from Nintendo) -->
@@ -322,8 +309,7 @@
         catch (err)
         {
           console.error("Failed to get username:", err);
-          // Fallback greeting if it fails
-          document.getElementById('greeting').textContent = 'Hi! How can I help you?';
+          document.getElementById('greeting').textContent = 'Hi! How can I help you?'; // Fallback if we can't get the username.
         }
       }
 
