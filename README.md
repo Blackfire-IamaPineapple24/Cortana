@@ -49,7 +49,7 @@ This will automatically install the app on your system.
 
 Enter it, click **Submit**, and start chatting with Cortana!
 
-**Tip:** You can use Microsoft PowerToys’ Keyboard Manager to bind a shortcut (e.g., Win+C) to open Cortana. The app should be located in `C:/Program Files/Cortana`.
+**Tip:** You can use Microsoft PowerToys’ Keyboard Manager to bind Win+C to open Cortana. The app should be located in `C:/Program Files/Cortana`.
 
 **[System Requirements](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/System%20Requirements.md)**
 
