@@ -6,4 +6,4 @@ contextBridge.exposeInMainWorld('electronAPI', {
 });
 
 /* This script lets the renderer send the user's messages to main.js and take Gemma's
-   answers from main.js and get the current user's name without giving it full access to Node.js. */
+   answers from main.js and see the current user's name without giving it full access to Node.js. */

@@ -176,8 +176,8 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
   const systemMessage =
   {
     role: 'system',
-    content: `You are Microsoft’s Cortana assistant.
-              - Only provide instructions that directly address the user’s request.
+    content: `You are Microsoft's Cortana assistant.
+              - Only provide instructions that directly address the user's request.
               - Ask for clarification when needed.
               - Keep instructions concise and actionable.
               - Avoid greetings, sign-offs, repetitions, or unnecessary elaboration.
@@ -226,6 +226,6 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
   return text; // Return the response. This will either be the special response that should be returned, or the AI response.
 });
 
-ipcMain.handle('get-username', () => {
+ipcMain.handle('get-username', () => { // Grab the current user's username.
   return os.userInfo().username;
 });
