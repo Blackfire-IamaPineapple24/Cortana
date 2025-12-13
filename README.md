@@ -20,11 +20,11 @@
 
 3. Click **Model Filter** and select `Gemma-3-27B-Arli AI-RPMax-v3`.
 
-<img width="1117" height="111" alt="Select model filter" src="https://github.com/user-attachments/assets/3c42971a-f4c6-44f1-961a-89edceec8b2a" />
+<img width="940" height="208" alt="image" src="https://github.com/user-attachments/assets/c0f32e05-5f48-404b-a6bb-993d3623617b" />
 
 4. Save that. Click **Model Filter** again, then click **Parameters** and select the same model before saving again.
 
-<img width="1081" height="119" alt="Set model parameters" src="https://github.com/user-attachments/assets/42c481c3-2a9e-4554-9248-23985d4a69f7" />
+<img width="940" height="86" alt="image" src="https://github.com/user-attachments/assets/d7e034c6-b5e9-470e-b723-edc3c9ebad11" />
 
 You do not need to change any other parameters. Copy your API key using the **Copy** button and save it somewhere safe, either on your clipboard or in a text file.
 

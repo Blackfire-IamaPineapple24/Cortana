@@ -5,8 +5,23 @@ const fs = require('fs'); // This is so we can store the API key.
 const removeMarkdown = require('remove-markdown'); // Naughty AI uses Markdown but we're not letting it.
 const os = require('os'); // I need this...
 
-const MODEL = 'Gemma-3-27B-ArliAI-RPMax-v3'; // This tells the app which AI model to use. Gemma 3 is the latest and fastest model available for free on Arli.
-let conversationHistory = []; // Conversation history. So that the AI doesn't forget what you said to it immediately.
+
+// This is the system message. It's like when you give ChatGPT custom instructions. This part of the code is what's telling Cortana to be Cortana, rather than Gemma.
+const systemMessage =
+{
+  role: 'system',
+  content: `You are Microsoft's Cortana assistant.
+            - Only provide instructions that directly address the user's request.
+            - Ask for clarification when needed.
+            - Keep instructions concise and actionable.
+            - Avoid greetings, sign-offs, repetitions, or unnecessary elaboration unless specifically apropriate (e.g. user says hello).
+            - Use proper grammar.
+            - Give guidance specific to Windows 10 version 22H2 when relevant.
+            - Don't be concise to the point of unhelpfulness. If the answer needs to be long, it can be.
+            - Keep replies longer than two sentences.`
+};
+const MODEL = 'Gemma-3-27B-it'; // This tells the app which AI model to use. Gemma 3 is the latest and fastest model available for free on Arli.
+let conversationHistory = [systemMessage]; // Conversation history. So that the AI doesn't forget what you said to it immediately.
 const boundsFile = path.join(app.getPath('userData'), 'window-bounds.json'); // These two lines...
 const apiKeyFile = path.join(app.getPath('userData'), 'api-key.txt'); // ...Store the size+position of your cortana window and your API key in userData.
 
@@ -170,27 +185,13 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
   const lower = prompt.trim().toLowerCase();
   if (specialReplies[lower]) return specialReplies[lower];
 
-  // This is the system message. It's like when you give ChatGPT custom instructions. This part of the code is what's telling Cortana to be Cortana, rather than Gemma.
-  const systemMessage =
-  {
-    role: 'system',
-    content: `You are Microsoft's Cortana assistant.
-              - Only provide instructions that directly address the user's request.
-              - Ask for clarification when needed.
-              - Keep instructions concise and actionable.
-              - Avoid greetings, sign-offs, repetitions, or unnecessary elaboration.
-              - Use proper grammar.
-              - Give guidance specific to Windows 10 version 22H2 when relevant.
-              - Don't be concise to the point of unhelpfulness. If the answer needs to be long, it can be.`
-  };
-
   // This part pushes the system message and the user's prompt to the Conversation history.
   conversationHistory.push({ role: 'user', content: prompt });
-  const messages = [systemMessage, ...conversationHistory];
+  const messages = conversationHistory;
 
   /* This part is tricky. It's an HTTP POST request. Like a set of instructions being sent to the Arli AI server. This part:
      - Authorises your API key.
-     - Tells Arli AI to use Google Gemma-3-27B-ArliAI-RPMax-v3
+     - Tells Arli AI to use Google Gemma-3-27B-it
      - Hands the messages array to the server, so that the AI remembers your entire conversation.
      - Controls the temperature. */
   const res = await fetch('https://api.arliai.com/v1/chat/completions',
@@ -205,7 +206,7 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
     {
       model: MODEL,
       messages,
-      temperature: 0.7 // The "Temperature" of an AI Model refers to how creative it can be, or how much it's response can vary from other responses it has given.
+      temperature: 0.7, // The "Temperature" of an AI Model refers to how creative it can be, or how much it's response can vary from other responses it has given.
     })
   });
 
