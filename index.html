@@ -37,6 +37,7 @@
         align-content: flex-start;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        padding-bottom: 20px; /* Fix for the strange scrolling. you can scroll below the chat now but tha's fiiiine */
       }
 /* ----------------------------------------------------------------------------------------------------------------------- */
 
@@ -90,6 +91,7 @@
         /* gap: 12px; */
         user-select: none;
         height: 50px;
+        flex-shrink: 0;
       }
 
       .input-bar input /* This is the bit where you type your message to Cortana. (She is code.) */
