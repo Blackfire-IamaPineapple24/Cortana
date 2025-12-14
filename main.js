@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs'); // This is so we can store the API key.
 const removeMarkdown = require('remove-markdown'); // Naughty AI uses Markdown but we're not letting it.
 const os = require('os'); // I need this...
-
+const FORCE_WIN11 = true;
 
 // This is the system message. It's like when you give ChatGPT custom instructions. This part of the code is what's telling Cortana to be Cortana, rather than Gemma.
 const systemMessage =
@@ -24,6 +24,7 @@ const MODEL = 'Gemma-3-27B-it'; // This tells the app which AI model to use. Gem
 let conversationHistory = [systemMessage]; // Conversation history. So that the AI doesn't forget what you said to it immediately.
 const boundsFile = path.join(app.getPath('userData'), 'window-bounds.json'); // These two lines...
 const apiKeyFile = path.join(app.getPath('userData'), 'api-key.txt'); // ...Store the size+position of your cortana window and your API key in userData.
+const win11AckFile = path.join(app.getPath('userData'), 'win11-ack.json'); // Store the file to say you've acknowledged that you bought the wrong OS.
 
 let ARLI_API_KEY = null; // API key. Your silly little keyboard spam gets slapped into here when you enter it.
 
@@ -90,6 +91,31 @@ function createMainWindow()
   return win; // Allow the rest of the app to keep track of the main window.
 }
 
+// Functions to check if you're running Windows Vista 2.0, show you a warning if you are and then write a file to make sure it never shows you that again.
+function isWindows11()
+{
+  if (FORCE_WIN11) return true;
+  const release = os.release(); // Get the windows version.
+  const build = Number(release.split('.')[2]);
+  return build >= 22000;
+}
+function hasAcknowledgedWin11()
+{
+  try
+  {
+    const data = JSON.parse(fs.readFileSync(win11AckFile, 'utf8'));
+    return data.acknowledged === true;
+  }
+  catch
+  {
+    return false;
+  }
+}
+function acknowledgeWin11()
+{
+  fs.writeFileSync(win11AckFile, JSON.stringify({ acknowledged: true }), 'utf8');
+}
+
 // This does the same thing as createMainWindow(), but for the Window that asks you for the API key instead.
 function createApiKeyWindow()
 {
@@ -115,10 +141,40 @@ function createApiKeyWindow()
   return win;
 }
 
+function createWin11Warning()
+{
+  const win = new BrowserWindow(
+  {
+    width: 550,
+    height: 500,
+    resizable: false,
+    minimizable: false,
+    maximizable: false,
+    autoHideMenuBar: true,
+    show: false,
+    webPreferences:
+    {
+      preload: path.join(__dirname, 'preload-win11.js'),
+      contextIsolation: true,
+      nodeIntegration: false
+    }
+  });
+
+  win.loadFile('win11-warning.html');
+  win.once('ready-to-show', () => win.show());
+  return win;
+}
+
 /* This checks if you have a saved API key on launch. If you do, it reads the file, uses it as your API key and opens the chat page.
    If you don't, it opens the API key submission window. */
 app.whenReady().then(() =>
 {
+  if (isWindows11() && !hasAcknowledgedWin11())
+  {
+    createWin11Warning();
+    return;
+  }
+  
   if (fs.existsSync(apiKeyFile))
   {
     ARLI_API_KEY = fs.readFileSync(apiKeyFile, 'utf8').trim();
@@ -227,4 +283,21 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
 
 ipcMain.handle('get-username', () => { // Grab the current user's username.
   return os.userInfo().username;
+});
+
+ipcMain.on('win11-acknowledged', () =>
+{
+  acknowledgeWin11();
+  const warningWin = BrowserWindow.getFocusedWindow();
+  if (warningWin) warningWin.close();
+
+  if (fs.existsSync(apiKeyFile))
+  {
+    ARLI_API_KEY = fs.readFileSync(apiKeyFile, 'utf8').trim();
+    createMainWindow();
+  }
+  else
+  {
+    createApiKeyWindow();
+  }
 });

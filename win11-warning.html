@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <!-- This is the meta. (Someone call Matthew Patthew) Metadata and Viewport settings. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warning</title>
+
+    <!-- Style in CSS. -->
+    <style>
+
+      body /* Main page layout. Can be overwritten by other CSS. */
+      {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        font-family: "Segoe UI Semilight", "Segoe UI", sans-serif;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+      }
+
+      .header-container /* This is the container for the Logo and Header text ("Cortana"). */
+      {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .header /* This is the Text that says "Cortana". */
+      {
+        font-size: 35px;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 20px;
+        color: rgb(66, 195, 255);
+      }
+
+      .warning
+      {
+        color: rgba(255, 255, 255, 1);
+        font-size: 35px;
+        text-align: center;
+      }
+
+      .warning-body
+      {
+        color: rgba(255, 255, 255, 1);
+        font-size: 20px;
+        padding-bottom: 20px;
+        text-align: center;
+      }
+
+      .cortana /* This is the logo. */
+      {
+        height: 100px;
+        width: auto;
+        margin-bottom: 16px;
+      }
+
+      .acknowledge /* Global style for the Input box. */
+      {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        gap: 12px;
+        align-items: stretch;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .acknowledge button /* The "OK" button. */
+      {
+        padding: 12px;
+        font-size: 16px;
+        cursor: normal;
+        background: rgba(3, 168, 244, 0.664);
+        border: none;
+        color: white;
+      }
+
+      .acknowledge button:hover
+      {
+        background: rgb(66, 195, 255);
+        cursor: normal;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <!-- The header. This is the bit that shows the Logo and says "Cortana". -->
+    <div class="header-container">
+      <img src="Images/cortana.svg" class="cortana"> <!-- Logo -->
+      <div class="header">Warning</div> <!-- "Warning" -->
+      <div class="warning">This app was not made with Windows 11 in mind.</div>
+      <div class="warning-body">If you encounter bugs, please do NOT report them.</div>
+    </div>
+
+    <!-- The part that shows the input box and allows you to type (or paste) in it. -->
+    <div class="acknowledge">
+        <button onclick="acknowledge()">OK</button> <!-- Submit button. -->
+    </div>
+
+    <script>
+        function acknowledge()
+        {
+            window.win11API.acknowledge();
+        }
+    </script>
+  </body>
+</html>
