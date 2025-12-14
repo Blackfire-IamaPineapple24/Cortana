@@ -24,6 +24,12 @@
         align-items: center;
       }
 
+      body.light-mode
+      {
+        background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+
       .header-container /* This is the container for the Logo and Header text ("Cortana"). */
       {
         display: flex;
@@ -38,6 +44,7 @@
         text-align: center;
         margin-bottom: 24px;
         color: rgb(66, 195, 255);
+        user-select: none;
       }
 
       .cortana /* This is the logo. */
@@ -45,6 +52,7 @@
         height: 100px;
         width: auto;
         margin-bottom: 16px;
+        user-select: none;
       }
 
       .input-bar /* Global style for the Input box. */
@@ -57,6 +65,11 @@
         background: rgba(255, 255, 255, 0.1);
       }
 
+      body.light-mode .input-bar
+      {
+        background: rgba(255, 255, 255, 1);
+      }
+
       .input-bar input /* This is the bit where you put your API key in. */
       {
         padding: 12px 16px;
@@ -66,6 +79,14 @@
         background: rgba(63, 63, 63, 1);
         color: white;
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        user-select: none;
+      }
+
+      body.light-mode .input-bar input
+      {
+        background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
       }
 
       .input-bar ::placeholder
@@ -73,9 +94,19 @@
         color: rgba(255, 255, 255, 0.5);
       }
 
+      body.light-mode .input-bar ::placeholder
+      {
+        color: rgba(0 ,0, 0, 0.5);
+      }
+
       .input-bar input:hover
       {
         box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+      }
+
+      body.light-mode .input-bar input:hover
+      {
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.5);
       }
 
       .input-bar button /* The "Submit" button. Submit to our corporate overlords. */
@@ -86,6 +117,7 @@
         background: rgba(3, 168, 244, 0.664);
         border: none;
         color: white;
+        user-select: none;
       }
 
       .input-bar button:hover
@@ -122,6 +154,18 @@
       }
 
       input.addEventListener('keypress', e => { if(e.key==='Enter') submitKey(); }); // Make it so you can press "Enter" instead of clicking "Submit" if that floats your boat.
+
+      window.apiKeyAPI.onThemeUpdate((isLight) =>
+      {
+        if (isLight)
+        {
+          document.body.classList.add('light-mode');
+        }
+        else
+        {
+          document.body.classList.remove('light-mode');
+        }
+      });
     </script>
   </body>
 </html>
