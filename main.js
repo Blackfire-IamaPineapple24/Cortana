@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs'); // This is so we can store the API key.
 const removeMarkdown = require('remove-markdown'); // Naughty AI uses Markdown but we're not letting it.
 const os = require('os'); // I need this...
-const FORCE_WIN11 = true;
+const FORCE_WIN11 = false;
 
 // This is the system message. It's like when you give ChatGPT custom instructions. This part of the code is what's telling Cortana to be Cortana, rather than Gemma.
 const systemMessage =
