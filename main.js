@@ -1,5 +1,5 @@
 // Woah, cool #includeusing;imports
-const { app, BrowserWindow, ipcMain, screen, systemPreferences } = require('electron');
+const { app, BrowserWindow, nativeTheme, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs'); // This is so we can store the API key.
 const removeMarkdown = require('remove-markdown'); // Naughty AI uses Markdown but we're not letting it.
@@ -27,6 +27,12 @@ const apiKeyFile = path.join(app.getPath('userData'), 'api-key.txt'); // ...Stor
 const win11AckFile = path.join(app.getPath('userData'), 'win11-ack.json'); // Store the file to say you've acknowledged that you bought the wrong OS.
 
 let ARLI_API_KEY = null; // API key. Your silly little keyboard spam gets slapped into here when you enter it.
+
+function updateTheme(win)
+{
+  const isLight = !nativeTheme.shouldUseDarkColors;
+  win.webContents.send('theme-updated', isLight);
+}
 
 function createMainWindow()
 {
@@ -71,6 +77,7 @@ function createMainWindow()
     win.show(); // Show the window.
     win.focus(); // Focus the window.
     win.webContents.executeJavaScript(`document.getElementById('input').focus();`); // Focus the input box, so we can type to cortana immediately.
+    updateTheme(win);
   });
 
   win.on('close', () => // Runs when the window closes.
@@ -137,7 +144,11 @@ function createApiKeyWindow()
 
   win.loadFile('api-key.html');
 
-  win.once('ready-to-show', () => win.show());
+  win.once('ready-to-show', () => 
+  {
+    win.show();
+    updateTheme(win);
+  });
   return win;
 }
 
@@ -161,7 +172,11 @@ function createWin11Warning()
   });
 
   win.loadFile('win11-warning.html');
-  win.once('ready-to-show', () => win.show());
+  win.once('ready-to-show', () => 
+  {
+    win.show();
+    updateTheme(win);
+  });
   return win;
 }
 
@@ -169,6 +184,27 @@ function createWin11Warning()
    If you don't, it opens the API key submission window. */
 app.whenReady().then(() =>
 {
+
+  // This is the part constantly checking what theme your computer is set to. It calls updateTheme() every ime you change it.
+  nativeTheme.on('updated', () =>
+  {
+    const warningWin = BrowserWindow.getAllWindows().find(win => win.getTitle() === 'Warning');
+    if (warningWin)
+    {
+      updateTheme(warningWin);
+    }
+    const apiKeyWin = BrowserWindow.getAllWindows().find(win => win.getTitle() === 'Enter API Key');
+    if (apiKeyWin)
+    {
+      updateTheme(apiKeyWin);
+    }
+    const chatWin = BrowserWindow.getAllWindows().find(win => win.getTitle() === 'Cortana');
+    if (chatWin)
+    {
+      updateTheme(chatWin);
+    }
+  });
+
   if (isWindows11() && !hasAcknowledgedWin11())
   {
     createWin11Warning();
