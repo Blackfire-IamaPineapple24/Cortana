@@ -5,11 +5,13 @@
     <!-- This is the meta. (Someone call Matthew Patthew) Metadata and Viewport settings. -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enter API Key</title>
+    <title>Setup</title>
 
     <!-- Style in CSS. -->
     <style>
-
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------------------------- Body --------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
       body /* Main page layout. Can be overwritten by other CSS. */
       {
         margin: 0;
@@ -36,7 +38,13 @@
         flex-direction: column;
         align-items: center;
       }
+/* ----------------------------------------------------------------------------------------------------------------------- */
 
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------- Header -------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
       .header /* This is the Text that says "Cortana". */
       {
         font-size: 35px;
@@ -54,7 +62,173 @@
         margin-bottom: 16px;
         user-select: none;
       }
+/* ----------------------------------------------------------------------------------------------------------------------- */
 
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------------------- Location Select ---------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+      .location-select
+      {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        gap: 12px;
+        align-items: stretch;
+        background: rgba(0, 0, 0, 1);
+        font-size: 30px;
+        color: rgba(255, 255, 255, 1);
+        user-select: none;
+        padding-bottom: 25px;
+      }
+
+      body.light-mode .location-select
+      {
+        background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+
+      .dropdown
+      {
+        position: relative;
+      }
+
+      .dropdown-toggle
+      {
+        padding: 0px 12px;
+        font-size: 14px;
+        border: none;
+        outline: none;
+        width: 100%;
+        text-align: left;
+        background: rgba(0, 0, 0, 1);
+        color: rgba(255, 255, 255, 1);
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+        cursor: normal;
+        user-select: none;
+        height: 32px;
+      }
+      body.light-mode .dropdown-toggle
+      {
+        background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .dropdown-toggle:hover
+      {
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+      }
+      body.light-mode .dropdown-toggle:hover
+      {
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .dropdown-toggle:active
+      {
+        background: rgba(255, 255, 255, 0.3);
+      }
+      body.light-mode .dropdown-toggle:active
+      {
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      .dropdown-toggle::after
+      {
+        content: "";
+        margin-left: 8px;
+        font-family: "Segoe MDL2 Assets", sans-serif;
+        font-size: 14px;
+        line-height: 1;
+        pointer-events: none;
+        float: right;
+      }
+
+      .dropdown-menu
+      {
+        display: none;
+        position: absolute;
+        top: calc(50% - 70px);
+        left: 0;
+        right: 0;
+        z-index: 10;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background: rgba(31, 31, 31, 1);
+        border: 1px solid rgba(118, 118, 118, 1);
+        padding-top: 5px;
+        padding-bottom: 5px;
+        max-height: 240px;
+        overflow-y: auto;
+        scrollbar-width: none;
+      }
+      body.light-mode .dropdown-menu
+      {
+        background: rgba(242, 242, 242, 1);
+        border: 1px solid #cfcfcf;
+      }
+      .dropdown-open .dropdown-menu
+      {
+        display: block;
+      }
+
+      .dropdown-menu li
+      {
+        padding: 7px;
+        font-size: 14px;
+        cursor: normal;
+        user-select: none;
+        color: rgba(255, 255, 255, 1);
+      }
+      body.light-mode .dropdown-menu li
+      {
+        color: rgba(0, 0, 0, 1);
+      }
+
+      .dropdown-menu li:hover
+      {
+        background: rgba(64, 64, 64, 1);
+      }
+      body.light-mode .dropdown-menu li:hover
+      {
+        background: rgba(218, 218, 218, 1);
+      }
+
+      .dropdown-menu li.selected
+      {
+        background: rgba(0, 37, 65, 0.9);
+      }
+      body.light-mode .dropdown-menu li.selected
+      {
+        background: rgba(166, 216, 255, 0.9);
+      }
+
+      .dropdown-menu li.selected:hover
+      {
+        background: rgba(0, 66, 117, 1);
+      }
+      body.light-mode .dropdown-menu li.selected:hover
+      {
+        background: rgba(118, 185, 237, 1);
+      }
+
+      .dropdown-menu li:active
+      {
+        background: rgba(76, 76, 76, 1);
+      }
+      body.light-mode .dropdown-menu li:active
+      {
+        background: rgba(188, 188, 188, 1);
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------- Input Bar ------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
       .input-bar /* Global style for the Input box. */
       {
         display: flex;
@@ -62,12 +236,16 @@
         width: 80%;
         gap: 12px;
         align-items: stretch;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 1);
+        font-size: 30px;
+        color: rgba(255, 255, 255, 1);
+        user-select: none;
       }
 
       body.light-mode .input-bar
       {
         background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
       }
 
       .input-bar input /* This is the bit where you put your API key in. */
@@ -125,7 +303,22 @@
         background: rgb(66, 195, 255);
         cursor: normal;
       }
+/* ----------------------------------------------------------------------------------------------------------------------- */
 
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------- Fonts ------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+      @font-face /* Grab the font for the arrow icon. */
+      {
+        font-family: 'Segoe MDL2 Assets';
+        src: url('C:/Windows/Fonts/segmdl2.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
     </style>
   </head>
 
@@ -133,11 +326,34 @@
     <!-- The header. This is the bit that shows the Logo and says "Cortana". -->
     <div class="header-container">
       <img src="Images/cortana.svg" class="cortana"> <!-- Logo -->
-      <div class="header">Cortana</div> <!-- "Cortana" -->
+      <div class="header">Setup</div> <!-- "Cortana" -->
     </div>
+
+    <!-- This is the location selection bar for the weather. -->
+     <div class="location-select">
+      Location
+      <div class="dropdown" id="locationDropdown">
+        <button class="dropdown-toggle" aria-haspopup="listbox">
+          Location
+        </button>
+        <ul class="dropdown-menu" role="listbox">
+          <li data-value="NYC">New York City, NY, USA</li>
+          <li data-value="London">London, England, UK</li>
+          <li data-value="Sydney">Sydney, New South Wales, Australia</li>
+          <li data-value="Tokyo">Tokyo, Honshu, Japan</li>
+          <li data-value="Moscow">Moscow, Russia</li>
+          <li data-value="Cairo">Cairo, Egypt</li>
+          <li data-value="Rio">Rio de Janeiro</li>
+          <li data-value="Delhi">Delhi, India</li>
+          <li data-value="Singapore">Singapore</li>
+          <li data-value="Cape_Town">Cape Town, Western Cape, South Africa</li>
+        </ul>
+      </div>
+     </div>
 
     <!-- The part that shows the input box and allows you to type (or paste) in it. -->
     <div class="input-bar">
+      API Key
       <input id="apikey" type="password" placeholder="Enter your API Key"> <!-- Input box. -->
       <button onclick="submitKey()">Submit</button> <!-- Submit button. -->
     </div>
@@ -166,6 +382,33 @@
           document.body.classList.remove('light-mode');
         }
       });
+
+      const dropdown = document.getElementById('locationDropdown');
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const menuItems = dropdown.querySelectorAll('.dropdown-menu li');
+      const defaultItem = dropdown.querySelector('[data-value="London"]');
+
+      if (defaultItem)
+      {
+        defaultItem.classList.add('selected');
+        toggle.textContent = defaultItem.textContent;
+      }
+
+      toggle.addEventListener('click', () =>
+      {
+        dropdown.classList.toggle('dropdown-open');
+      });
+
+      menuItems.forEach(item =>
+      {
+        item.addEventListener('click', () =>
+        {
+          menuItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          toggle.textContent = item.textContent;
+          dropdown.classList.remove('dropdown-open');
+        })
+      })
     </script>
   </body>
 </html>

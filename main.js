@@ -129,7 +129,7 @@ function createApiKeyWindow()
   const win = new BrowserWindow(
   {
     width: 420,
-    height: 400,
+    height: 600,
     resizable: false,
     minimizable: false,
     maximizable: false,
@@ -193,10 +193,10 @@ app.whenReady().then(() =>
     {
       updateTheme(warningWin);
     }
-    const apiKeyWin = BrowserWindow.getAllWindows().find(win => win.getTitle() === 'Enter API Key');
-    if (apiKeyWin)
+    const setupWin = BrowserWindow.getAllWindows().find(win => win.getTitle() === 'Setup');
+    if (setupWin)
     {
-      updateTheme(apiKeyWin);
+      updateTheme(setupWin);
     }
     const chatWin = BrowserWindow.getAllWindows().find(win => win.getTitle() === 'Cortana');
     if (chatWin)
