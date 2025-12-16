@@ -25,8 +25,10 @@ let conversationHistory = [systemMessage]; // Conversation history. So that the 
 const boundsFile = path.join(app.getPath('userData'), 'window-bounds.json'); // These two lines...
 const apiKeyFile = path.join(app.getPath('userData'), 'api-key.txt'); // ...Store the size+position of your cortana window and your API key in userData.
 const win11AckFile = path.join(app.getPath('userData'), 'win11-ack.json'); // Store the file to say you've acknowledged that you bought the wrong OS.
+const locationStore = path.join(app.getPath('userData'), 'weather-location.txt');
 
 let ARLI_API_KEY = null; // API key. Your silly little keyboard spam gets slapped into here when you enter it.
+let WEATHER_LOCATION = null;
 
 function updateTheme(win)
 {
@@ -211,9 +213,10 @@ app.whenReady().then(() =>
     return;
   }
   
-  if (fs.existsSync(apiKeyFile))
+  if (fs.existsSync(apiKeyFile) && fs.existsSync(locationStore))
   {
     ARLI_API_KEY = fs.readFileSync(apiKeyFile, 'utf8').trim();
+    WEATHER_LOCATION = fs.readFileSync(locationStore, 'utf8');
     createMainWindow();
   }
   else
@@ -234,6 +237,12 @@ ipcMain.on('api-key-submitted', (_, key) =>
   const mainWin = createMainWindow();
   const apiWin = BrowserWindow.getFocusedWindow();
   if (apiWin) apiWin.close();
+});
+
+ipcMain.on('location-submitted', (_, location) =>
+{
+  WEATHER_LOCATION = location;
+  fs.writeFileSync(locationStore, WEATHER_LOCATION, 'utf8');
 });
 
 // Did you press close or escape? You little scallywag. Well, in that case...

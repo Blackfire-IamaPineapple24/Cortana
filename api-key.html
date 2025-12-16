@@ -360,16 +360,18 @@
 
     <!-- This is the script. (The part that actually takes your sweet, sweet API key and sends it to the main app.) -->
     <script>
-      const input = document.getElementById('apikey'); // Make a reference to the input box in the HTML "input-bar" div.
+      let selectedLocation = null;
+
+      const APIinput = document.getElementById('apikey'); // Make a reference to the input box in the HTML "input-bar" div.
 
       // Trim the key (remove unnecessary whitespace) and send it to the main process.
       function submitKey()
       {
-        const val = input.value.trim();
+        const val = APIinput.value.trim();
         if(val) window.apiKeyAPI.submitKey(val);
+        const location = selectedLocation;
+        if(location) window.apiKeyAPI.submitLocation(location);
       }
-
-      input.addEventListener('keypress', e => { if(e.key==='Enter') submitKey(); }); // Make it so you can press "Enter" instead of clicking "Submit" if that floats your boat.
 
       window.apiKeyAPI.onThemeUpdate((isLight) =>
       {
@@ -392,6 +394,7 @@
       {
         defaultItem.classList.add('selected');
         toggle.textContent = defaultItem.textContent;
+        selectedLocation = defaultItem.dataset.value;
       }
 
       toggle.addEventListener('click', () =>
@@ -406,9 +409,10 @@
           menuItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
           toggle.textContent = item.textContent;
+          selectedLocation = item.dataset.value;
           dropdown.classList.remove('dropdown-open');
         })
-      })
+      });
     </script>
   </body>
 </html>
