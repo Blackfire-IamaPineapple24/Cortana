@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs'); // This is so we can store the API key.
 const removeMarkdown = require('remove-markdown'); // Naughty AI uses Markdown but we're not letting it.
 const os = require('os'); // I need this...
-const FORCE_WIN11 = false;
+const FORCE_WIN11 = true; // This is here so that I can test the Windows 11 Warning window.
 
 // This is the system message. It's like when you give ChatGPT custom instructions. This part of the code is what's telling Cortana to be Cortana, rather than Gemma.
 const systemMessage =
@@ -28,7 +28,7 @@ const win11AckFile = path.join(app.getPath('userData'), 'win11-ack.json'); // St
 const locationStore = path.join(app.getPath('userData'), 'weather-location.txt');
 
 let ARLI_API_KEY = null; // API key. Your silly little keyboard spam gets slapped into here when you enter it.
-let WEATHER_LOCATION = null;
+let WEATHER_LOCATION = null; // Location.
 
 function updateTheme(win)
 {
@@ -126,7 +126,7 @@ function acknowledgeWin11()
 }
 
 // This does the same thing as createMainWindow(), but for the Window that asks you for the API key instead.
-function createApiKeyWindow()
+function createSetupWindow()
 {
   const win = new BrowserWindow(
   {
@@ -138,13 +138,13 @@ function createApiKeyWindow()
     autoHideMenuBar: true,
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload-api.js'),
+      preload: path.join(__dirname, 'preload-setup.js'),
       contextIsolation: true,
       nodeIntegration: false
     }  
   });
 
-  win.loadFile('api-key.html');
+  win.loadFile('setup.html');
 
   win.once('ready-to-show', () => 
   {
@@ -183,7 +183,7 @@ function createWin11Warning()
 }
 
 /* This checks if you have a saved API key on launch. If you do, it reads the file, uses it as your API key and opens the chat page.
-   If you don't, it opens the API key submission window. */
+   If you don't, it opens the API key submission window. It now also sets the theme and does the same for your Location. */
 app.whenReady().then(() =>
 {
 
@@ -221,7 +221,7 @@ app.whenReady().then(() =>
   }
   else
   {
-    const apiWin = createApiKeyWindow();
+    const setupWin = createSetupWindow();
   }
 });
 
@@ -235,8 +235,8 @@ ipcMain.on('api-key-submitted', (_, key) =>
   fs.writeFileSync(apiKeyFile, ARLI_API_KEY, 'utf8');
 
   const mainWin = createMainWindow();
-  const apiWin = BrowserWindow.getFocusedWindow();
-  if (apiWin) apiWin.close();
+  const setupWin = BrowserWindow.getFocusedWindow();
+  if (setupWin) setupWin.close();
 });
 
 ipcMain.on('location-submitted', (_, location) =>
@@ -336,13 +336,14 @@ ipcMain.on('win11-acknowledged', () =>
   const warningWin = BrowserWindow.getFocusedWindow();
   if (warningWin) warningWin.close();
 
-  if (fs.existsSync(apiKeyFile))
+  if (fs.existsSync(apiKeyFile) && fs.existsSync(locationStore))
   {
     ARLI_API_KEY = fs.readFileSync(apiKeyFile, 'utf8').trim();
+    WEATHER_LOCATION = fs.readFileSync(locationStore, 'utf8');
     createMainWindow();
   }
   else
   {
-    createApiKeyWindow();
+    createSetupWindow();
   }
 });

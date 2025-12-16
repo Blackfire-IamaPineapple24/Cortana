@@ -32,7 +32,7 @@
         color: rgba(0, 0, 0, 1);
       }
 
-      .header-container /* This is the container for the Logo and Header text ("Cortana"). */
+      .header-container /* This is the container for the Logo and Header text ("Setup"). */
       {
         display: flex;
         flex-direction: column;
@@ -45,7 +45,7 @@
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------- Header -------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------------------------- */
-      .header /* This is the Text that says "Cortana". */
+      .header /* This is the Text that says "Setup". */
       {
         font-size: 35px;
         font-weight: 300;
@@ -287,7 +287,7 @@
         box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.5);
       }
 
-      .input-bar button /* The "Submit" button. Submit to our corporate overlords. */
+      .input-bar button /* The "OK" button. Submit your API key to our corporate overlords. */
       {
         padding: 12px;
         font-size: 16px;
@@ -310,7 +310,7 @@
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------------------- Fonts ------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------------------------- */
-      @font-face /* Grab the font for the arrow icon. */
+      @font-face /* Grab the font for the arrow icon in the dropdown. */
       {
         font-family: 'Segoe MDL2 Assets';
         src: url('C:/Windows/Fonts/segmdl2.ttf') format('truetype');
@@ -323,19 +323,17 @@
   </head>
 
   <body>
-    <!-- The header. This is the bit that shows the Logo and says "Cortana". -->
+    <!-- The header. This is the bit that shows the Logo and says "Setup". -->
     <div class="header-container">
       <img src="Images/cortana.svg" class="cortana"> <!-- Logo -->
-      <div class="header">Setup</div> <!-- "Cortana" -->
+      <div class="header">Setup</div> <!-- "Setup" -->
     </div>
 
     <!-- This is the location selection bar for the weather. -->
      <div class="location-select">
       Location
       <div class="dropdown" id="locationDropdown">
-        <button class="dropdown-toggle" aria-haspopup="listbox">
-          Location
-        </button>
+        <button class="dropdown-toggle" aria-haspopup="listbox">Location</button>
         <ul class="dropdown-menu" role="listbox">
           <li data-value="NYC">New York City, NY, USA</li>
           <li data-value="London">London, England, UK</li>
@@ -355,25 +353,25 @@
     <div class="input-bar">
       API Key
       <input id="apikey" type="password" placeholder="Enter your API Key"> <!-- Input box. -->
-      <button onclick="submitKey()">Submit</button> <!-- Submit button. -->
+      <button onclick="submitSettings()">OK</button> <!-- OK button. -->
     </div>
 
-    <!-- This is the script. (The part that actually takes your sweet, sweet API key and sends it to the main app.) -->
+    <!-- This is the script. (The part that actually takes your sweet, sweet API key and sends it to the main app.) Update: it now DOXXes you too. (sends your selected location) -->
     <script>
       let selectedLocation = null;
 
       const APIinput = document.getElementById('apikey'); // Make a reference to the input box in the HTML "input-bar" div.
 
-      // Trim the key (remove unnecessary whitespace) and send it to the main process.
-      function submitKey()
+      // Trim the key (remove unnecessary whitespace) and send it to the main process. Also send your Location. (I am in your walls.)
+      function submitSettings()
       {
         const val = APIinput.value.trim();
-        if(val) window.apiKeyAPI.submitKey(val);
+        if(val) window.setupAPI.submitKey(val);
         const location = selectedLocation;
-        if(location) window.apiKeyAPI.submitLocation(location);
+        if(location) window.setupAPI.submitLocation(location);
       }
 
-      window.apiKeyAPI.onThemeUpdate((isLight) =>
+      window.setupAPI.onThemeUpdate((isLight) =>
       {
         if (isLight)
         {
