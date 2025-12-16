@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <!-- This is the meta. (Someone call Matthew Patthew) Metadata and Viewport settings. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup</title>
+
+    <!-- Style in CSS. -->
+    <style>
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------------------------- Body --------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+      body /* Main page layout. Can be overwritten by other CSS. */
+      {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        font-family: "Segoe UI Semilight","Segoe UI",sans-serif;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
+
+      body.light-mode
+      {
+        background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+
+      .header-container /* This is the container for the Logo and Header text ("Setup"). */
+      {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------- Header -------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+      .header /* This is the Text that says "Setup". */
+      {
+        font-size: 35px;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 24px;
+        color: rgb(66, 195, 255);
+        user-select: none;
+      }
+
+      .cortana /* This is the logo. */
+      {
+        height: 100px;
+        width: auto;
+        margin-bottom: 16px;
+        user-select: none;
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------------------- Location Select ---------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+      .location-select
+      {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        gap: 12px;
+        align-items: stretch;
+        background: rgba(0, 0, 0, 1);
+        font-size: 30px;
+        color: rgba(255, 255, 255, 1);
+        user-select: none;
+        padding-bottom: 25px;
+      }
+
+      body.light-mode .location-select
+      {
+        background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+
+      .dropdown
+      {
+        position: relative;
+      }
+
+      .dropdown-toggle
+      {
+        padding: 0px 12px;
+        font-size: 14px;
+        border: none;
+        outline: none;
+        width: 100%;
+        text-align: left;
+        background: rgba(0, 0, 0, 1);
+        color: rgba(255, 255, 255, 1);
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+        cursor: normal;
+        user-select: none;
+        height: 32px;
+      }
+      body.light-mode .dropdown-toggle
+      {
+        background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .dropdown-toggle:hover
+      {
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+      }
+      body.light-mode .dropdown-toggle:hover
+      {
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .dropdown-toggle:active
+      {
+        background: rgba(255, 255, 255, 0.3);
+      }
+      body.light-mode .dropdown-toggle:active
+      {
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      .dropdown-toggle::after
+      {
+        content: "";
+        margin-left: 8px;
+        font-family: "Segoe MDL2 Assets", sans-serif;
+        font-size: 14px;
+        line-height: 1;
+        pointer-events: none;
+        float: right;
+      }
+
+      .dropdown-menu
+      {
+        display: none;
+        position: absolute;
+        top: calc(50% - 70px);
+        left: 0;
+        right: 0;
+        z-index: 10;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background: rgba(31, 31, 31, 1);
+        border: 1px solid rgba(118, 118, 118, 1);
+        padding-top: 5px;
+        padding-bottom: 5px;
+        max-height: 240px;
+        overflow-y: auto;
+        scrollbar-width: none;
+      }
+      body.light-mode .dropdown-menu
+      {
+        background: rgba(242, 242, 242, 1);
+        border: 1px solid #cfcfcf;
+      }
+      .dropdown-open .dropdown-menu
+      {
+        display: block;
+      }
+
+      .dropdown-menu li
+      {
+        padding: 7px;
+        font-size: 14px;
+        cursor: normal;
+        user-select: none;
+        color: rgba(255, 255, 255, 1);
+      }
+      body.light-mode .dropdown-menu li
+      {
+        color: rgba(0, 0, 0, 1);
+      }
+
+      .dropdown-menu li:hover
+      {
+        background: rgba(64, 64, 64, 1);
+      }
+      body.light-mode .dropdown-menu li:hover
+      {
+        background: rgba(218, 218, 218, 1);
+      }
+
+      .dropdown-menu li.selected
+      {
+        background: rgba(0, 37, 65, 0.9);
+      }
+      body.light-mode .dropdown-menu li.selected
+      {
+        background: rgba(166, 216, 255, 0.9);
+      }
+
+      .dropdown-menu li.selected:hover
+      {
+        background: rgba(0, 66, 117, 1);
+      }
+      body.light-mode .dropdown-menu li.selected:hover
+      {
+        background: rgba(118, 185, 237, 1);
+      }
+
+      .dropdown-menu li:active
+      {
+        background: rgba(76, 76, 76, 1);
+      }
+      body.light-mode .dropdown-menu li:active
+      {
+        background: rgba(188, 188, 188, 1);
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------- Input Bar ------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+      .input-bar /* Global style for the Input box. */
+      {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        gap: 12px;
+        align-items: stretch;
+        background: rgba(0, 0, 0, 1);
+        font-size: 30px;
+        color: rgba(255, 255, 255, 1);
+        user-select: none;
+      }
+
+      body.light-mode .input-bar
+      {
+        background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+
+      .input-bar input /* This is the bit where you put your API key in. */
+      {
+        padding: 12px 16px;
+        font-size: 16px;
+        border: none;
+        outline: none;
+        background: rgba(63, 63, 63, 1);
+        color: white;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        user-select: none;
+      }
+
+      body.light-mode .input-bar input
+      {
+        background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+      }
+
+      .input-bar ::placeholder
+      {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      body.light-mode .input-bar ::placeholder
+      {
+        color: rgba(0 ,0, 0, 0.5);
+      }
+
+      .input-bar input:hover
+      {
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+      }
+
+      body.light-mode .input-bar input:hover
+      {
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .input-bar button /* The "OK" button. Submit your API key to our corporate overlords. */
+      {
+        padding: 12px;
+        font-size: 16px;
+        cursor: normal;
+        background: rgba(3, 168, 244, 0.664);
+        border: none;
+        color: white;
+        user-select: none;
+      }
+
+      .input-bar button:hover
+      {
+        background: rgb(66, 195, 255);
+        cursor: normal;
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------- Fonts ------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+      @font-face /* Grab the font for the arrow icon in the dropdown. */
+      {
+        font-family: 'Segoe MDL2 Assets';
+        src: url('C:/Windows/Fonts/segmdl2.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+    </style>
+  </head>
+
+  <body>
+    <!-- The header. This is the bit that shows the Logo and says "Setup". -->
+    <div class="header-container">
+      <img src="Images/cortana.svg" class="cortana"> <!-- Logo -->
+      <div class="header">Setup</div> <!-- "Setup" -->
+    </div>
+
+    <!-- This is the location selection bar for the weather. -->
+     <div class="location-select">
+      Location
+      <div class="dropdown" id="locationDropdown">
+        <button class="dropdown-toggle" aria-haspopup="listbox">Location</button>
+        <ul class="dropdown-menu" role="listbox">
+          <li data-value="NYC">New York City, NY, USA</li>
+          <li data-value="London">London, England, UK</li>
+          <li data-value="Sydney">Sydney, New South Wales, Australia</li>
+          <li data-value="Tokyo">Tokyo, Honshu, Japan</li>
+          <li data-value="Moscow">Moscow, Russia</li>
+          <li data-value="Cairo">Cairo, Egypt</li>
+          <li data-value="Rio">Rio de Janeiro</li>
+          <li data-value="Delhi">Delhi, India</li>
+          <li data-value="Singapore">Singapore</li>
+          <li data-value="Cape_Town">Cape Town, Western Cape, South Africa</li>
+        </ul>
+      </div>
+     </div>
+
+    <!-- The part that shows the input box and allows you to type (or paste) in it. -->
+    <div class="input-bar">
+      API Key
+      <input id="apikey" type="password" placeholder="Enter your API Key"> <!-- Input box. -->
+      <button onclick="submitSettings()">OK</button> <!-- OK button. -->
+    </div>
+
+    <!-- This is the script. (The part that actually takes your sweet, sweet API key and sends it to the main app.) Update: it now DOXXes you too. (sends your selected location) -->
+    <script>
+      let selectedLocation = null;
+
+      const APIinput = document.getElementById('apikey'); // Make a reference to the input box in the HTML "input-bar" div.
+
+      // Trim the key (remove unnecessary whitespace) and send it to the main process. Also send your Location. (I am in your walls.)
+      function submitSettings()
+      {
+        const val = APIinput.value.trim();
+        if(val) window.setupAPI.submitKey(val);
+        const location = selectedLocation;
+        if(location) window.setupAPI.submitLocation(location);
+      }
+
+      window.setupAPI.onThemeUpdate((isLight) =>
+      {
+        if (isLight)
+        {
+          document.body.classList.add('light-mode');
+        }
+        else
+        {
+          document.body.classList.remove('light-mode');
+        }
+      });
+
+      const dropdown = document.getElementById('locationDropdown');
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const menuItems = dropdown.querySelectorAll('.dropdown-menu li');
+      const defaultItem = dropdown.querySelector('[data-value="London"]');
+
+      if (defaultItem)
+      {
+        defaultItem.classList.add('selected');
+        toggle.textContent = defaultItem.textContent;
+        selectedLocation = defaultItem.dataset.value;
+      }
+
+      toggle.addEventListener('click', () =>
+      {
+        dropdown.classList.toggle('dropdown-open');
+      });
+
+      menuItems.forEach(item =>
+      {
+        item.addEventListener('click', () =>
+        {
+          menuItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          toggle.textContent = item.textContent;
+          selectedLocation = item.dataset.value;
+          dropdown.classList.remove('dropdown-open');
+        })
+      });
+    </script>
+  </body>
+</html>

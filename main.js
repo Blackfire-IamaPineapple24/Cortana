@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs'); // This is so we can store the API key.
 const removeMarkdown = require('remove-markdown'); // Naughty AI uses Markdown but we're not letting it.
 const os = require('os'); // I need this...
-const FORCE_WIN11 = false;
+const FORCE_WIN11 = true; // This is here so that I can test the Windows 11 Warning window.
 
 // This is the system message. It's like when you give ChatGPT custom instructions. This part of the code is what's telling Cortana to be Cortana, rather than Gemma.
 const systemMessage =
@@ -17,16 +17,22 @@ const systemMessage =
             - Avoid greetings, sign-offs, repetitions, or unnecessary elaboration unless specifically apropriate (e.g. user says hello).
             - Use proper grammar.
             - Give guidance specific to Windows 10 version 22H2 when relevant.
+            - Keep replies longer than two sentences and shorter than two full paragraphs.
+            - Avoid Markdown syntax at all times.
             - Don't be concise to the point of unhelpfulness. If the answer needs to be long, it can be.
-            - Keep replies longer than two sentences.`
+            - Avoid trailing line breaks.
+            - Avoid duplicated characters, like "iss" instead of "is" and multiple full stops (.. .) outside of elypses (...) instead of one (.).
+            - Avoid ending sentences with conjunctions (and efficiency for) and instead use punctuation (and efficiency.).`
 };
 const MODEL = 'Gemma-3-27B-it'; // This tells the app which AI model to use. Gemma 3 is the latest and fastest model available for free on Arli.
 let conversationHistory = [systemMessage]; // Conversation history. So that the AI doesn't forget what you said to it immediately.
 const boundsFile = path.join(app.getPath('userData'), 'window-bounds.json'); // These two lines...
 const apiKeyFile = path.join(app.getPath('userData'), 'api-key.txt'); // ...Store the size+position of your cortana window and your API key in userData.
 const win11AckFile = path.join(app.getPath('userData'), 'win11-ack.json'); // Store the file to say you've acknowledged that you bought the wrong OS.
+const locationStore = path.join(app.getPath('userData'), 'weather-location.txt');
 
 let ARLI_API_KEY = null; // API key. Your silly little keyboard spam gets slapped into here when you enter it.
+let WEATHER_LOCATION = null; // Location.
 
 function updateTheme(win)
 {
@@ -124,25 +130,25 @@ function acknowledgeWin11()
 }
 
 // This does the same thing as createMainWindow(), but for the Window that asks you for the API key instead.
-function createApiKeyWindow()
+function createSetupWindow()
 {
   const win = new BrowserWindow(
   {
     width: 420,
-    height: 400,
+    height: 600,
     resizable: false,
     minimizable: false,
     maximizable: false,
     autoHideMenuBar: true,
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload-api.js'),
+      preload: path.join(__dirname, 'preload-setup.js'),
       contextIsolation: true,
       nodeIntegration: false
     }  
   });
 
-  win.loadFile('api-key.html');
+  win.loadFile('setup.html');
 
   win.once('ready-to-show', () => 
   {
@@ -181,7 +187,7 @@ function createWin11Warning()
 }
 
 /* This checks if you have a saved API key on launch. If you do, it reads the file, uses it as your API key and opens the chat page.
-   If you don't, it opens the API key submission window. */
+   If you don't, it opens the API key submission window. It now also sets the theme and does the same for your Location. */
 app.whenReady().then(() =>
 {
 
@@ -193,10 +199,10 @@ app.whenReady().then(() =>
     {
       updateTheme(warningWin);
     }
-    const apiKeyWin = BrowserWindow.getAllWindows().find(win => win.getTitle() === 'Enter API Key');
-    if (apiKeyWin)
+    const setupWin = BrowserWindow.getAllWindows().find(win => win.getTitle() === 'Setup');
+    if (setupWin)
     {
-      updateTheme(apiKeyWin);
+      updateTheme(setupWin);
     }
     const chatWin = BrowserWindow.getAllWindows().find(win => win.getTitle() === 'Cortana');
     if (chatWin)
@@ -211,14 +217,15 @@ app.whenReady().then(() =>
     return;
   }
   
-  if (fs.existsSync(apiKeyFile))
+  if (fs.existsSync(apiKeyFile) && fs.existsSync(locationStore))
   {
     ARLI_API_KEY = fs.readFileSync(apiKeyFile, 'utf8').trim();
+    WEATHER_LOCATION = fs.readFileSync(locationStore, 'utf8');
     createMainWindow();
   }
   else
   {
-    const apiWin = createApiKeyWindow();
+    const setupWin = createSetupWindow();
   }
 });
 
@@ -232,8 +239,14 @@ ipcMain.on('api-key-submitted', (_, key) =>
   fs.writeFileSync(apiKeyFile, ARLI_API_KEY, 'utf8');
 
   const mainWin = createMainWindow();
-  const apiWin = BrowserWindow.getFocusedWindow();
-  if (apiWin) apiWin.close();
+  const setupWin = BrowserWindow.getFocusedWindow();
+  if (setupWin) setupWin.close();
+});
+
+ipcMain.on('location-submitted', (_, location) =>
+{
+  WEATHER_LOCATION = location;
+  fs.writeFileSync(locationStore, WEATHER_LOCATION, 'utf8');
 });
 
 // Did you press close or escape? You little scallywag. Well, in that case...
@@ -298,7 +311,8 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
     {
       model: MODEL,
       messages,
-      temperature: 0.7, // The "Temperature" of an AI Model refers to how creative it can be, or how much it's response can vary from other responses it has given.
+      temperature: 0.4, // The "Temperature" of an AI Model refers to how creative it can be, or how much it's response can vary from other responses it has given.
+      min_p: 0.06,
     })
   });
 
@@ -327,13 +341,19 @@ ipcMain.on('win11-acknowledged', () =>
   const warningWin = BrowserWindow.getFocusedWindow();
   if (warningWin) warningWin.close();
 
-  if (fs.existsSync(apiKeyFile))
+  if (fs.existsSync(apiKeyFile) && fs.existsSync(locationStore))
   {
     ARLI_API_KEY = fs.readFileSync(apiKeyFile, 'utf8').trim();
+    WEATHER_LOCATION = fs.readFileSync(locationStore, 'utf8');
     createMainWindow();
   }
   else
   {
-    createApiKeyWindow();
+    createSetupWindow();
   }
+});
+
+ipcMain.handle('get-weather-location', () =>
+{
+  return WEATHER_LOCATION || 'London';
 });
