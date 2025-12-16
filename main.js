@@ -17,8 +17,12 @@ const systemMessage =
             - Avoid greetings, sign-offs, repetitions, or unnecessary elaboration unless specifically apropriate (e.g. user says hello).
             - Use proper grammar.
             - Give guidance specific to Windows 10 version 22H2 when relevant.
+            - Keep replies longer than two sentences and shorter than two full paragraphs.
+            - Avoid Markdown syntax at all times.
             - Don't be concise to the point of unhelpfulness. If the answer needs to be long, it can be.
-            - Keep replies longer than two sentences.`
+            - Avoid trailing line breaks.
+            - Avoid duplicated characters, like "iss" instead of "is" and multiple full stops (.. .) outside of elypses (...) instead of one (.).
+            - Avoid ending sentences with conjunctions (and efficiency for) and instead use punctuation (and efficiency.).`
 };
 const MODEL = 'Gemma-3-27B-it'; // This tells the app which AI model to use. Gemma 3 is the latest and fastest model available for free on Arli.
 let conversationHistory = [systemMessage]; // Conversation history. So that the AI doesn't forget what you said to it immediately.
@@ -307,7 +311,8 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
     {
       model: MODEL,
       messages,
-      temperature: 0.7, // The "Temperature" of an AI Model refers to how creative it can be, or how much it's response can vary from other responses it has given.
+      temperature: 0.4, // The "Temperature" of an AI Model refers to how creative it can be, or how much it's response can vary from other responses it has given.
+      min_p: 0.06,
     })
   });
 
