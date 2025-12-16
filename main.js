@@ -352,3 +352,8 @@ ipcMain.on('win11-acknowledged', () =>
     createSetupWindow();
   }
 });
+
+ipcMain.handle('get-weather-location', () =>
+{
+  return WEATHER_LOCATION || 'London';
+});
