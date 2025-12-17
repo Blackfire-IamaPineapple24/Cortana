@@ -45,7 +45,7 @@ function updateTheme(win)
 
 function createMainWindow()
 {
-  let bounds = { width: 420, height: 680 }; // Set a default window size.
+  let bounds = { width: 420, height: 810 }; // Set a default window size.
   // Here we take the saved window position and size and use it.
   try
   {
@@ -66,8 +66,10 @@ function createMainWindow()
     x,
     y,
     minWidth: 420,
-    minHeight: 680,
+    minHeight: 810,
     resizable: true,
+    maximizable: false,
+    minimizable: false,
     autoHideMenuBar: true, // This removes the Menubar.
     show: false,
     icon: path.join(__dirname, 'Images', 'icon.png'),

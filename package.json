@@ -1,6 +1,6 @@
 {
   "name": "cortana",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Electron frontend for Gemma 3",
   "main": "main.js",
   "scripts": {

@@ -36,14 +36,14 @@
       {
         flex: 1;
         overflow-y: auto;
-        padding: 0 24px;
+        padding-left: 24px;
+        padding-right: 24px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         align-content: flex-start;
         scrollbar-width: none;
         -ms-overflow-style: none;
-        padding-bottom: 20px; /* Fix for the strange scrolling. you can scroll below the chat now but tha's fiiiine */
       }
 
       body.hide-header .chat-container
@@ -397,7 +397,9 @@
         </div>
     </div>
     <!-- Cortana asks you what tf you want. -->
-    <div class="chat-container" id="chat"></div> <!-- This contains the chat. It's in the name. -->
+    <div class="chat-container" id="chat">
+      <div id="bottom-anchor"></div>
+    </div> <!-- This contains the chat. It's in the name. -->
 
     <!-- Ever wanted to type something in an HTML page? Well, now you can with our new patented technology! (Message from Nintendo) -->
     <div class="input-bar">
@@ -427,7 +429,14 @@
         div.className = `message ${who}`; // The class for the div we just made is set to the value of "who".
         div.textContent = text; // Add the value of "text" to the message. Our message is COMPLETE!
         chat.appendChild(div); // The rest of the function makes the div visible, scrolls to the bottom of the page and make the div available for us to use later.
-        chat.scrollTop = chat.scrollHeight;
+        requestAnimationFrame(() =>
+        {
+          requestAnimationFrame(() =>
+          {
+            chat.scrollTop = chat.scrollHeight;
+          });
+        });
+
         return div;
       }
 
