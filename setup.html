@@ -16,7 +16,7 @@
       {
         margin: 0;
         padding: 0;
-        background: #000;
+        background: rgba(0, 0, 0, 1);
         font-family: "Segoe UI Semilight","Segoe UI",sans-serif;
         color: white;
         display: flex;
@@ -61,6 +61,146 @@
         width: auto;
         margin-bottom: 16px;
         user-select: none;
+      }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------- Date Format Select -------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+      .date-format-header
+      {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        gap: 12px;
+        align-items: stretch;
+        background: rgba(0, 0, 0, 1);
+        font-size: 30px;
+        color: rgba(255, 255, 255, 1);
+        user-select: none;
+      }
+      body.light-mode .date-format-header
+      {
+        background: rgba(255, 255, 255, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+
+      .radio-group
+      {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin-bottom: 25px;
+      }
+
+      .radio-option
+      {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 12px;
+        cursor: normal;
+        border-radius: 2px;
+        user-select: none;
+      }
+
+      .radio-custom
+      {
+        position: relative;
+        height: 20px; /* Size of the outer ring */
+        width: 20px;
+        border-radius: 50%;
+        border: 2px solid rgba(198, 198, 198, 1);
+        margin-right: 12px; /* Space between radio and text */
+        flex-shrink: 0; /* Prevent the radio button from shrinking */
+      }
+      body.light-mode .radio-custom
+      {
+        border-color: rgba(51, 51, 51, 1);
+      }
+
+      .radio-option:active .radio-custom
+      {
+        border-color: rgba(153, 153, 153, 1) !important;
+      }
+      body.light-mode .radio-option:active .radio-custom
+      {
+        border-color: rgba(102, 102, 102, 1) !important;
+      }
+
+      .radio-option input[type="radio"]
+      {
+        /* Hide the actual browser radio button */
+        display: none;
+      }
+
+      .radio-label
+      {
+        font-size: 12pt;
+        line-height: 1.5;
+      }
+
+      /* Checked State (Outer Ring) */
+      .radio-option input[type="radio"]:checked + .radio-custom
+      {
+        border-color: rgba(0, 110, 197);
+      }
+      body.light-mode .radio-option input[type="radio"]:checked + .radio-custom
+      {
+        border-color: rgba(0, 120, 215, 1);
+      }
+
+      /* Inner Dot */
+      .radio-custom::after
+      {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0); /* Start hidden */
+        height: 12px; /* Size of the inner dot */
+        width: 12px;
+        border-radius: 50%;
+        background: rgba(198, 198, 198, 1);
+      }
+      body.light-mode .radio-custom::after
+      {
+        background: rgba(51, 51, 51, 1);
+      }
+
+      /* Checked State (Inner Dot) */
+      .radio-option input[type="radio"]:checked + .radio-custom::after
+      {
+        transform: translate(-50%, -50%) scale(1); /* Reveal the dot */
+      }
+
+      /* Hover on UNCHECKED (Border highlight) */
+      .radio-option:hover input[type="radio"]:not(:checked) + .radio-custom
+      {
+        border-color: rgba(255, 255, 255, 1);
+      }
+      body.light-mode .radio-option:hover input[type="radio"]:not(:checked) + .radio-custom
+      {
+        border-color: rgba(0, 0, 0, 1);
+      }
+
+      .radio-option:hover input[type="radio"]:checked + .radio-custom::after
+      {
+        background: rgba(255, 255, 255, 1);
+      }
+      .radio-option:active input[type="radio"]:checked + .radio-custom::after
+      {
+        background: rgba(153, 153, 153, 1) !important;
+      }
+
+      body.light-mode .radio-option:hover input[type="radio"]:checked + .radio-custom::after
+      {
+        background: rgba(0, 0, 0, 1);
+      }
+      body.light-mode .radio-option:active input[type="radio"]:checked + .radio-custom::after
+      {
+        background: rgba(102, 102, 102, 1) !important;
       }
 /* ----------------------------------------------------------------------------------------------------------------------- */
 
@@ -329,6 +469,24 @@
       <div class="header">Setup</div> <!-- "Setup" -->
     </div>
 
+    <!-- This is the radio button select for whether you want real date formatting or MM/DD date formatting. -->
+    <div class="date-format-header">
+     Date Format
+      <div class="radio-group" id="dateFormatOptions">
+    
+        <label class="radio-option">
+          <input type="radio" name="date-format" value="ddmm" checked>
+          <div class="radio-custom"></div>
+          <div class="radio-label">DD/MM</div>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="date-format" value="mmdd">
+          <div class="radio-custom"></div>
+          <div class="radio-label">MM/DD</div>
+        </label>
+      </div>
+    </div>
+
     <!-- This is the location selection bar for the weather. -->
      <div class="location-select">
       Location
@@ -337,6 +495,7 @@
         <ul class="dropdown-menu" role="listbox">
           <li data-value="NYC">New York City, NY, USA</li>
           <li data-value="London">London, England, UK</li>
+          <li data-value="Edinburgh">Edinburgh, Scotland, UK</li>
           <li data-value="Sydney">Sydney, New South Wales, Australia</li>
           <li data-value="Tokyo">Tokyo, Honshu, Japan</li>
           <li data-value="Moscow">Moscow, Russia</li>
@@ -362,13 +521,23 @@
 
       const APIinput = document.getElementById('apikey'); // Make a reference to the input box in the HTML "input-bar" div.
 
-      // Trim the key (remove unnecessary whitespace) and send it to the main process. Also send your Location. (I am in your walls.)
+      // Get the current setting for date format.
+      function getDateFormatSetting()
+      {
+        const radioGroup = document.getElementById('dateFormatOptions');
+        const selected = radioGroup.querySelector('input[name="date-format"]:checked');
+        return selected ? selected.value : null;
+      }
+
+      // Trim the key (remove unnecessary whitespace) and send it to the main process. Also send your Location (I am in your walls.) and date format.
       function submitSettings()
       {
         const val = APIinput.value.trim();
         if(val) window.setupAPI.submitKey(val);
         const location = selectedLocation;
         if(location) window.setupAPI.submitLocation(location);
+        const dateFormat = getDateFormatSetting();
+        if(dateFormat) window.setupAPI.submitDateFormat(dateFormat);
       }
 
       window.setupAPI.onThemeUpdate((isLight) =>

@@ -534,24 +534,30 @@
         }
       });
 
-      function formatDay(offset)
+      async function formatDay(offset)
       {
         const d = new Date();
         d.setDate(d.getDate() + offset);
 
-        // Check if date is valid
         if (isNaN(d.getTime()))
         {
           return 'INVALID DATE';
         }
-      
-        const options = {
-          weekday: 'short',
-          day: 'numeric',
-          month: 'numeric'
-        };
 
-        return d.toLocaleDateString('en-GB', options).toUpperCase();
+        let dateFormat = await window.electronAPI.getDateFormat();
+      
+        const weekday = new Intl.DateTimeFormat('en-GB', { weekday: 'short' }).format(d);
+        const day = d.getDate();
+        const month = d.getMonth() + 1;
+
+        if (dateFormat === 'ddmm')
+        {
+          return `${weekday} ${day}/${month}`.toUpperCase();
+        }
+        else
+        {
+          return `${weekday} ${month}/${day}`.toUpperCase();
+        }
       }
 
       function iconFor(desc)
@@ -596,7 +602,7 @@
           document.getElementById('today-low').textContent = `Low ${data.weather[0].mintempC}°`; // Low temperature
           document.getElementById('today-type').textContent = data.current_condition[0].weatherDesc[0].value; // Weather Type (Partly cloudy, Overcast etc.)
           document.getElementById('today-rain').textContent = `${data.weather[0].hourly[0].chanceofrain}%`; // Chance of percipitation
-          document.getElementById('today-date').textContent = formatDay(0); // Date
+          document.getElementById('today-date').textContent = await formatDay(0); // Date
           document.getElementById('today-icon').textContent = iconFor(data.current_condition[0].weatherDesc[0].value); // Icon
 
           // Tomorrow's Weather
@@ -604,15 +610,13 @@
           document.getElementById('tomorrow-low').textContent = `Low ${data.weather[1].mintempC}°`; // Low temperature
           document.getElementById('tomorrow-type').textContent = data.weather[1].hourly[0].weatherDesc[0].value; // Weather Type
           document.getElementById('tomorrow-rain').textContent = `${data.weather[1].hourly[0].chanceofrain}%`; // Chance of percipitation
-          document.getElementById('tomorrow-date').textContent = formatDay(1); // Date
+          document.getElementById('tomorrow-date').textContent = await formatDay(1); // Date
           document.getElementById('tomorrow-icon').textContent = iconFor(data.weather[1].hourly[0].weatherDesc[0].value); // Icon
         }
         catch (err)
         {
           clearInterval(weatherSpinnerInterval);
-          // *** CHANGED: Show actual error for debugging ***
           document.getElementById('weather').textContent = `:( There was an error loading the weather: ${err.message}`;
-          console.error('Weather fetch error:', err); // Log to console for debugging
         }
       }
 

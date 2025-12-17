@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   getUsername: () => ipcRenderer.invoke('get-username'),
   onThemeUpdate: (callback) => ipcRenderer.on('theme-updated', (_, isLight) => callback(isLight)),
   getWeatherLocation: () => ipcRenderer.invoke('get-weather-location'),
+  getDateFormat: () => ipcRenderer.invoke('get-date-format'),
   fetchWeather: async () =>
   {
     const location = await ipcRenderer.invoke('get-weather-location');

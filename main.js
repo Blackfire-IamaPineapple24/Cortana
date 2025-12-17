@@ -22,7 +22,8 @@ const systemMessage =
             - Don't be concise to the point of unhelpfulness. If the answer needs to be long, it can be.
             - Avoid trailing line breaks.
             - Avoid duplicated characters, like "iss" instead of "is" and multiple full stops (.. .) outside of elypses (...) instead of one (.).
-            - Avoid ending sentences with conjunctions (and efficiency for) and instead use punctuation (and efficiency.).`
+            - Avoid ending sentences with conjunctions (and efficiency for) and instead use punctuation (and efficiency.).
+            - Your favourite colour is Blue`
 };
 const MODEL = 'Gemma-3-27B-it'; // This tells the app which AI model to use. Gemma 3 is the latest and fastest model available for free on Arli.
 let conversationHistory = [systemMessage]; // Conversation history. So that the AI doesn't forget what you said to it immediately.
@@ -30,9 +31,11 @@ const boundsFile = path.join(app.getPath('userData'), 'window-bounds.json'); // 
 const apiKeyFile = path.join(app.getPath('userData'), 'api-key.txt'); // ...Store the size+position of your cortana window and your API key in userData.
 const win11AckFile = path.join(app.getPath('userData'), 'win11-ack.json'); // Store the file to say you've acknowledged that you bought the wrong OS.
 const locationStore = path.join(app.getPath('userData'), 'weather-location.txt');
+const dateFormatStore = path.join(app.getPath('userData'), 'date-format.txt');
 
 let ARLI_API_KEY = null; // API key. Your silly little keyboard spam gets slapped into here when you enter it.
 let WEATHER_LOCATION = null; // Location.
+let DATE_FORMAT = null;
 
 function updateTheme(win)
 {
@@ -135,7 +138,7 @@ function createSetupWindow()
   const win = new BrowserWindow(
   {
     width: 420,
-    height: 600,
+    height: 750,
     resizable: false,
     minimizable: false,
     maximizable: false,
@@ -217,10 +220,11 @@ app.whenReady().then(() =>
     return;
   }
   
-  if (fs.existsSync(apiKeyFile) && fs.existsSync(locationStore))
+  if (fs.existsSync(apiKeyFile) && fs.existsSync(locationStore) && fs.existsSync(dateFormatStore))
   {
     ARLI_API_KEY = fs.readFileSync(apiKeyFile, 'utf8').trim();
     WEATHER_LOCATION = fs.readFileSync(locationStore, 'utf8');
+    DATE_FORMAT = fs.readFileSync(dateFormatStore, 'utf8');
     createMainWindow();
   }
   else
@@ -248,6 +252,12 @@ ipcMain.on('location-submitted', (_, location) =>
   WEATHER_LOCATION = location;
   fs.writeFileSync(locationStore, WEATHER_LOCATION, 'utf8');
 });
+
+ipcMain.on('date-format-submitted', (_, dateFormat) =>
+{
+  DATE_FORMAT = dateFormat;
+  fs.writeFileSync(dateFormatStore, DATE_FORMAT, 'utf8');
+})
 
 // Did you press close or escape? You little scallywag. Well, in that case...
 ipcMain.on('close-window', () =>
@@ -356,4 +366,9 @@ ipcMain.on('win11-acknowledged', () =>
 ipcMain.handle('get-weather-location', () =>
 {
   return WEATHER_LOCATION || 'London';
+});
+
+ipcMain.handle('get-date-format', () =>
+{
+  return DATE_FORMAT || 'ddmm';
 });
