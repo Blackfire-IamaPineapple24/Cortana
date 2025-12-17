@@ -18,7 +18,7 @@
 
 <img width="319" height="93" alt="Name API key" src="https://github.com/user-attachments/assets/37113804-1dfd-497c-a0a7-07e019535663" />
 
-3. Click **Model Filter** and select `Gemma-3-27B-Arli AI-RPMax-v3`.
+3. Click **Model Filter** and select `Gemma-3-27B-it`.
 
 <img width="940" height="208" alt="image" src="https://github.com/user-attachments/assets/c0f32e05-5f48-404b-a6bb-993d3623617b" />
 
