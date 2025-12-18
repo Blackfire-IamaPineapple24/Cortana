@@ -63,4 +63,6 @@ Cortana SVGs provided by Icons8:
 <a target="_blank" href="https://icons8.com/icon/63758/cortana">Cortana</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 This is **not Cortana**. This program is intended to resemble and behave like Cortana. It runs on Arli AI's Google Gemma 3 model. Microsoft owns the trademarks for the Cortana name and logo; I do not claim ownership of any of these assets. Microsoft was not involved in the creation or production of this program.
-I made this for myself, using ChatGPT, mostly. I do not claim to have written all of this code, but I did write some - edited CSS and instructions. I'm going to update the code gradually over the next year or so. Update: As the project has grown I've started to shy away from AI more. It's still been used but as I say eventually the AI code will be cleaned up, functional, understood and well made. Hopefully.
+I made this for myself, using ChatGPT, mostly. I do not claim to have written all of this code, but I did write some - edited CSS and instructions. I'm going to update the code gradually over the next year or so.
+
+**Update**: As the project has grown I've started to shy away from AI more. It's still been used but as I say eventually the AI code will be cleaned up, functional, understood and well made. Hopefully.
