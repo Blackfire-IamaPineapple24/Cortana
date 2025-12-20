@@ -445,12 +445,32 @@
       {
         div.style.fontFamily = '"Segoe Boot Semilight", monospace'; // Give me my fancy font. The location of this font is defined in CSS (See @font-face)
         let i = 0; // This is a counter. Watch it go up.
-        chat.scrollTop = chat.scrollHeight; // Scroll to the bottom of the page.
+        requestAnimationFrame(() => // Scroll to the bottom of the page.
+        {
+          requestAnimationFrame(() =>
+          {
+            chat.scrollTop = chat.scrollHeight;
+          });
+        });
         const interval = setInterval(() => // Repeat a timer.
         {
+          requestAnimationFrame(() =>
+          {
+            requestAnimationFrame(() =>
+            {
+              chat.scrollTop = chat.scrollHeight;
+            });
+          });
           div.textContent = spinnerChars[i % spinnerChars.length]; // Set the currently active frame to the... current frame of the animation.
           i++; // I told you it would go up.
         }, 23); // How many times to repeat our timer. In other words, the animation speed. The lower the number, the faster the spinner. Don't make him dizzy.
+        requestAnimationFrame(() =>
+        {
+          requestAnimationFrame(() =>
+          {
+            chat.scrollTop = chat.scrollHeight;
+          });
+        });
         return interval; // Make it so we can stop the animation later.
       }
 
@@ -493,13 +513,20 @@
           // Change the font back to something humans can read and put the AI response in the box.
           assistantDiv.style.fontFamily = '"Segoe UI Semilight", sans-serif';
           assistantDiv.textContent = response;
-
+          
+          requestAnimationFrame(() => // Scroll to the bottom of the page.
+          {
+            requestAnimationFrame(() =>
+            {
+              chat.scrollTop = chat.scrollHeight;
+            });
+          });
         }
         catch (err) // What happens if anything between here and "try" goes wrong.
         {
           clearInterval(spinnerInterval); // Stop the spinner. We don't need it here, either. sorry li'l guy.
           assistantDiv.style.fontFamily = '"Segoe UI Semilight", sans-serif'; // Change the font back to something humans can read.
-          assistantDiv.textContent = `Error: ${err.message}`; // Display the error message.
+          assistantDiv.textContent = `:( Something went wrong: ${err.message}`; // Display the error message.
         }
       }
 
