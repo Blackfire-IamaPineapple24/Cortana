@@ -454,10 +454,16 @@
         });
         const interval = setInterval(() => // Repeat a timer.
         {
+          requestAnimationFrame(() =>
+          {
+            requestAnimationFrame(() =>
+            {
+              chat.scrollTop = chat.scrollHeight;
+            });
+          });
           div.textContent = spinnerChars[i % spinnerChars.length]; // Set the currently active frame to the... current frame of the animation.
           i++; // I told you it would go up.
         }, 23); // How many times to repeat our timer. In other words, the animation speed. The lower the number, the faster the spinner. Don't make him dizzy.
-        return interval; // Make it so we can stop the animation later.
         requestAnimationFrame(() =>
         {
           requestAnimationFrame(() =>
@@ -465,6 +471,7 @@
             chat.scrollTop = chat.scrollHeight;
           });
         });
+        return interval; // Make it so we can stop the animation later.
       }
 
       // Same as startSpinner() but for the weather.
