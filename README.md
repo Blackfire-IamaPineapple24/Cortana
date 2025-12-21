@@ -42,18 +42,24 @@ This will automatically install the app on your system.
 
 <img width="597" height="167" alt="image" src="https://github.com/user-attachments/assets/0ee46603-5126-4efe-b6a4-7e3343724bee" />
 
-### Step 2: Input Your API Key
-1. You will be prompted to enter an API key:
+### Step 2: Setup
+1. You will be prompted to set up the app:
 
-<img width="427" height="424" alt="API key window" src="https://github.com/user-attachments/assets/019d0867-dfc4-46ff-a0ed-2cc9665ed466" />
+<img width="495" height="811" alt="image" src="https://github.com/user-attachments/assets/bad83e75-9628-4d24-9917-c5ca2ba633e6" />
 
-Enter it, click **Submit**, and start chatting with Cortana!
+2. Select your preferred Date Format
+
+3. Select the Location closest to you in the dropdown. I'm still working on this, so there's only a few available.
+
+<img width="344" height="294" alt="image" src="https://github.com/user-attachments/assets/40e24ca9-6e72-4604-9c79-88e3a0e1e7f1" />
+  
+4. Enter or paste your API Key, click **OK**, and start chatting with Cortana!
 
 **Tip:** You can use Microsoft PowerToys’ Keyboard Manager to bind Win+C to open Cortana. The app should be located in `C:/Program Files/Cortana`.
 
 **VirusTotal Scan:** SmartScreen flags the installer, so [here's](https://www.virustotal.com/gui/file/d7f996f6ceb0b3c3d8df307fb2378f9933a1eec988a68279cd6afd9bb34c6993?nocache=1) a scan of the file to prove it's safe.
 
-**Other Links:** [System Requirements](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/System%20Requirements.md) | [Technical Information](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/Technical%20Information.md)
+**Other Links:** [System Requirements](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/System%20Requirements.md) | [Technical Information](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/Technical%20Information.md) | [Screenshots](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/Screenshots.md)
 
 ---
 
