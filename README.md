@@ -59,7 +59,7 @@ This will automatically install the app on your system.
 
 **VirusTotal Scan:** SmartScreen flags the installer, so [here's](https://www.virustotal.com/gui/file/d7f996f6ceb0b3c3d8df307fb2378f9933a1eec988a68279cd6afd9bb34c6993?nocache=1) a scan of the file to prove it's safe.
 
-**Other Links:** [System Requirements](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/System%20Requirements.md) | [Technical Information](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/Technical%20Information.md) | [Screenshots](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/Screenshots.md)
+**Other Links:** [System Requirements](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/Info/System%20Requirements.md) | [Technical Information](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/Info/Technical%20Information.md) | [Screenshots](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/Info/Screenshots.md)
 
 ---
 
