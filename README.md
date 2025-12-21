@@ -51,7 +51,7 @@ Enter it, click **Submit**, and start chatting with Cortana!
 
 **Tip:** You can use Microsoft PowerToys’ Keyboard Manager to bind Win+C to open Cortana. The app should be located in `C:/Program Files/Cortana`.
 
-**VirusTotal Scan:** SmartScreen flags the installer, so [here's](https://www.virustotal.com/gui/file/bf6567af188d98319e9d7f0b99dfa7e9b2dcd20aa512f5b07f56158d0b3f2553?nocache=1) a scan of the file to prove it's safe.
+**VirusTotal Scan:** SmartScreen flags the installer, so [here's](https://www.virustotal.com/gui/file/d7f996f6ceb0b3c3d8df307fb2378f9933a1eec988a68279cd6afd9bb34c6993?nocache=1) a scan of the file to prove it's safe.
 
 **Other Links:** [System Requirements](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/System%20Requirements.md) | [Technical Information](https://github.com/Blackfire-IamaPineapple24/Cortana/blob/main/Technical%20Information.md)
 
