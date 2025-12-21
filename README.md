@@ -42,7 +42,7 @@ This will automatically install the app on your system.
 
 <img width="597" height="167" alt="image" src="https://github.com/user-attachments/assets/0ee46603-5126-4efe-b6a4-7e3343724bee" />
 
-### Step 2: Setup
+### Step 2: Set up the app
 1. You will be prompted to set up the app:
 
 <img width="495" height="811" alt="image" src="https://github.com/user-attachments/assets/bad83e75-9628-4d24-9917-c5ca2ba633e6" />
