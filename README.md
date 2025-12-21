@@ -3,10 +3,10 @@
 ## 1. Get an Arli AI API Key
 
 ### Step 1: Create an Arli AI Account
-1. Go to [Arli AI's sign-up page](https://www.arliai.com/signup) and create an account.  
-2. Access the account panel.
-
+1. Go to [Arli AI's sign-up page](https://www.arliai.com/signup) and create an account.
 <img width="1359" height="785" alt="Sign-up page screenshot" src="https://github.com/user-attachments/assets/c98bd9e3-f5c7-42dc-a1a6-af92c8dbbb6c" />
+
+2. Access the account panel.
 <img width="2459" height="529" alt="Account panel screenshot" src="https://github.com/user-attachments/assets/12ebd52d-bbc8-4579-84f0-7d57996e07a4" />
 
 ### Step 2: Create an API Key
