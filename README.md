@@ -67,6 +67,8 @@ This will automatically install the app on your system.
 
 Weather Data: [wttr.in](https://github.com/chubin/wttr.in)
 
+Wake Word models and training: [OpenWakeWord](https://github.com/dscripka/openWakeWord)
+
 Cortana SVGs provided by Icons8:  
 <a target="_blank" href="https://icons8.com/icon/63758/cortana">Cortana</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
