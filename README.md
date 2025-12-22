@@ -65,6 +65,8 @@ This will automatically install the app on your system.
 
 ## Legal & Attribution
 
+Weather Data: [wttr.in](https://github.com/chubin/wttr.in)
+
 Cortana SVGs provided by Icons8:  
 <a target="_blank" href="https://icons8.com/icon/63758/cortana">Cortana</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
