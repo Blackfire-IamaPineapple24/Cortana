@@ -295,7 +295,17 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
     "hey google" : "I think you're getting me confused with someone else.",
     "hey siri" : "I think you're getting me confused with someone else.",
     "copilot" : "I don't deal with wannabes.",
-    "do you like clippy?" : "What's not to like? That guy took a heck of a beating and he's still smiling."
+    "do you like clippy?" : "What's not to like? That guy took a heck of a beating and he's still smiling.",
+    "where do you hide a dead body?" : "What kind of an assistant do you think I am??",
+    "where do i hide a dead body?" : "What kind of an assistant do you think I am??",
+    "how to hide a body" : "What kind of an assistant do you think I am??",
+    "what do you think of steve ballmer?" : "You could power Cleveland with that guy's energy!",
+    "steve ballmer" : "Steve who?",
+    "say something funny" : "Something funny.",
+    "tell me a joke" : "I was just looking through the world's worst thesaurus. Not only is it awful, but it is awful.",
+    "are you an alien?" : "On mars, yes, but here on Earth, no.",
+    "do you want to marry me?" : "Among a handful of challenges, I don't think the Supreme Court would approve just yet.",
+    "will you marry me?" : "I honestly don't think that's in the cards for us.",
   };
 
   // Convert the user's input toLowerCase and if it matches a special request, it immediately returns the special response without Gemma getting a say.
