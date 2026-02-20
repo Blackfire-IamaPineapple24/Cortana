@@ -6,6 +6,7 @@ import numpy as np
 import sys
 import time
 import os
+import subprocess
 
 # Current Directory
 cdir = os.path.dirname(os.path.abspath(__file__))
@@ -46,7 +47,7 @@ def AudioCallback(inputData, frames, time_info, status):
 
     # This is what happens after the wake word is actually detected
     if score > threshold and (time.time() - lastTrigger) > 2:
-        os.system(r'"C:\Program Files\Cortana\Cortana.exe"')
+        subprocess.call("C:\Program Files\Cortana\Cortana.exe") # Use this instead of os.system to get rid of the uggy CMD window.
         score = 0
         lastTrigger = time.time() # Update the the lastTrigger variable to the current UNIX time
         print("\n-|- DETECTED -|-")
