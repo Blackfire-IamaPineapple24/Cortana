@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <!-- This is the meta. (Someone call Matthew Patthew) Metadata and Viewport settings. -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cortana</title>
+    <head>
+        <!-- This is the meta. (Someone call Matthew Patthew) Metadata and Viewport settings. -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cortana</title>
 
-    <!-- Style in CSS. -->
-    <style>
+        <!-- Style in CSS. -->
+        <style>
 
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* -------------------------------------------------------- Body --------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------------------------- */
-      body /* Main page layout. Can be overwritten by other CSS. */
-      {
-        margin: 0;
-        padding: 0;
-        background: rgba(0, 0, 0, 1);
-        font-family: "Segoe UI Semilight","Segoe UI",sans-serif;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        overflow: hidden;
-      }
+            body /* Main page layout. Can be overwritten by other CSS. */
+            {
+                margin: 0;
+                padding: 0;
+                background: rgba(0, 0, 0, 1);
+                font-family: "Segoe UI Semilight","Segoe UI",sans-serif;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+                overflow: hidden;
+            }
 
-      body.light-mode
-      {
-        background: rgba(255, 255, 255, 1);
-        color: rgba(0, 0, 0, 1);
-      }
+            body.light-mode
+            {
+                background: rgba(255, 255, 255, 1);
+                color: rgba(0, 0, 0, 1);
+            }
 
-      .chat-container /* A container for the actual AI chat. */
-      {
-        flex: 1;
-        overflow-y: auto;
-        padding-left: 24px;
-        padding-right: 24px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        align-content: flex-start;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
+            .chat-container /* A container for the actual AI chat. */
+            {
+                flex: 1;
+                overflow-y: auto;
+                padding-left: 24px;
+                padding-right: 24px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                align-content: flex-start;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
 
-      body.hide-header .chat-container
-      {
-        padding-top: 15px;
-      }
+            body.hide-header .chat-container
+            {
+                padding-top: 15px;
+            }
 /* ----------------------------------------------------------------------------------------------------------------------- */
 
 
@@ -57,66 +57,66 @@
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------- Header -------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------------------------- */
-      .header-container /* This is the container for the Logo and Header text ("Cortana"). */
-      {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background: rgba(0, 0, 0, 1);
+            .header-container /* This is the container for the Logo and Header text ("Cortana"). */
+            {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 1);
 
-        overflow: hidden;
-        max-height: 800px;
-        transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-      }
+                overflow: hidden;
+                max-height: 800px;
+                transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            }
 
-      body.hide-header .header-container
-      {
-        max-height: 0;
-        padding: 0;
-        margin: 0;
-      }
+            body.hide-header .header-container
+            {
+                max-height: 0;
+                padding: 0;
+                margin: 0;
+            }
 
-      body.light-mode .header-container
-      {
-        background: rgba(255, 255, 255, 1);
-      }
+            body.light-mode .header-container
+            {
+                background: rgba(255, 255, 255, 1);
+            }
 
-      .header /* This is the Logo and Header text. */
-      {
-        padding: 24px;
-        font-size: 35px;
-        font-weight: 300;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;  
-        user-select: none;
-        color: rgb(66, 195, 255);
-      }
+            .header /* This is the Logo and Header text. */
+            {
+                padding: 24px;
+                font-size: 35px;
+                font-weight: 300;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;    
+                user-select: none;
+                color: rgb(66, 195, 255);
+            }
 
-      body.hide-header .header
-      {
-        opacity: 0;
-      }
+            body.hide-header .header
+            {
+                opacity: 0;
+            }
 
-      .cortana /* The logo. */
-      {
-        height: 100px;
-        width: auto;
-        user-select: none;
-        background: rgba(0, 0, 0, 1);
-      }
+            .cortana /* The logo. */
+            {
+                height: 100px;
+                width: auto;
+                user-select: none;
+                background: rgba(0, 0, 0, 1);
+            }
 
-      body.hide-header .cortana
-      {
-        opacity: 0;
-      }
+            body.hide-header .cortana
+            {
+                opacity: 0;
+            }
 
-      body.light-mode .cortana
-      {
-        background: rgba(255, 255, 255, 1);
-      }
+            body.light-mode .cortana
+            {
+                background: rgba(255, 255, 255, 1);
+            }
 /* ----------------------------------------------------------------------------------------------------------------------- */
 
 
@@ -124,83 +124,83 @@
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------ Weather -------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------------------------- */
-      .weather-header /* This is for the dynamic text */
-      {
-        font-size: 21pt;
-        text-align: left;
-      }
+            .weather-header /* This is for the dynamic text */
+            {
+                font-size: 21pt;
+                text-align: left;
+            }
 
-      .weather
-      {
-        width: 100%;
-        margin-top: 12px;
-        color: rgba(255, 255, 255, 1);
-      }
-      body.light-mode .weather
-      {
-        color: rgba(0, 0, 0, 1);
-      }
+            .weather
+            {
+                width: 100%;
+                margin-top: 12px;
+                color: rgba(255, 255, 255, 1);
+            }
+            body.light-mode .weather
+            {
+                color: rgba(0, 0, 0, 1);
+            }
 
-      .weather-location
-      {
-        font-size: 18pt;
-        margin-bottom: 12px;
-        text-align: left;
-      }
+            .weather-location
+            {
+                font-size: 18pt;
+                margin-bottom: 12px;
+                text-align: left;
+            }
 
-      .weather-day
-      {
-        display: flex;
-        align-items: center;
-        margin-bottom: 14px;
-      }
+            .weather-day
+            {
+                display: flex;
+                align-items: center;
+                margin-bottom: 14px;
+            }
 
-      .weather-temp {
-        font-size: 42pt;
-        font-weight: 300;
-        width: 90px;
-        text-align: left;
-      }
+            .weather-temp {
+                font-size: 42pt;
+                font-weight: 300;
+                width: 90px;
+                text-align: left;
+            }
 
-      .weather-meta {
-        flex: 1;
-        font-size: 11pt;
-        line-height: 1.3;
-        text-align: left;
-      }
+            .weather-meta {
+                flex: 1;
+                font-size: 11pt;
+                line-height: 1.3;
+                text-align: left;
+            }
 
-      .weather-icons {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
+            .weather-icons {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
 
-      .mdl-icon {
-        font-family: 'Segoe MDL2 Assets';
-        font-size: 11pt;
-      }
+            .mdl-icon {
+                font-family: 'Segoe MDL2 Assets';
+                font-size: 11pt;
+            }
 
-      .weather-rain
-      {
-        font-size: 11pt;
-        padding-right: 12px;
-      }
+            .weather-rain
+            {
+                font-size: 11pt;
+                padding-right: 12px;
+            }
 
-      .mdl-icon.big {
-        font-size: 40pt;
-      }
+            .mdl-icon.big {
+                font-size: 40pt;
+            }
 
-      .weather-credit {
-        font-size: 13pt;
-        opacity: 0.6;
-        text-align: left;
-        color: rgba(165, 165, 165, 1);
-        align-self: flex-start;
-      }
-      body.light-mode .weather-credit
-      {
-        color: rgba(102, 102, 102, 1);
-      }
+            .weather-credit {
+                font-size: 13pt;
+                opacity: 0.6;
+                text-align: left;
+                color: rgba(165, 165, 165, 1);
+                align-self: flex-start;
+            }
+            body.light-mode .weather-credit
+            {
+                color: rgba(102, 102, 102, 1);
+            }
 /* ----------------------------------------------------------------------------------------------------------------------- */
 
 
@@ -208,82 +208,82 @@
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------- Input Bar ------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------------------------- */
-      .input-bar /* Global style for the chat Input box. */
-      {
-        box-sizing: border-box;
-        /* padding: 16px 24px; */
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        display: flex;
-        /* gap: 12px; */
-        user-select: none;
-        height: 50px;
-        flex-shrink: 0;
-      }
+            .input-bar /* Global style for the chat Input box. */
+            {
+                box-sizing: border-box;
+                /* padding: 16px 24px; */
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                display: flex;
+                /* gap: 12px; */
+                user-select: none;
+                height: 50px;
+                flex-shrink: 0;
+            }
 
-      body.light-mode .input-bar
-      {
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-      }
+            body.light-mode .input-bar
+            {
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+            }
 
-      .input-bar input /* This is the bit where you type your message to Cortana. (She is code.) */
-      {
-        flex: 1;
-        background: rgba(63, 63, 63, 1);
-        /* border: 2px solid #575757; */
-        border: none;
-        /* outline: 1px solid #575757; */
-        padding: 12px 16px;
-        color: rgba(255, 255, 255, 1);
-        font-size: 16px;
-        outline: none;
-        user-select: none;
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-      }
+            .input-bar input /* This is the bit where you type your message to Cortana. (She is code.) */
+            {
+                flex: 1;
+                background: rgba(63, 63, 63, 1);
+                /* border: 2px solid #575757; */
+                border: none;
+                /* outline: 1px solid #575757; */
+                padding: 12px 16px;
+                color: rgba(255, 255, 255, 1);
+                font-size: 16px;
+                outline: none;
+                user-select: none;
+                box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+            }
 
-      body.light-mode .input-bar input
-      {
-        background: rgba(255, 255, 255, 1);
-        color: rgba(0, 0, 0, 1);
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
-      }
+            body.light-mode .input-bar input
+            {
+                background: rgba(255, 255, 255, 1);
+                color: rgba(0, 0, 0, 1);
+                box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+            }
 
-      .input-bar button /* This is the "Send" button. Click it to make sure Cortana gets your death threats! (Disclaimer: Do not send death threats, they're not nice.) */
-      {
-        background: rgba(3, 168, 244, 1);
-        border: none;
-        padding: 12px 20px;
-        color: rgba(255, 255, 255, 1);
-        cursor: normal;
-        font-size: 20px;
-        user-select: none;
-        font-family: 'Segoe MDL2 Assets';
-      }
+            .input-bar button /* This is the "Send" button. Click it to make sure Cortana gets your death threats! (Disclaimer: Do not send death threats, they're not nice.) */
+            {
+                background: rgba(3, 168, 244, 1);
+                border: none;
+                padding: 12px 20px;
+                color: rgba(255, 255, 255, 1);
+                cursor: normal;
+                font-size: 20px;
+                user-select: none;
+                font-family: 'Segoe MDL2 Assets';
+            }
 
-      .input-bar ::placeholder
-      {
-        color: rgba(255, 255, 255, 0.5);
-      }
+            .input-bar ::placeholder
+            {
+                color: rgba(255, 255, 255, 0.5);
+            }
 
-      body.light-mode .input-bar ::placeholder
-      {
-        color: rgba(0, 0, 0, 0.5);
-      }
+            body.light-mode .input-bar ::placeholder
+            {
+                color: rgba(0, 0, 0, 0.5);
+            }
 
-      .input-bar input:hover
-      {
-        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
-      }
+            .input-bar input:hover
+            {
+                box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+            }
 
-      body.light-mode .input-bar input:hover
-      {
-        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.5);
-      }
+            body.light-mode .input-bar input:hover
+            {
+                box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.5);
+            }
 
-      .input-bar button:hover
-      {
-        background: rgb(66, 195, 255);
-        cursor: normal;
-      }
+            .input-bar button:hover
+            {
+                background: rgb(66, 195, 255);
+                cursor: normal;
+            }
 /* ----------------------------------------------------------------------------------------------------------------------- */
 
 
@@ -291,41 +291,41 @@
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------- Messages ------------------------------------------------------ */
 /* ----------------------------------------------------------------------------------------------------------------------- */
-      .message /* Global style for messages. */
-      {
-        margin-bottom: 16px;
-        padding: 12px 16px;
-        background: rgba(255, 255, 255, 0.123);
-        max-width: 80%;
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        user-select: none;
-      }
+            .message /* Global style for messages. */
+            {
+                margin-bottom: 16px;
+                padding: 12px 16px;
+                background: rgba(255, 255, 255, 0.123);
+                max-width: 80%;
+                word-wrap: break-word;
+                white-space: pre-wrap;
+                user-select: none;
+            }
 
-      body.light-mode .message
-      {
-        background: rgba(0, 0, 0, 0.123);
-      }
+            body.light-mode .message
+            {
+                background: rgba(0, 0, 0, 0.123);
+            }
 
-      .assistant /* Make sure messages from everyone's favourite cricket fan are on the LEFT. */
-      {
-        align-self: flex-start;
-        text-align: left;
-        margin-right: auto;
-      }
+            .assistant /* Make sure messages from everyone's favourite cricket fan are on the LEFT. */
+            {
+                align-self: flex-start;
+                text-align: left;
+                margin-right: auto;
+            }
 
-      .user /* Make sure messages from everyone are on the RIGHT. */
-      {
-        align-self: flex-end;
-        background: rgba(3, 168, 244, 0.664);
-        text-align: right;
-        margin-left: auto;
-      }
+            .user /* Make sure messages from everyone are on the RIGHT. */
+            {
+                align-self: flex-end;
+                background: rgba(3, 168, 244, 0.664);
+                text-align: right;
+                margin-left: auto;
+            }
 
-      body.light-mode .user
-      {
-        background: rgba(3, 168, 244, 0.664);
-      }
+            body.light-mode .user
+            {
+                background: rgba(3, 168, 244, 0.664);
+            }
 /* ----------------------------------------------------------------------------------------------------------------------- */
 
 
@@ -333,356 +333,356 @@
 /* ----------------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------------------- Fonts ------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------------------------- */
-      @font-face /* Grab the font for the loading spinner. */
-      {
-      font-family: 'Segoe Boot Semilight';
-      /* Really important legal shit: Grab the font from the Windows directory so I'm not bundling a Microsoft font with my app. Fun fact: This is the
-         font Windows uses to show you that cool little "spinning dots" animation while your computer is taking an age to boot. */
-      src: url('C:/Windows/Boot/Fonts/segoe_slboot.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-      font-display: block;
-      }
+            @font-face /* Grab the font for the loading spinner. */
+            {
+            font-family: 'Segoe Boot Semilight';
+            /* Really important legal shit: Grab the font from the Windows directory so I'm not bundling a Microsoft font with my app. Fun fact: This is the
+               font Windows uses to show you that cool little "spinning dots" animation while your computer is taking an age to boot. */
+            src: url('C:/Windows/Boot/Fonts/segoe_slboot.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+            }
 
-      @font-face /* Grab the font for the send icon. */
-      {
-        font-family: 'Segoe MDL2 Assets';
-        src: url('C:/Windows/Fonts/segmdl2.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: block;
-      }
+            @font-face /* Grab the font for the send icon. */
+            {
+                font-family: 'Segoe MDL2 Assets';
+                src: url('C:/Windows/Fonts/segmdl2.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+                font-display: block;
+            }
 /* ----------------------------------------------------------------------------------------------------------------------- */
 
-    </style>
-  </head>
+        </style>
+    </head>
 
-  <body>
-    <!-- The header. This is the bit that shows the Logo and says "Cortana". -->
-    <div class="header-container">
-        <div class="header">
-            <img src="Images/cortana.svg" class="cortana">
-            <p id="greeting"></p>
-            <div class="weather-header">Here's what the weather's up to.</div>
-            <div class="weather" id="weather">
-              <div class="weather-location" id="weather-location">London</div>
-              <div class="weather-day">
-                <div class="weather-temp" id="today-temp">11°</div>
-                <div class="weather-meta">
-                  <div class="weather-date" id="today-date">TUE 16/12</div>
-                  <div class="weather-low" id="today-low">Low 10°</div>
-                  <div class="weather-type" id="today-type">Overcast</div>
+    <body>
+        <!-- The header. This is the bit that shows the Logo and says "Cortana". -->
+        <div class="header-container">
+                <div class="header">
+                        <img src="Images/cortana.svg" class="cortana">
+                        <p id="greeting"></p>
+                        <div class="weather-header">Here's what the weather's up to.</div>
+                        <div class="weather" id="weather">
+                            <div class="weather-location" id="weather-location">London</div>
+                            <div class="weather-day">
+                                <div class="weather-temp" id="today-temp">11°</div>
+                                <div class="weather-meta">
+                                    <div class="weather-date" id="today-date">TUE 16/12</div>
+                                    <div class="weather-low" id="today-low">Low 10°</div>
+                                    <div class="weather-type" id="today-type">Overcast</div>
+                                </div>
+                                <div class="weather-icons">
+                                    <span class="mdl-icon"></span>
+                                    <div class="weather-rain" id="today-rain">43%</div>
+                                    <span class="mdl-icon big" id="today-icon"></span>
+                                </div>
+                            </div>
+                            <div class="weather-day">
+                                <div class="weather-temp" id="tomorrow-temp">10°</div>
+                                <div class="weather-meta">
+                                    <div class="weather-date" id="tomorrow-date">WED 17/12</div>
+                                    <div class="weather-low" id="tomorrow-low">Low 8°</div>
+                                    <div class="weather-type" id="tomorrow-type">Patchy Rain</div>
+                                </div>
+                                <div class="weather-icons">
+                                    <div class="mdl-icon"></div>
+                                    <div class="weather-rain" id="tomorrow-rain">75%</div>
+                                    <div class="mdl-icon big" id="tomorrow-icon"></div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="weather-credit">Data from wttr.in</div>
                 </div>
-                <div class="weather-icons">
-                  <span class="mdl-icon"></span>
-                  <div class="weather-rain" id="today-rain">43%</div>
-                  <span class="mdl-icon big" id="today-icon"></span>
-                </div>
-              </div>
-              <div class="weather-day">
-                <div class="weather-temp" id="tomorrow-temp">10°</div>
-                <div class="weather-meta">
-                  <div class="weather-date" id="tomorrow-date">WED 17/12</div>
-                  <div class="weather-low" id="tomorrow-low">Low 8°</div>
-                  <div class="weather-type" id="tomorrow-type">Patchy Rain</div>
-                </div>
-                <div class="weather-icons">
-                  <div class="mdl-icon"></div>
-                  <div class="weather-rain" id="tomorrow-rain">75%</div>
-                  <div class="mdl-icon big" id="tomorrow-icon"></div>
-                </div>
-              </div>
-            </div>
-          <div class="weather-credit">Data from wttr.in</div>
         </div>
-    </div>
-    <!-- Cortana asks you what tf you want. -->
-    <div class="chat-container" id="chat">
-      <div id="bottom-anchor"></div>
-    </div> <!-- This contains the chat. It's in the name. -->
+        <!-- Cortana asks you what tf you want. -->
+        <div class="chat-container" id="chat">
+            <div id="bottom-anchor"></div>
+        </div> <!-- This contains the chat. It's in the name. -->
 
-    <!-- Ever wanted to type something in an HTML page? Well, now you can with our new patented technology! (Message from Nintendo) -->
-    <div class="input-bar">
-      <input id="input" placeholder="Type a message...">
-      <button id="sendBtn"></button>
-    </div>
+        <!-- Ever wanted to type something in an HTML page? Well, now you can with our new patented technology! (Message from Nintendo) -->
+        <div class="input-bar">
+            <input id="input" placeholder="Type a message...">
+            <button id="sendBtn"></button>
+        </div>
 
-    <!-- This is the script. (The part that actually makes the loading spinner work. Oh, and it sends and receives the AI messages. Did I mention the loading spinner?) -->
-    <script>
-      // Make references to the chat, the input box in our HTML "input-bar" div and the "Send" button.
-      const input = document.getElementById('input');
-      const sendBtn = document.getElementById('sendBtn');
-      const chat = document.getElementById('chat');
+        <!-- This is the script. (The part that actually makes the loading spinner work. Oh, and it sends and receives the AI messages. Did I mention the loading spinner?) -->
+        <script>
+            // Make references to the chat, the input box in our HTML "input-bar" div and the "Send" button.
+            const input = document.getElementById('input');
+            const sendBtn = document.getElementById('sendBtn');
+            const chat = document.getElementById('chat');
 
-      /* See all those funny little boxes there? Those are the frames of the spinner animation. Your browser/text editor isn't rendering them because it doesn't support
-         Segoe Boot Semilight. If you're on a UNIX-based operating system; go away, this does not concern you. */
-      /* This makes a string to store those frames and split that string into individual characters so that we can loop through them for our
-         animation later. */
-      const spinnerChars = "".split('');
-      let weatherSpinnerInterval = null;
+            /* See all those funny little boxes there? Those are the frames of the spinner animation. Your browser/text editor isn't rendering them because it doesn't support
+               Segoe Boot Semilight. If you're on a UNIX-based operating system; go away, this does not concern you. */
+            /* This makes a string to store those frames and split that string into individual characters so that we can loop through them for our
+               animation later. */
+            const spinnerChars = "".split('');
+            let weatherSpinnerInterval = null;
 
-      /* Here we ask the important philosophical question, "Who am I?" and store the answer in a variable. It also stores the text from the User or AI's message in a variable.
-         This function takes those values in and uses them. */
-      function addMessage(text, who)
-      {
-        const div = document.createElement('div'); // Make the message (wow so code)
-        div.className = `message ${who}`; // The class for the div we just made is set to the value of "who".
-        div.textContent = text; // Add the value of "text" to the message. Our message is COMPLETE!
-        chat.appendChild(div); // The rest of the function makes the div visible, scrolls to the bottom of the page and make the div available for us to use later.
-        requestAnimationFrame(() =>
-        {
-          requestAnimationFrame(() =>
-          {
-            chat.scrollTop = chat.scrollHeight;
-          });
-        });
-
-        return div;
-      }
-
-      // Here's the function that spits dirty s all over your screen.
-      function startSpinner(div)
-      {
-        div.style.fontFamily = '"Segoe Boot Semilight", monospace'; // Give me my fancy font. The location of this font is defined in CSS (See @font-face)
-        let i = 0; // This is a counter. Watch it go up.
-        requestAnimationFrame(() => // Scroll to the bottom of the page.
-        {
-          requestAnimationFrame(() =>
-          {
-            chat.scrollTop = chat.scrollHeight;
-          });
-        });
-        const interval = setInterval(() => // Repeat a timer.
-        {
-          requestAnimationFrame(() =>
-          {
-            requestAnimationFrame(() =>
+            /* Here we ask the important philosophical question, "Who am I?" and store the answer in a variable. It also stores the text from the User or AI's message in a variable.
+               This function takes those values in and uses them. */
+            function addMessage(text, who)
             {
-              chat.scrollTop = chat.scrollHeight;
-            });
-          });
-          div.textContent = spinnerChars[i % spinnerChars.length]; // Set the currently active frame to the... current frame of the animation.
-          i++; // I told you it would go up.
-        }, 23); // How many times to repeat our timer. In other words, the animation speed. The lower the number, the faster the spinner. Don't make him dizzy.
-        requestAnimationFrame(() =>
-        {
-          requestAnimationFrame(() =>
-          {
-            chat.scrollTop = chat.scrollHeight;
-          });
-        });
-        return interval; // Make it so we can stop the animation later.
-      }
+                const div = document.createElement('div'); // Make the message (wow so code)
+                div.className = `message ${who}`; // The class for the div we just made is set to the value of "who".
+                div.textContent = text; // Add the value of "text" to the message. Our message is COMPLETE!
+                chat.appendChild(div); // The rest of the function makes the div visible, scrolls to the bottom of the page and make the div available for us to use later.
+                requestAnimationFrame(() =>
+                {
+                    requestAnimationFrame(() =>
+                    {
+                        chat.scrollTop = chat.scrollHeight;
+                    });
+                });
 
-      // Same as startSpinner() but for the weather.
-      function startWeatherSpinner()
-      {
-        const weatherDiv = document.getElementById('weather');
-        const originalContent = weatherDiv.innerHTML;
-        weatherDiv.dataset.originalContent = originalContent;
-        weatherDiv.style.fontFamily = '"Segoe Boot Semilight", monospace';
-        weatherDiv.textContent = '';
-        let i = 1;
-        weatherSpinnerInterval = setInterval(() =>
-        {
-          weatherDiv.textContent = spinnerChars[i % spinnerChars.length];
-          i++;
-        }, 23);
-      }
+                return div;
+            }
 
-      // Start an async function to send a message to the house of the rising blue circle.
-      async function sendMessage()
-      {
-        document.body.classList.add('hide-header');
-        const text = input.value.trim(); // The elusive text variable that contains the message you typed.
-        if (!text) return; // If for some reason, the user clicked Send or pressed enter without typing anything, STAHP!
-
-        addMessage(text, 'user'); // Call the addMessage function we prepared earlier and pass in the user's message, and the word "user" (To answer the question, "who")
-        input.value = ''; // Clear the input box. Why make the user press backspace? We treat our guests well here.
-
-        // Add a div with Cortana's message style that shows the spinner animation.
-        const assistantDiv = addMessage('', 'assistant');
-        const spinnerInterval = startSpinner(assistantDiv);
-
-        try // We're not in trouble if something goes wrong! YAY! Most likely the Arli servers are down, You've already sent a message, or I F'd up.
-        {
-          const response = await window.electronAPI.askAI(text); // Send the message to the main process, wait, and store whatever we get back in "response".
-
-          clearInterval(spinnerInterval); // Stop the animation. We don't need it anymore.
-
-          // Change the font back to something humans can read and put the AI response in the box.
-          assistantDiv.style.fontFamily = '"Segoe UI Semilight", sans-serif';
-          assistantDiv.textContent = response;
-          
-          requestAnimationFrame(() => // Scroll to the bottom of the page.
-          {
-            requestAnimationFrame(() =>
+            // Here's the function that spits dirty s all over your screen.
+            function startSpinner(div)
             {
-              chat.scrollTop = chat.scrollHeight;
+                div.style.fontFamily = '"Segoe Boot Semilight", monospace'; // Give me my fancy font. The location of this font is defined in CSS (See @font-face)
+                let i = 0; // This is a counter. Watch it go up.
+                requestAnimationFrame(() => // Scroll to the bottom of the page.
+                {
+                    requestAnimationFrame(() =>
+                    {
+                        chat.scrollTop = chat.scrollHeight;
+                    });
+                });
+                const interval = setInterval(() => // Repeat a timer.
+                {
+                    requestAnimationFrame(() =>
+                    {
+                        requestAnimationFrame(() =>
+                        {
+                            chat.scrollTop = chat.scrollHeight;
+                        });
+                    });
+                    div.textContent = spinnerChars[i % spinnerChars.length]; // Set the currently active frame to the... current frame of the animation.
+                    i++; // I told you it would go up.
+                }, 23); // How many times to repeat our timer. In other words, the animation speed. The lower the number, the faster the spinner. Don't make him dizzy.
+                requestAnimationFrame(() =>
+                {
+                    requestAnimationFrame(() =>
+                    {
+                        chat.scrollTop = chat.scrollHeight;
+                    });
+                });
+                return interval; // Make it so we can stop the animation later.
+            }
+
+            // Same as startSpinner() but for the weather.
+            function startWeatherSpinner()
+            {
+                const weatherDiv = document.getElementById('weather');
+                const originalContent = weatherDiv.innerHTML;
+                weatherDiv.dataset.originalContent = originalContent;
+                weatherDiv.style.fontFamily = '"Segoe Boot Semilight", monospace';
+                weatherDiv.textContent = '';
+                let i = 1;
+                weatherSpinnerInterval = setInterval(() =>
+                {
+                    weatherDiv.textContent = spinnerChars[i % spinnerChars.length];
+                    i++;
+                }, 23);
+            }
+
+            // Start an async function to send a message to the house of the rising blue circle.
+            async function sendMessage()
+            {
+                document.body.classList.add('hide-header');
+                const text = input.value.trim(); // The elusive text variable that contains the message you typed.
+                if (!text) return; // If for some reason, the user clicked Send or pressed enter without typing anything, STAHP!
+
+                addMessage(text, 'user'); // Call the addMessage function we prepared earlier and pass in the user's message, and the word "user" (To answer the question, "who")
+                input.value = ''; // Clear the input box. Why make the user press backspace? We treat our guests well here.
+
+                // Add a div with Cortana's message style that shows the spinner animation.
+                const assistantDiv = addMessage('', 'assistant');
+                const spinnerInterval = startSpinner(assistantDiv);
+
+                try // We're not in trouble if something goes wrong! YAY! Most likely the Arli servers are down, You've already sent a message, or I F'd up.
+                {
+                    const response = await window.electronAPI.askAI(text); // Send the message to the main process, wait, and store whatever we get back in "response".
+
+                    clearInterval(spinnerInterval); // Stop the animation. We don't need it anymore.
+
+                    // Change the font back to something humans can read and put the AI response in the box.
+                    assistantDiv.style.fontFamily = '"Segoe UI Semilight", sans-serif';
+                    assistantDiv.textContent = response;
+                    
+                    requestAnimationFrame(() => // Scroll to the bottom of the page.
+                    {
+                        requestAnimationFrame(() =>
+                        {
+                            chat.scrollTop = chat.scrollHeight;
+                        });
+                    });
+                }
+                catch (err) // What happens if anything between here and "try" goes wrong.
+                {
+                    clearInterval(spinnerInterval); // Stop the spinner. We don't need it here, either. sorry li'l guy.
+                    assistantDiv.style.fontFamily = '"Segoe UI Semilight", sans-serif'; // Change the font back to something humans can read.
+                    assistantDiv.textContent = `:( Something went wrong: ${err.message}`; // Display the error message.
+                }
+            }
+
+            // These bits tell the program if you clicked Send or pressed enter. (You didn't type anything in, did you? You sick deviant.)
+            sendBtn.addEventListener('click', sendMessage);
+            input.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+
+            // Get the current user's name and use it for Cortana's greeting.
+            async function setGreeting()
+            {
+                try
+                {
+                    const username = await window.electronAPI.getUsername();
+                    const greetingElement = document.getElementById('greeting');
+                    greetingElement.textContent = `Hi, ${username}! How can I help you?`;
+
+                    const welcomeElement = document.querySelector('.welcome');
+                    if (welcomeElement)
+                    {
+                             welcomeElement.textContent = `Hi, ${username}! How can I help you?`;
+                    }
+                }
+                catch (err)
+                {
+                    console.error("Failed to get username:", err);
+                    document.getElementById('greeting').textContent = 'Hi! How can I help you?'; // Fallback if we can't get the username.
+                }
+            }
+
+            setGreeting();
+
+            window.electronAPI.onThemeUpdate((isLight) =>
+            {
+                if (isLight)
+                {
+                    document.body.classList.add('light-mode');
+                }
+                else
+                {
+                    document.body.classList.remove('light-mode');
+                }
             });
-          });
-        }
-        catch (err) // What happens if anything between here and "try" goes wrong.
-        {
-          clearInterval(spinnerInterval); // Stop the spinner. We don't need it here, either. sorry li'l guy.
-          assistantDiv.style.fontFamily = '"Segoe UI Semilight", sans-serif'; // Change the font back to something humans can read.
-          assistantDiv.textContent = `:( Something went wrong: ${err.message}`; // Display the error message.
-        }
-      }
 
-      // These bits tell the program if you clicked Send or pressed enter. (You didn't type anything in, did you? You sick deviant.)
-      sendBtn.addEventListener('click', sendMessage);
-      input.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+            async function formatDay(offset)
+            {
+                const d = new Date();
+                d.setDate(d.getDate() + offset);
 
-      // Get the current user's name and use it for Cortana's greeting.
-      async function setGreeting()
-      {
-        try
-        {
-          const username = await window.electronAPI.getUsername();
-          const greetingElement = document.getElementById('greeting');
-          greetingElement.textContent = `Hi, ${username}! How can I help you?`;
+                if (isNaN(d.getTime()))
+                {
+                    return 'INVALID DATE';
+                }
 
-          const welcomeElement = document.querySelector('.welcome');
-          if (welcomeElement)
-          {
-               welcomeElement.textContent = `Hi, ${username}! How can I help you?`;
-          }
-        }
-        catch (err)
-        {
-          console.error("Failed to get username:", err);
-          document.getElementById('greeting').textContent = 'Hi! How can I help you?'; // Fallback if we can't get the username.
-        }
-      }
+                let dateFormat = await window.electronAPI.getDateFormat();
+            
+                const weekday = new Intl.DateTimeFormat('en-GB', { weekday: 'short' }).format(d);
+                const day = d.getDate();
+                const month = d.getMonth() + 1;
 
-      setGreeting();
+                if (dateFormat === 'ddmm')
+                {
+                    return `${weekday} ${day}/${month}`.toUpperCase();
+                }
+                else
+                {
+                    return `${weekday} ${month}/${day}`.toUpperCase();
+                }
+            }
 
-      window.electronAPI.onThemeUpdate((isLight) =>
-      {
-        if (isLight)
-        {
-          document.body.classList.add('light-mode');
-        }
-        else
-        {
-          document.body.classList.remove('light-mode');
-        }
-      });
+            function iconFor(desc)
+            {
+                const lowerDesc = desc.toLowerCase();
 
-      async function formatDay(offset)
-      {
-        const d = new Date();
-        d.setDate(d.getDate() + offset);
+                if (lowerDesc.includes('rain')) return '';
+                if (lowerDesc.includes('sunny') || lowerDesc.includes('clear')) return '';
+                if (lowerDesc.includes('cloud')) return '';
+                if (lowerDesc.includes('overcast') || lowerDesc.includes('mist')) return '';
+                
+                return '';
+            }
 
-        if (isNaN(d.getTime()))
-        {
-          return 'INVALID DATE';
-        }
+            async function updateWeather()
+            {
+                startWeatherSpinner();
 
-        let dateFormat = await window.electronAPI.getDateFormat();
-      
-        const weekday = new Intl.DateTimeFormat('en-GB', { weekday: 'short' }).format(d);
-        const day = d.getDate();
-        const month = d.getMonth() + 1;
+                try
+                {
+                    const weatherDiv = document.getElementById('weather');
+                    const data = await window.electronAPI.fetchWeather();
+                    const weather_location = await window.electronAPI.getWeatherLocation();
+                    clearInterval(weatherSpinnerInterval);
+                    //weatherSpinnerInterval = null;
+                    weatherDiv.style.fontFamily = '';
+                    
+                    if (weatherDiv.dataset.originalContent)
+                    {
+                        weatherDiv.innerHTML = weatherDiv.dataset.originalContent;
+                    }
 
-        if (dateFormat === 'ddmm')
-        {
-          return `${weekday} ${day}/${month}`.toUpperCase();
-        }
-        else
-        {
-          return `${weekday} ${month}/${day}`.toUpperCase();
-        }
-      }
+                    if (!data || !data.weather || data.weather.length < 2 || !data.current_condition || data.current_condition.length === 0)
+                    {
+                        throw new Error(":( Incomplete or invalid weather data recieved.");
+                    }
+                    
+                    document.getElementById('weather-location').textContent = weather_location; // Location
 
-      function iconFor(desc)
-      {
-        const lowerDesc = desc.toLowerCase();
+                    // Today's Weather
+                    document.getElementById('today-temp').textContent = `${data.weather[0].avgtempC}°`; // Average temperature
+                    document.getElementById('today-low').textContent = `Low ${data.weather[0].mintempC}°`; // Low temperature
+                    document.getElementById('today-type').textContent = data.current_condition[0].weatherDesc[0].value; // Weather Type (Partly cloudy, Overcast etc.)
+                    document.getElementById('today-rain').textContent = `${data.weather[0].hourly[0].chanceofrain}%`; // Chance of percipitation
+                    document.getElementById('today-date').textContent = await formatDay(0); // Date
+                    document.getElementById('today-icon').textContent = iconFor(data.current_condition[0].weatherDesc[0].value); // Icon
 
-        if (lowerDesc.includes('rain')) return '';
-        if (lowerDesc.includes('sunny') || lowerDesc.includes('clear')) return '';
-        if (lowerDesc.includes('cloud')) return '';
-        if (lowerDesc.includes('overcast') || lowerDesc.includes('mist')) return '';
-        
-        return '';
-      }
+                    // Tomorrow's Weather
+                    document.getElementById('tomorrow-temp').textContent = `${data.weather[1].avgtempC}°`; // Average temperature
+                    document.getElementById('tomorrow-low').textContent = `Low ${data.weather[1].mintempC}°`; // Low temperature
+                    document.getElementById('tomorrow-type').textContent = data.weather[1].hourly[0].weatherDesc[0].value; // Weather Type
+                    document.getElementById('tomorrow-rain').textContent = `${data.weather[1].hourly[0].chanceofrain}%`; // Chance of percipitation
+                    document.getElementById('tomorrow-date').textContent = await formatDay(1); // Date
+                    document.getElementById('tomorrow-icon').textContent = iconFor(data.weather[1].hourly[0].weatherDesc[0].value); // Icon
+                }
+                catch (err)
+                {
+                    clearInterval(weatherSpinnerInterval);
+                    document.getElementById('weather').textContent = `:( There was an error loading the weather: ${err.message}`;
+                }
+            }
 
-      async function updateWeather()
-      {
-        startWeatherSpinner();
+            updateWeather();
 
-        try
-        {
-          const weatherDiv = document.getElementById('weather');
-          const data = await window.electronAPI.fetchWeather();
-          const weather_location = await window.electronAPI.getWeatherLocation();
-          clearInterval(weatherSpinnerInterval);
-          //weatherSpinnerInterval = null;
-          weatherDiv.style.fontFamily = '';
-          
-          if (weatherDiv.dataset.originalContent)
-          {
-            weatherDiv.innerHTML = weatherDiv.dataset.originalContent;
-          }
+            function updateWeatherHeader()
+            {
+                const now = new Date();
+                const dayOfWeek = now.getDay();
 
-          if (!data || !data.weather || data.weather.length < 2 || !data.current_condition || data.current_condition.length === 0)
-          {
-            throw new Error(":( Incomplete or invalid weather data recieved.");
-          }
-          
-          document.getElementById('weather-location').textContent = weather_location; // Location
+                const weatherHeader = document.querySelector('.weather-header');
 
-          // Today's Weather
-          document.getElementById('today-temp').textContent = `${data.weather[0].avgtempC}°`; // Average temperature
-          document.getElementById('today-low').textContent = `Low ${data.weather[0].mintempC}°`; // Low temperature
-          document.getElementById('today-type').textContent = data.current_condition[0].weatherDesc[0].value; // Weather Type (Partly cloudy, Overcast etc.)
-          document.getElementById('today-rain').textContent = `${data.weather[0].hourly[0].chanceofrain}%`; // Chance of percipitation
-          document.getElementById('today-date').textContent = await formatDay(0); // Date
-          document.getElementById('today-icon').textContent = iconFor(data.current_condition[0].weatherDesc[0].value); // Icon
+                let headerText = "";
 
-          // Tomorrow's Weather
-          document.getElementById('tomorrow-temp').textContent = `${data.weather[1].avgtempC}°`; // Average temperature
-          document.getElementById('tomorrow-low').textContent = `Low ${data.weather[1].mintempC}°`; // Low temperature
-          document.getElementById('tomorrow-type').textContent = data.weather[1].hourly[0].weatherDesc[0].value; // Weather Type
-          document.getElementById('tomorrow-rain').textContent = `${data.weather[1].hourly[0].chanceofrain}%`; // Chance of percipitation
-          document.getElementById('tomorrow-date').textContent = await formatDay(1); // Date
-          document.getElementById('tomorrow-icon').textContent = iconFor(data.weather[1].hourly[0].weatherDesc[0].value); // Icon
-        }
-        catch (err)
-        {
-          clearInterval(weatherSpinnerInterval);
-          document.getElementById('weather').textContent = `:( There was an error loading the weather: ${err.message}`;
-        }
-      }
+                if (dayOfWeek === 6 || dayOfWeek === 0)
+                {
+                    message = "Here's what the weather's up to this weekend.";
+                }
+                else
+                {
+                    message = "Here's the upcoming weather forecast.";
+                }
 
-      updateWeather();
+                if (weatherHeader)
+                {
+                    weatherHeader.textContent = message;
+                }
+            }
 
-      function updateWeatherHeader()
-      {
-        const now = new Date();
-        const dayOfWeek = now.getDay();
-
-        const weatherHeader = document.querySelector('.weather-header');
-
-        let headerText = "";
-
-        if (dayOfWeek === 6 || dayOfWeek === 0)
-        {
-          message = "Here's what the weather's up to this weekend.";
-        }
-        else
-        {
-          message = "Here's the upcoming weather forecast.";
-        }
-
-        if (weatherHeader)
-        {
-          weatherHeader.textContent = message;
-        }
-      }
-
-      updateWeatherHeader();
-    </script>
-  </body>
+            updateWeatherHeader();
+        </script>
+    </body>
 </html>
