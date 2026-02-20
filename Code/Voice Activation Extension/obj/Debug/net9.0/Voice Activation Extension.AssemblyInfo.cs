@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Voice Activation Extension")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0691a73b54db371b5e830bf1e9fe1b0db7f521a4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4da5b3e45662c8d558aede6c6804cb358788c430")]
 [assembly: System.Reflection.AssemblyProductAttribute("Voice Activation Extension")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Voice Activation Extension")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

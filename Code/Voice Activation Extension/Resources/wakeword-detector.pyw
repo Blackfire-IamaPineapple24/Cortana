@@ -5,7 +5,7 @@ import sounddevice as sd
 import numpy as np
 import sys
 import time
-import os;
+import os
 
 # Current Directory
 cdir = os.path.dirname(os.path.abspath(__file__))
