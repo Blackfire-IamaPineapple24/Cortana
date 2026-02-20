@@ -5,10 +5,14 @@ import sounddevice as sd
 import numpy as np
 import sys
 import time
+import os;
+
+# Current Directory
+cdir = os.path.dirname(os.path.abspath(__file__))
 
 # Tell the program where the wake word model is.
 # hey_cor_tahnah.onnx says listen for "Hey Cortana" instead of "Alexa" or "OK Google".
-modelPath = "Code/Resources/hey_cor_tahnah.onnx"
+modelPath = os.path.join(cdir, "hey_cor_tahnah.onnx")
 modelName = "hey_cor_tahnah"
 
 # Audio Setup
@@ -42,6 +46,8 @@ def AudioCallback(inputData, frames, time_info, status):
 
     # This is what happens after the wake word is actually detected
     if score > threshold and (time.time() - lastTrigger) > 2:
+        os.system(r'"C:\Program Files\Cortana\Cortana.exe"')
+        score = 0
         lastTrigger = time.time() # Update the the lastTrigger variable to the current UNIX time
         print("\n-|- DETECTED -|-")
 
