@@ -1,12 +1,12 @@
 # Imports. Obviously.
 import openwakeword as oww
-from openwakeword import Model # This is now a requirement for some reason
+from openwakeword import Model # This is now a requirement for some incredibly strange reason
 import sounddevice as sd
 import numpy as np
 import sys
-import time
-import os
-import subprocess
+import time # Thanks to Ken, Dennis, Brian, Douglas and Joe.
+import os # OS to get path the script is in
+import subprocess # Subprocess so we can actually run Cortana.exe
 
 # Current Directory
 cdir = os.path.dirname(os.path.abspath(__file__))
@@ -31,13 +31,13 @@ def AudioCallback(inputData, frames, time_info, status):
     global lastTrigger
 
     if status:
-        print(f"Status: {status}", file=sys.stderr) # Error handling
+        print(f"Status: {status}", file=sys.stderr) # Error handling. Says "Input overflow" but as far as I can tell it affects nothing, so... If it ain't broke, don't fix it.
 
     # Convert audio data to a 1D array
     audio = inputData.flatten()
 
     # Get a prediction for when the word is going to end
-    prediction = ww.predict(audio)
+    prediction = ww.predict(audio) # ww as in the variable ww defined earlier, not oww as in openwakeword.
 
     # Score is how close the audio is to matching the trained model
     score = prediction.get(modelName, 0.0)
@@ -47,10 +47,10 @@ def AudioCallback(inputData, frames, time_info, status):
 
     # This is what happens after the wake word is actually detected
     if score > threshold and (time.time() - lastTrigger) > 2:
-        subprocess.call("C:\Program Files\Cortana\Cortana.exe") # Use this instead of os.system to get rid of the uggy CMD window.
+        print("\n-|- DETECTED -|-")
+        subprocess.run("C:\Program Files\Cortana\Cortana.exe --voice") # Use this instead of os.system to get rid of the uggy CMD window.
         score = 0
         lastTrigger = time.time() # Update the the lastTrigger variable to the current UNIX time
-        print("\n-|- DETECTED -|-")
 
 # Start the stream (Run it)
 try:

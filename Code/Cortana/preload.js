@@ -1,6 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-contextBridge.exposeInMainWorld('electronAPI', {
+contextBridge.exposeInMainWorld('electronAPI',
+{
     askAI: (prompt) => ipcRenderer.invoke('ask-ai', prompt),
     getUsername: () => ipcRenderer.invoke('get-username'),
     onThemeUpdate: (callback) => ipcRenderer.on('theme-updated', (_, isLight) => callback(isLight)),

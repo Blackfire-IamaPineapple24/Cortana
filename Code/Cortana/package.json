@@ -4,7 +4,7 @@
   "description": "Electron frontend for Gemma 3",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron . --voice",
     "pack": "electron-packager . Cortana --platform=win32 --arch=x64 --overwrite",
     "dist": "electron-builder"
   },
@@ -22,23 +22,19 @@
     "remove-markdown": "^0.6.2",
     "undici": "^7.16.0"
   },
-  
   "build": {
     "appId": "com.blackinkgames.cortanaremake",
     "productName": "Cortana",
     "directories": {
       "output": "dist"
     },
-
     "files": [
       "**/*"
     ],
-
     "win": {
       "target": "nsis",
       "icon": "Images/icon.ico"
     },
-
     "nsis": {
       "oneClick": false,
       "perMachine": true,
@@ -47,6 +43,4 @@
       "createStartMenuShortcut": true
     }
   }
-  
 }
-

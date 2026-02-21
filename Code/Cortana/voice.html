@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <!-- This is the meta. (Someone call Matthew Patthew) Metadata and Viewport settings. -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cortana</title>
+
+        <!-- Style in CSS. -->
+        <style>
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------------------------- Body --------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+            body /* Main page layout. Can be overwritten by other CSS. */
+            {
+                margin: 0;
+                padding: 0;
+                background: rgba(0, 0, 0, 1);
+                font-family: "Segoe UI Semilight","Segoe UI",sans-serif;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+                overflow: hidden;
+                user-select: none;
+            }
+
+            body.light-mode
+            {
+                background: rgba(255, 255, 255, 1);
+                color: rgba(0, 0, 0, 1);
+            }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------- Header -------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+            .cortana /* The assistant herself. */
+            {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                user-select: none;
+                height: calc(100% - 100px);
+                font-size: 170px;
+                color: rgba(3, 168, 244, 1);
+                background: rgba(0, 0, 0, 1);
+            }
+
+            .cortana-image
+            {
+                width: 300px;
+                height: auto;
+                
+            }
+
+            body.light-mode .cortana
+            {
+                background: rgba(255, 255, 255, 1);
+            }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------- Fonts ------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+            @font-face /* Grab the font for the loading spinner. */
+            {
+            font-family: 'Segoe Boot Semilight';
+            /* Really important legal shit: Grab the font from the Windows directory so I'm not bundling a Microsoft font with my app. Fun fact: This is the
+               font Windows uses to show you that cool little "spinning dots" animation while your computer is taking an age to boot. */
+            src: url('C:/Windows/Boot/Fonts/segoe_slboot.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+            }
+
+            @font-face /* Grab the font for the icons. */
+            {
+                font-family: 'Segoe MDL2 Assets';
+                src: url('C:/Windows/Fonts/segmdl2.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+                font-display: block;
+            }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+        </style>
+    </head>
+
+    <body>
+        <div id="cortana" class="cortana">
+            <img src="Images/cortana.svg" class="cortana-image">
+        </div>
+
+        <!-- This is the script. (The part that actually makes the loading spinner work. Oh, and it sends and receives the AI messages. Did I mention the loading spinner?) -->
+        <script>
+            /* See all those funny little boxes there? Those are the frames of the spinner animation. Your browser/text editor isn't rendering them because it doesn't support
+               Segoe Boot Semilight. If you're on a UNIX-based operating system; go away, this does not concern you. */
+            /* This makes a string to store those frames and split that string into individual characters so that we can loop through them for our
+               animation later. */
+            const spinnerChars = "".split('');
+
+            // Here's the function that spits dirty s all over your screen.
+            function startSpinner(div)
+            {
+                div.style.fontFamily = '"Segoe Boot Semilight", monospace'; // Give me my fancy font. The location of this font is defined in CSS (See @font-face)
+                let i = 0; // This is a counter. Watch it go up.
+                requestAnimationFrame(() => // Scroll to the bottom of the page.
+                {
+                    requestAnimationFrame(() =>
+                    {
+                        chat.scrollTop = chat.scrollHeight;
+                    });
+                });
+                const interval = setInterval(() => // Repeat a timer.
+                {
+                    requestAnimationFrame(() =>
+                    {w
+                        requestAnimationFrame(() =>
+                        {
+                            chat.scrollTop = chat.scrollHeight;
+                        });
+                    });
+                    div.textContent = spinnerChars[i % spinnerChars.length]; // Set the currently active frame to the... current frame of the animation.
+                    i++; // I told you it would go up.
+                }, 23); // How many times to repeat our timer. In other words, the animation speed. The lower the number, the faster the spinner. Don't make him dizzy.
+                requestAnimationFrame(() =>
+                {
+                    requestAnimationFrame(() =>
+                    {
+                        chat.scrollTop = chat.scrollHeight;
+                    });
+                });
+                return interval; // Make it so we can stop the animation later.
+            }
+
+            // Start an async function to send a message to the house of the rising blue circle.
+            async function sendMessage()
+            {
+                const text = "placeholder";
+                const spinnerInterval = startSpinner(cortana);
+
+                try // We're not in trouble if something goes wrong! YAY! Most likely the Arli servers are down, You've already sent a message, or I F'd up.
+                {
+                    const response = await window.electronAPI.askAI(text); // Send the message to the main process, wait, and store whatever we get back in "response".
+
+                    clearInterval(spinnerInterval); // Stop the animation. We don't need it anymore.
+                }
+                catch (err) // What happens if anything between here and "try" goes wrong.
+                {
+                    clearInterval(spinnerInterval); // Stop the spinner. We don't need it here, either. sorry li'l guy.
+                }
+            }
+
+            window.electronAPI.onThemeUpdate((isLight) =>
+            {
+                if (isLight)
+                {
+                    document.body.classList.add('light-mode');
+                }
+                else
+                {
+                    document.body.classList.remove('light-mode');
+                }
+            });
+
+            if ("webkitSpeechRecognition" in window)
+            {
+                let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                let recognition = new SpeechRecognition();
+
+                recognition.onstart = () =>
+                {
+                    console.log("Listening");
+                };
+
+                recognition.onspeechend = () =>
+                {
+                    recognition.stop();
+                };
+
+                recognition.onresult = (event) =>
+                {
+                    let transcript = event.results[0][0].transcript;
+                    console.log(transcript);
+                };
+
+                recognition.start();
+            }
+            else
+            {
+                alert("Browser unsupported");
+            }
+        </script>
+    </body>
+</html>

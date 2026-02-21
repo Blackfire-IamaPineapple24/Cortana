@@ -344,7 +344,7 @@
             font-display: block;
             }
 
-            @font-face /* Grab the font for the send icon. */
+            @font-face /* Grab the font for the icons. */
             {
                 font-family: 'Segoe MDL2 Assets';
                 src: url('C:/Windows/Fonts/segmdl2.ttf') format('truetype');
@@ -604,6 +604,7 @@
                 if (lowerDesc.includes('sunny') || lowerDesc.includes('clear')) return '';
                 if (lowerDesc.includes('cloud')) return '';
                 if (lowerDesc.includes('overcast') || lowerDesc.includes('mist')) return '';
+                if (lowerDesc.includes('snow')) return '';
                 
                 return '';
             }

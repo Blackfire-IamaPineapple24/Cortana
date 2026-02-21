@@ -43,6 +43,71 @@ function updateTheme(win)
     win.webContents.send('theme-updated', isLight);
 }
 
+function CreateVoiceWindow()
+{
+    let bounds = { width: 420, height: 810 }; // Set a default window size.
+    // Here we take the saved window position and size and use it.
+    try
+    {
+        const data = fs.readFileSync(boundsFile, 'utf8');
+        bounds = JSON.parse(data);
+    }
+    catch (_) {} // If that goes wrong somehow, go get a new computer, not my problem.
+  
+    const primaryDisplay = screen.getPrimaryDisplay(); // Store the specs of your primary monitor. (I see you over there with the 4:3 Hitachi printer display.)
+    const workArea = primaryDisplay.workArea; // Get the screen excluding the Taskbar so we don't end up with the window who walked 5, 000 miles off the bottom of the screen.
+    const x = bounds.x !== undefined ? bounds.x : workArea.x;
+    const y = bounds.y !== undefined ? bounds.y : workArea.y + workArea.height - bounds.height; // Default to sit at the bottom of the screen.
+  
+    const win = new BrowserWindow( // Here, we're setting up the window. size, position and style.
+    {
+        width: bounds.width,
+        height: bounds.height,
+        x,
+        y,
+        minWidth: 420,
+        minHeight: 810,
+        resizable: true,
+        maximizable: false,
+        minimizable: false,
+        autoHideMenuBar: true, // This removes the Menubar.
+        show: false,
+        icon: path.join(__dirname, 'Images', 'icon.png'),
+        webPreferences: // Settings for the renderer.
+        {
+            preload: path.join(__dirname, 'preload-voice.js'), // This runs the preload script.
+            contextIsolation: true, // Stop the webpage (index.html) from overwriting the JS.
+            nodeIntegration: true
+        }
+    });
+  
+    win.loadFile('voice.html'); // Use index.html. This is the line that shows the app window.
+  
+    win.once('ready-to-show', () => // Runs once the window is ready.
+    {
+        win.show(); // Show the window.
+        win.focus(); // Focus the window.
+        updateTheme(win);
+    });
+  
+    win.on('close', () => // Runs when the window closes.
+    {
+        fs.writeFileSync(boundsFile, JSON.stringify(win.getBounds())); // Write the current window size and position to the boundsFile, which is loaded at the beginning of this file.
+    });
+  
+    // This is simply the shortcut to close by pressing Escape.
+    win.webContents.on('before-input-event', (event, input) =>
+    {
+        if (input.key === 'Escape')
+        {
+            event.preventDefault();
+            win.close();
+        }
+    });
+  
+    return win; // Allow the rest of the app to keep track of the main window.
+}
+
 function createMainWindow()
 {
     let bounds = { width: 420, height: 810 }; // Set a default window size.
@@ -228,7 +293,14 @@ app.whenReady().then(() =>
         arliApiKey = fs.readFileSync(apiKeyFile, 'utf8').trim();
         weatherLocation = fs.readFileSync(locationStore, 'utf8');
         dateFormat = fs.readFileSync(dateFormatStore, 'utf8');
-        createMainWindow();
+        if (!app.commandLine.hasSwitch('voice'))
+        {
+            createMainWindow();
+        }
+        else
+        {
+            CreateVoiceWindow();
+        }
     }
     else
     {
