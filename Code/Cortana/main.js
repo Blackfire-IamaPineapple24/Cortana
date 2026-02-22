@@ -6,6 +6,11 @@ const removeMarkdown = require('remove-markdown'); // Naughty AI uses Markdown b
 const os = require('os'); // I need this...
 const forceWin11 = false; // This is here so that I can test the Windows 11 Warning window.
 
+// This stuff is for the voice to text
+const {Readable} = require('stream');
+const wav = require('wav');
+const sherpa_onnx = require('sherpa-onnx');
+
 // This is the system message. It's like when you give ChatGPT custom instructions. This part of the code is what's telling Cortana to be Cortana, rather than Gemma.
 const systemMessage =
 {
@@ -308,6 +313,37 @@ app.whenReady().then(() =>
     }
 });
 
+// Voice recognizer. Offline. Don't wanna rely too much on the user having internet access.
+function createOfflineRecognizer() {
+    const modelLocation = path.resolve(__dirname, 'Resources/ONNX Models/zipformer-en'); // Set the folder path where the model is located
+
+    // Config for the recognizer
+    const config = {
+        modelConfig: {
+            // These are the filenames of the model's files.
+            transducer: { // Transducer is the name for this method of speech-to-text
+                encoder: path.join(modelLocation, 'encoder-epoch-99-avg-1-chunk-16-left-128.onnx'), // Encodes the raw audio into something the model can use
+                decoder: path.join(modelLocation, 'decoder-epoch-99-avg-1-chunk-16-left-128.onnx'), // Predicts what token (character/word) should come next
+                joiner: path.join(modelLocation, 'joiner-epoch-99-avg-1-chunk-16-left-128.onnx'), // Connect the encoder and previous predictions to actually predict the next token
+            },
+            tokens: path.join(modelLocation, 'tokens.txt'), // Tokenization. LLMs do this - idk, not important rn.
+            bpe_vocab: path.join(modelLocation, 'bpe.model'), // Improves efficiency of predictions
+            numThreads: 1, // How many CPU threads to use. Want it to be light, so use 1.
+            provider: "cpu",
+            debug: false // Set to true for rainbow puke in the console
+        },
+
+        decodingMethod: "greedy_search", // Convert the model's predictions to text useable by the renderer
+        maxActivePaths: 4 // Setting this higher means the model can correct itself later if it gets something wrong
+    };
+
+    return sherpa_onnx.createOfflineRecognizer(config);
+}
+
+const recognizer = createOfflineRecognizer();
+const stream = recognizer.createStream();
+
+// ------------------------------------ IPC ------------------------------------------------------------------------------
 // This is what tells the program that we have submitted an API key. It's also the part that writes the API key to a file.
 ipcMain.on('api-key-submitted', (_, key) =>
 {

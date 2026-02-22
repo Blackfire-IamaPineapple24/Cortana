@@ -1,2 +1,3 @@
 electron.exe
 /dist
+*.onnx

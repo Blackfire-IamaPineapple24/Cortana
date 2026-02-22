@@ -18,9 +18,13 @@
     "electron-packager": "^17.1.2"
   },
   "dependencies": {
+    "mic": "^2.1.2",
     "node-fetch": "^3.3.2",
+    "onnxruntime-node": "^1.24.2",
     "remove-markdown": "^0.6.2",
-    "undici": "^7.16.0"
+    "sherpa-onnx": "^1.12.25",
+    "undici": "^7.16.0",
+    "wav": "^1.0.2"
   },
   "build": {
     "appId": "com.blackinkgames.cortanaremake",

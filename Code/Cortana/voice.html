@@ -36,7 +36,7 @@
 
 
 /* ----------------------------------------------------------------------------------------------------------------------- */
-/* ------------------------------------------------------- Header -------------------------------------------------------- */
+/* ------------------------------------------------------ Cortana -------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------------------------- */
             .cortana /* The assistant herself. */
             {
@@ -60,6 +60,26 @@
             body.light-mode .cortana
             {
                 background: rgba(255, 255, 255, 1);
+            }
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------- User input ---------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------------------------- */
+            .voice-input
+            {
+                font-size: 20pt;
+                color: rgba(255, 255, 255, 1);
+                align-content: center;
+                text-align: center;
+                justify-content: center;
+            }
+
+            body.light-mode .voice-input
+            {
+                color: rgba(0, 0, 0, 1);
             }
 /* ----------------------------------------------------------------------------------------------------------------------- */
 
@@ -95,6 +115,8 @@
         <div id="cortana" class="cortana">
             <img src="Images/cortana.svg" class="cortana-image">
         </div>
+
+        <div class="voice-input"> This is a placeholder </div>
 
         <!-- This is the script. (The part that actually makes the loading spinner work. Oh, and it sends and receives the AI messages. Did I mention the loading spinner?) -->
         <script>
@@ -168,33 +190,7 @@
                 }
             });
 
-            if ("webkitSpeechRecognition" in window)
-            {
-                let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                let recognition = new SpeechRecognition();
-
-                recognition.onstart = () =>
-                {
-                    console.log("Listening");
-                };
-
-                recognition.onspeechend = () =>
-                {
-                    recognition.stop();
-                };
-
-                recognition.onresult = (event) =>
-                {
-                    let transcript = event.results[0][0].transcript;
-                    console.log(transcript);
-                };
-
-                recognition.start();
-            }
-            else
-            {
-                alert("Browser unsupported");
-            }
+            startSpinner(cortana);
         </script>
     </body>
 </html>
