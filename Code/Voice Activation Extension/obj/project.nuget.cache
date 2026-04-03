@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UFE+uFiSFmo=",
+  "dgSpecHash": "fWKMf1Fk3sU=",
   "success": true,
-  "projectFilePath": "E:\\Github\\Cortana\\Code\\Voice Activation Extension\\Voice Activation Extension.csproj",
+  "projectFilePath": "D:\\Github\\Cortana\\Code\\Voice Activation Extension\\Voice Activation Extension.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jack\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\Jack\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512",

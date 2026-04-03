@@ -106,6 +106,7 @@
                 width: auto;
                 user-select: none;
                 background: rgba(0, 0, 0, 1);
+                pointer-events: none;
             }
 
             body.hide-header .cortana
@@ -403,7 +404,7 @@
 
         <!-- Ever wanted to type something in an HTML page? Well, now you can with our new patented technology! (Message from Nintendo) -->
         <div class="input-bar">
-            <input id="input" placeholder="Type a message...">
+            <input id="input" placeholder="Talk to Cortana">
             <button id="sendBtn"></button>
         </div>
 
@@ -605,6 +606,7 @@
                 if (lowerDesc.includes('cloud')) return '';
                 if (lowerDesc.includes('overcast') || lowerDesc.includes('mist')) return '';
                 if (lowerDesc.includes('snow')) return '';
+                if (lowerDesc.includes('drizzle')) return '';
                 
                 return '';
             }

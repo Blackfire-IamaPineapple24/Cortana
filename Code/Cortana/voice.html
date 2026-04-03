@@ -116,10 +116,12 @@
             <img src="Images/cortana.svg" class="cortana-image">
         </div>
 
-        <div class="voice-input"> This is a placeholder </div>
+        <div class="voice-input" id="voice-input"> [Placeholder] </div>
 
         <!-- This is the script. (The part that actually makes the loading spinner work. Oh, and it sends and receives the AI messages. Did I mention the loading spinner?) -->
         <script>
+            voiceInputText = document.getElementById('voice-input');
+
             /* See all those funny little boxes there? Those are the frames of the spinner animation. Your browser/text editor isn't rendering them because it doesn't support
                Segoe Boot Semilight. If you're on a UNIX-based operating system; go away, this does not concern you. */
             /* This makes a string to store those frames and split that string into individual characters so that we can loop through them for our
@@ -131,32 +133,11 @@
             {
                 div.style.fontFamily = '"Segoe Boot Semilight", monospace'; // Give me my fancy font. The location of this font is defined in CSS (See @font-face)
                 let i = 0; // This is a counter. Watch it go up.
-                requestAnimationFrame(() => // Scroll to the bottom of the page.
-                {
-                    requestAnimationFrame(() =>
-                    {
-                        chat.scrollTop = chat.scrollHeight;
-                    });
-                });
                 const interval = setInterval(() => // Repeat a timer.
                 {
-                    requestAnimationFrame(() =>
-                    {w
-                        requestAnimationFrame(() =>
-                        {
-                            chat.scrollTop = chat.scrollHeight;
-                        });
-                    });
                     div.textContent = spinnerChars[i % spinnerChars.length]; // Set the currently active frame to the... current frame of the animation.
                     i++; // I told you it would go up.
                 }, 23); // How many times to repeat our timer. In other words, the animation speed. The lower the number, the faster the spinner. Don't make him dizzy.
-                requestAnimationFrame(() =>
-                {
-                    requestAnimationFrame(() =>
-                    {
-                        chat.scrollTop = chat.scrollHeight;
-                    });
-                });
                 return interval; // Make it so we can stop the animation later.
             }
 
@@ -190,7 +171,30 @@
                 }
             });
 
+            (async () =>
+            {
+                const audioContext = new AudioContext();
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const source = audioContext.createMediaStreamSource(stream);
+                const processor = audioContext.createScriptProcessor(4096, 1, 1);
+
+                processor.onaudioprocess = (event) =>
+                {
+                   const samples = event.inputBuffer.getChannelData(0);
+                   window.electronAPI.SendAudioChunk(samples);
+                };
+
+                source.connect(processor);
+                processor.connect(audioContext.destination);
+
+                // Please send help
+                voiceInputText.style = "user-select: text;";
+                voiceInputText.textContent = stream;
+            })();
+
             startSpinner(cortana);
+
+            window.electronAPI.StartVoice();
         </script>
     </body>
 </html>

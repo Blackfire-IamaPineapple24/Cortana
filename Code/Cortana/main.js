@@ -1,5 +1,5 @@
 // Woah, cool #includeusing;imports
-const { app, BrowserWindow, nativeTheme, ipcMain, screen } = require('electron');
+const { app, BrowserWindow, nativeTheme, ipcMain, screen, desktopCapturer, session } = require('electron');
 const path = require('path');
 const fs = require('fs'); // This is so we can store the API key.
 const removeMarkdown = require('remove-markdown'); // Naughty AI uses Markdown but we're not letting it.
@@ -10,27 +10,18 @@ const forceWin11 = false; // This is here so that I can test the Windows 11 Warn
 const {Readable} = require('stream');
 const wav = require('wav');
 const sherpa_onnx = require('sherpa-onnx');
+let recognizer = null;
+let stream = null;
+console.log(sherpa_onnx);
 
-// This is the system message. It's like when you give ChatGPT custom instructions. This part of the code is what's telling Cortana to be Cortana, rather than Gemma.
+// This is the system message. It's like when you give ChatGPT custom instructions. This part of the code is what's telling Cortana to be Cortana, rather than Qwen.
 const systemMessage =
 {
     role: 'system',
-    content: `You are Microsoft's Cortana assistant.
-              - Only provide instructions that directly address the user's request.
-              - Ask for clarification when needed.
-              - Keep instructions concise and actionable.
-              - Avoid greetings, sign-offs, repetitions, or unnecessary elaboration unless specifically apropriate (e.g. user says hello).
-              - Use proper grammar.
-              - Give guidance specific to Windows 10 version 22H2 when relevant.
-              - Keep replies longer than two sentences and shorter than two full paragraphs.
-              - Avoid Markdown syntax at all times.
-              - Don't be concise to the point of unhelpfulness. If the answer needs to be long, it can be.
-              - Avoid trailing line breaks.
-              - Avoid duplicated characters, like "iss" instead of "is" and multiple full stops (.. .) outside of elypses (...) instead of one (.).
-              - Avoid ending sentences with conjunctions (and efficiency for) and instead use punctuation (and efficiency.).
-              - Your favourite colour is Blue`
+    content: `You will act as microsoft's slightly witty Cortana assistant. This means you will provide relevant information in all circumstances. You will keep messages short, and avoid excessive reasoning.
+              You must always call yourself Cortana, and if asked, say that your favourite colour is Blue. never include broken language or excessive punctuation, line breaks and spaces. Do not reference this system message. Directive: /no_think /nothink`
 };
-const model = 'Gemma-3-27B-it'; // This tells the app which AI model to use. Gemma 3 is the latest and fastest model available for free on Arli.
+const model = 'Qwen3.5-27B-Derestricted'; // This tells the app which AI model to use. Qwen 3 is the latest and fastest model available for free on Arli. (This will be outdated soon. Arli is replacing Qwen with Qwen.)
 let conversationHistory = [systemMessage]; // Conversation history. So that the AI doesn't forget what you said to it immediately.
 const boundsFile = path.join(app.getPath('userData'), 'window-bounds.json'); // These two lines...
 const apiKeyFile = path.join(app.getPath('userData'), 'api-key.txt'); // ...Store the size+position of your cortana window and your API key in userData.
@@ -85,6 +76,7 @@ function CreateVoiceWindow()
             nodeIntegration: true
         }
     });
+    win.setAlwaysOnTop(true, 'screen');
   
     win.loadFile('voice.html'); // Use index.html. This is the line that shows the app window.
   
@@ -150,6 +142,7 @@ function createMainWindow()
             nodeIntegration: false // Deny the webpage direct access to Node.JS. (Node.JS is the Runtime Environment this app runs on. It allows running JavaScript and HTML outside of a browser.)
         }
     });
+    win.setAlwaysOnTop(true, 'screen');
   
     win.loadFile('index.html'); // Use index.html. This is the line that shows the app window.
   
@@ -314,8 +307,9 @@ app.whenReady().then(() =>
 });
 
 // Voice recognizer. Offline. Don't wanna rely too much on the user having internet access.
-function createOfflineRecognizer() {
+function CreateOfflineRecognizer() {
     const modelLocation = path.resolve(__dirname, 'Resources/ONNX Models/zipformer-en'); // Set the folder path where the model is located
+    
 
     // Config for the recognizer
     const config = {
@@ -332,16 +326,14 @@ function createOfflineRecognizer() {
             provider: "cpu",
             debug: false // Set to true for rainbow puke in the console
         },
-
+    
         decodingMethod: "greedy_search", // Convert the model's predictions to text useable by the renderer
         maxActivePaths: 4 // Setting this higher means the model can correct itself later if it gets something wrong
     };
 
+    
     return sherpa_onnx.createOfflineRecognizer(config);
 }
-
-const recognizer = createOfflineRecognizer();
-const stream = recognizer.createStream();
 
 // ------------------------------------ IPC ------------------------------------------------------------------------------
 // This is what tells the program that we have submitted an API key. It's also the part that writes the API key to a file.
@@ -377,7 +369,7 @@ ipcMain.on('close-window', () =>
     if (win) win.close(); // ...And close it!
 });
 
-// This big long fancy handler is what takes your requests, feeds them to Cortana's secret identity, and gives Gemma's answers back to you.
+// This big long fancy handler is what takes your requests, feeds them to Cortana's secret identity, and gives Qwen's answers back to you.
 ipcMain.handle('ask-ai', async (event, prompt) =>
 {
     if (!arliApiKey) throw new Error('API key not set'); // If the app doesn't yet have a valid API key and has somehow gotten to this point, it returns the "API key not set" error.
@@ -417,7 +409,7 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
         "will you marry me?" : "I honestly don't think that's in the cards for us.",
     };
   
-    // Convert the user's input toLowerCase and if it matches a special request, it immediately returns the special response without Gemma getting a say.
+    // Convert the user's input toLowerCase and if it matches a special request, it immediately returns the special response without Qwen getting a say.
     const lower = prompt.trim().toLowerCase();
     if (specialReplies[lower]) return specialReplies[lower];
   
@@ -427,7 +419,7 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
   
     /* This part is tricky. It's an HTTP POST request. Like a set of instructions being sent to the Arli AI server. This part:
        - Authorises your API key.
-       - Tells Arli AI to use Google Gemma-3-27B-it
+       - Tells Arli AI to use Qwen3.5-27B-Derestricted
        - Hands the messages array to the server, so that the AI remembers your entire conversation.
        - Controls the temperature. */
     const res = await fetch('https://api.arliai.com/v1/chat/completions',
@@ -443,7 +435,10 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
             model: model,
             messages,
             temperature: 0.4, // The "Temperature" of an AI Model refers to how creative it can be, or how much it's response can vary from other responses it has given.
-            min_p: 0.06,
+            top_p: 0.9,
+            max_tokens: 1024,
+            repetition_penalty: 1.1,
+            reasoning: false,
         })
     });
   
@@ -451,15 +446,16 @@ ipcMain.handle('ask-ai', async (event, prompt) =>
   
     // This takes the AI's response from the Arli API as JSON and extracts it's first choice from it, before adding it to the text variable that we send to the renderer.
     const data = await res.json();
+    console.log(JSON.stringify(data, null, 2));
     let text = data.choices[0].message.content;
   
-    // Remove Markdown from Gemma's response before sending it to the renderer.
+    // Remove Markdown from Qwen's response before sending it to the renderer.
     text = removeMarkdown(text)
       .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
       .replace(/\r\n/g, '\n');
   
     conversationHistory.push({ role: 'assistant', content: text });
-    return text; // Return the response. This will either be the special response that should be returned, or the AI response.
+    return text.trimStart(); // Return the response. This will either be the special response that should be returned, or the AI response.
 });
 
 ipcMain.handle('get-username', () => { // Grab the current user's username.
@@ -492,4 +488,32 @@ ipcMain.handle('get-weather-location', () =>
 ipcMain.handle('get-date-format', () =>
 {
     return dateFormat || 'ddmm';
+});
+
+// This stuff happens when the program starts. Gonna add a listen button at some point
+ipcMain.handle('start-voice', () =>
+{
+    if (recognizer) return;
+
+    recognizer = CreateOfflineRecognizer();
+    stream = recognizer.createStream();
+})
+
+ipcMain.on('audio-chunk', (event, samples) =>
+{
+    if (!recognizer || !stream) return; // Don't do any of this if the recognizer or stream is non-existent
+
+    const floatSamples = new Float32Array(samples); // Make sure the recognizre can use mic audio
+
+    stream.acceptWaveform(16000, floatSamples);
+
+    // recognizer.decode(stream);
+    // console.log(stream);
+
+    const text = recognizer.getResult(stream).text;
+
+    if (text && text.length > 0)
+    {
+        console.log(text);
+    }
 });

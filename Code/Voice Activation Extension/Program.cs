@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Text.Encodings.Web;
 using Microsoft.Win32.TaskScheduler;
 
 namespace Vae
@@ -59,6 +58,11 @@ namespace Vae
             catch (IOException)
             {
                 Console.WriteLine(@"An I/O exception has occurred. Most likely, wakeword-detector.pyw already exists in AppData\Roaming\cortana");
+                Console.Write("Skip? ");
+                while (Console.ReadKey().Key == ConsoleKey.N)
+                {
+                    Environment.Exit(0);
+                }
                 Console.WriteLine("Skipping...");
             }
 
@@ -88,6 +92,11 @@ namespace Vae
             catch (IOException)
             {
                 Console.WriteLine(@"An I/O exception has occurred. Most likely, hey_cor_tahnah.onnx already exists in AppData\Roaming\cortana");
+                Console.Write("Skip? ");
+                while (Console.ReadKey().Key == ConsoleKey.N)
+                {
+                    Environment.Exit(0);
+                }
                 Console.WriteLine("Skipping...");
             }
 
@@ -133,6 +142,7 @@ namespace Vae
         }
     }
 
+// I am clueless. Stole this from the internet (Hippity Hoppity your code is now my property) because idk
     class PyCheck
     {
         public string Version()
@@ -140,7 +150,7 @@ namespace Vae
             string result = "";
 
             ProcessStartInfo checkPython = new ProcessStartInfo();
-            checkPython.FileName = "pythonw.exe";
+            checkPython.FileName = "python.exe";
             checkPython.Arguments = "--version";
             checkPython.UseShellExecute = false;
             checkPython.RedirectStandardOutput = true;

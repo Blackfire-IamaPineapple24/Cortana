@@ -1,3 +1,5 @@
 electron.exe
 /dist
+/.vs
+/.vscode
 encoder-epoch-99-avg-1-chunk-16-left-128.onnx

@@ -4,6 +4,16 @@ contextBridge.exposeInMainWorld('electronAPI',
 {
     askAI: (prompt) => ipcRenderer.invoke('ask-ai', prompt),
     onThemeUpdate: (callback) => ipcRenderer.on('theme-updated', (_, isLight) => callback(isLight)),
+    SendAudioChunk: (samples) => ipcRenderer.send('audio-chunk', samples),
+    StartVoice: () => ipcRenderer.invoke('start-voice'),
+});
+
+contextBridge.exposeInMainWorld('electronMic',
+{
+    getUserMedia: async (constraints) =>
+    {
+        return navigator.mediaDevices.getUserMedia(constraints);
+    }
 });
 
 /* This script lets the renderer send the user's messages to main.js and take Gemma's

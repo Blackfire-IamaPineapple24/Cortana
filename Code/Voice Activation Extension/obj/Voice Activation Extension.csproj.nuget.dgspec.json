@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Github\\Cortana\\Code\\Voice Activation Extension\\Voice Activation Extension.csproj": {}
+    "D:\\Github\\Cortana\\Code\\Voice Activation Extension\\Voice Activation Extension.csproj": {}
   },
   "projects": {
-    "E:\\Github\\Cortana\\Code\\Voice Activation Extension\\Voice Activation Extension.csproj": {
+    "D:\\Github\\Cortana\\Code\\Voice Activation Extension\\Voice Activation Extension.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Github\\Cortana\\Code\\Voice Activation Extension\\Voice Activation Extension.csproj",
+        "projectUniqueName": "D:\\Github\\Cortana\\Code\\Voice Activation Extension\\Voice Activation Extension.csproj",
         "projectName": "Voice Activation Extension",
-        "projectPath": "E:\\Github\\Cortana\\Code\\Voice Activation Extension\\Voice Activation Extension.csproj",
+        "projectPath": "D:\\Github\\Cortana\\Code\\Voice Activation Extension\\Voice Activation Extension.csproj",
         "packagesPath": "C:\\Users\\Jack\\.nuget\\packages\\",
-        "outputPath": "E:\\Github\\Cortana\\Code\\Voice Activation Extension\\obj\\",
+        "outputPath": "D:\\Github\\Cortana\\Code\\Voice Activation Extension\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
