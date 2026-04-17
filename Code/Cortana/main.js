@@ -10,8 +10,8 @@ const forceWin11 = false; // This is here so that I can test the Windows 11 Warn
 const {Readable} = require('stream');
 const wav = require('wav');
 const sherpa_onnx = require('sherpa-onnx');
-let recognizer = null;
-let stream = null;
+let vcRecognizer = null;
+let audStream = null;
 console.log(sherpa_onnx);
 
 // This is the system message. It's like when you give ChatGPT custom instructions. This part of the code is what's telling Cortana to be Cortana, rather than Qwen.
@@ -493,27 +493,29 @@ ipcMain.handle('get-date-format', () =>
 // This stuff happens when the program starts. Gonna add a listen button at some point
 ipcMain.handle('start-voice', () =>
 {
-    if (recognizer) return;
+    if (vcRecognizer) return;
 
-    recognizer = CreateOfflineRecognizer();
-    stream = recognizer.createStream();
+    vcRecognizer = CreateOfflineRecognizer();
+    audStream = vcRecognizer.createStream();
 })
 
 ipcMain.on('audio-chunk', (event, samples) =>
 {
-    if (!recognizer || !stream) return; // Don't do any of this if the recognizer or stream is non-existent
+    if (!vcRecognizer || !audStream) return; // Don't do any of this if the recognizer or stream is non-existent
 
     const floatSamples = new Float32Array(samples); // Make sure the recognizre can use mic audio
 
-    stream.acceptWaveform(16000, floatSamples);
+    audStream.acceptWaveform(16000, floatSamples);
 
-    // recognizer.decode(stream);
-    // console.log(stream);
+    vcRecognizer.decode(audStream);
+    console.log(audStream);
 
-    const text = recognizer.getResult(stream).text;
+    const text = vcRecognizer.getResult(audStream).text;
 
     if (text && text.length > 0)
     {
         console.log(text);
     }
+
+    return text;
 });

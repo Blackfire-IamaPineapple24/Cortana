@@ -180,8 +180,8 @@
 
                 processor.onaudioprocess = (event) =>
                 {
-                   const samples = event.inputBuffer.getChannelData(0);
-                   window.electronAPI.SendAudioChunk(samples);
+                    const samples = event.inputBuffer.getChannelData(0);
+                    var input = window.electronAPI.SendAudioChunk(samples);
                 };
 
                 source.connect(processor);
@@ -189,7 +189,7 @@
 
                 // Please send help
                 voiceInputText.style = "user-select: text;";
-                voiceInputText.textContent = stream;
+                voiceInputText.textContent = input;
             })();
 
             startSpinner(cortana);

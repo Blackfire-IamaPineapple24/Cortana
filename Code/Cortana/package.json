@@ -4,7 +4,7 @@
   "description": "Electron frontend for Qwen 3.5",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron . --voice",
     "pack": "electron-packager . Cortana --platform=win32 --arch=x64 --overwrite",
     "dist": "electron-builder"
   },
