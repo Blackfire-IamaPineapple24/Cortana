@@ -8,7 +8,12 @@ namespace Vae
         static void Main(string[] args)
     {
         Console.Title = "Cortana Voice Activation Extension Installer";
+        Console.ForegroundColor = ConsoleColor.Gray;
 
+        Console.WriteLine("Cortana Voice Activation Extension Installer Version 1.0.0");
+        Console.WriteLine();
+
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Press any key to install the Cortana Voice Activation Extension.");
         Console.ReadKey();
         Console.WriteLine();
@@ -18,6 +23,7 @@ namespace Vae
         while (Console.ReadKey().Key == ConsoleKey.Y)
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
             Install();
         }
     }
@@ -39,30 +45,39 @@ namespace Vae
             try
             {
                 File.Copy(source, destination);
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Done.");
+                Console.ForegroundColor = ConsoleColor.Blue;
             }
             catch (DirectoryNotFoundException)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine(@"AppData\Roaming\cortana not found. Is Cortana installed?");
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 Environment.Exit(0);
             }
             catch (FileNotFoundException)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("wakeword-detector.pyw was not found. Please make sure it exists in the same directory as the installer.");
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 Environment.Exit(0);
             }
             catch (IOException)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(@"An I/O exception has occurred. Most likely, wakeword-detector.pyw already exists in AppData\Roaming\cortana");
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write("Skip? ");
                 while (Console.ReadKey().Key == ConsoleKey.N)
                 {
                     Environment.Exit(0);
                 }
+                Console.WriteLine();
                 Console.WriteLine("Skipping...");
             }
 
@@ -73,30 +88,39 @@ namespace Vae
             try
             {
                 File.Copy(source, destination);
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Done.");
+                Console.ForegroundColor = ConsoleColor.Blue;
             }
             catch (DirectoryNotFoundException)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine(@"AppData\Roaming\cortana not found. Is Cortana installed?");
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 Environment.Exit(0);
             }
             catch (FileNotFoundException)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("hey_cor_tahnah.onnx was not found. Please make sure it exists in the same directory as the installer.");
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 Environment.Exit(0);
             }
             catch (IOException)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(@"An I/O exception has occurred. Most likely, hey_cor_tahnah.onnx already exists in AppData\Roaming\cortana");
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write("Skip? ");
                 while (Console.ReadKey().Key == ConsoleKey.N)
                 {
                     Environment.Exit(0);
                 }
+                Console.WriteLine();
                 Console.WriteLine("Skipping...");
             }
 
@@ -104,7 +128,9 @@ namespace Vae
             PyCheck isPyInstalled = new PyCheck();
             if (isPyInstalled.Version().Contains("Python") != true)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("It appears Python is not installed on your system. Please install it from https://www.python.org/downloads/");
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadLine();
                 Environment.Exit(0);
@@ -117,7 +143,11 @@ namespace Vae
             Console.WriteLine("Starting task");
             string script = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"cortana\wakeword-detector.pyw");
             System.Diagnostics.Process.Start("pythonw.exe", script);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Done.");
+            Console.ForegroundColor = ConsoleColor.Blue;
+
+            UninstallInstructions();
 
             Console.WriteLine("Installed. Press any key to exit.");
             Console.ReadKey();
@@ -137,8 +167,30 @@ namespace Vae
             td.Actions.Add("pythonw.exe", script);
 
             TaskService.Instance.RootFolder.RegisterTaskDefinition("VAEStartup", td);
-
+            
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Done.");
+            Console.ForegroundColor = ConsoleColor.Blue;
+        }
+
+        static void UninstallInstructions()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("=-----------------------------------------------------------=");
+            Console.WriteLine("                   Uninstall Instructions                    ");
+            Console.WriteLine("=-----------------------------------------------------------=");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Take a screenshot of this before exiting.");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("To uninstall:");
+            Console.WriteLine("1. Open Task Manager (CTRL+SHIFT+ESC) and kill Python.");
+            Console.WriteLine("2. Open Task Scheduler (Win+R, taskschd.msc) and");
+            Console.WriteLine("remove the scheduled task \"VAEStartup\".");
+            Console.WriteLine("3. Go to %AppData%\\cortana in Explorer and move or");
+            Console.WriteLine("delete \"hey_cor_tahnah.onnx\" and \"wakeword_detector.py\".");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("=-----------------------------------------------------------=");
+            Console.ForegroundColor = ConsoleColor.Blue;
         }
     }
 

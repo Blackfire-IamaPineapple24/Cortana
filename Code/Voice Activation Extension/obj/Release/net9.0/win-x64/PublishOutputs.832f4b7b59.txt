@@ -1,0 +1,2 @@
+C:\abc\Voice Activation Extension.pdb
+C:\abc\Voice Activation Extension.exe
