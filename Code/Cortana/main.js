@@ -507,7 +507,7 @@ ipcMain.on('audio-chunk', (event, samples) =>
 
     audStream.acceptWaveform(16000, floatSamples);
 
-    vcRecognizer.decode(audStream);
+    vcRecognizer.decode(audStream); // ERROR IS HERE (Working theory: The audio stream isn't being delivered as a valid WAV file.) 
     console.log(audStream);
 
     const text = vcRecognizer.getResult(audStream).text;
