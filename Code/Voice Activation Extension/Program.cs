@@ -6,27 +6,27 @@ namespace Vae
     class Program
     {
         static void Main(string[] args)
-    {
-        Console.Title = "Cortana Voice Activation Extension Installer";
-        Console.ForegroundColor = ConsoleColor.Gray;
-
-        Console.WriteLine("Cortana Voice Activation Extension Installer Version 1.0.0");
-        Console.WriteLine();
-
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Press any key to install the Cortana Voice Activation Extension.");
-        Console.ReadKey();
-        Console.WriteLine();
-
-        Console.Write("Are you sure? (Y/N) ");
-        // Proceed if the user presses Y
-        while (Console.ReadKey().Key == ConsoleKey.Y)
         {
+            Console.Title = "Cortana Voice Activation Extension Installer";
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Console.WriteLine("Cortana Voice Activation Extension Installer Version 1.0.0");
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Install();
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Press any key to install the Cortana Voice Activation Extension.");
+            Console.ReadKey();
+            Console.WriteLine();
+
+            Console.Write("Are you sure? (Y/N) ");
+            // Proceed if the user presses Y
+            while (Console.ReadKey().Key == ConsoleKey.Y)
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Install();
+            }
         }
-    }
 
         static void Install()
         {
