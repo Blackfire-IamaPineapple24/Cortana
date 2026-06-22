@@ -131,7 +131,7 @@ function createMainWindow()
         minHeight: 810,
         resizable: true,
         maximizable: false,
-        minimizable: false,
+        minimizable: true,
         autoHideMenuBar: true, // This removes the Menubar.
         show: false,
         icon: path.join(__dirname, 'Images', 'icon.png'),
@@ -309,7 +309,6 @@ app.whenReady().then(() =>
 // Voice recognizer. Offline. Don't wanna rely too much on the user having internet access.
 function CreateOfflineRecognizer() {
     const modelLocation = path.resolve(__dirname, 'Resources/ONNX Models/zipformer-en'); // Set the folder path where the model is located
-    
 
     // Config for the recognizer
     const config = {
@@ -326,12 +325,11 @@ function CreateOfflineRecognizer() {
             provider: "cpu",
             debug: false // Set to true for rainbow puke in the console
         },
-    
+
         decodingMethod: "greedy_search", // Convert the model's predictions to text useable by the renderer
         maxActivePaths: 4 // Setting this higher means the model can correct itself later if it gets something wrong
     };
 
-    
     return sherpa_onnx.createOfflineRecognizer(config);
 }
 

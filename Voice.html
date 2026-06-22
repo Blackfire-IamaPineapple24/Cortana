@@ -1,0 +1,34 @@
+
+<button id="start">Start</button>
+<button id="stop">Stop</button>
+
+<script>
+let mediaRecorder;
+let chunks = [];
+
+document.getElementById("start").onclick = async () => {
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+  mediaRecorder = new MediaRecorder(stream);
+
+  mediaRecorder.ondataavailable = (e) => {
+    chunks.push(e.data);
+  };
+
+  mediaRecorder.onstop = () => {
+    const blob = new Blob(chunks, { type: "audio/wav" });
+    const url = URL.createObjectURL(blob);
+
+    const audio = new Audio(url);
+    audio.play();
+
+    chunks = [];
+  };
+
+  mediaRecorder.start();
+};
+
+document.getElementById("stop").onclick = () => {
+  mediaRecorder.stop();
+};
+</script>
