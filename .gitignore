@@ -1,2 +1,4 @@
 electron.exe
 /dist
+/.vs
+/.vscode

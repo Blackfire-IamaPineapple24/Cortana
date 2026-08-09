@@ -1,0 +1,2 @@
+D:\Github\Cortana\Code\Voice Activation Extension\bin\Release\app\Voice Activation Extension.pdb
+D:\Github\Cortana\Code\Voice Activation Extension\bin\Release\app\Voice Activation Extension.exe
