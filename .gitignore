@@ -2,3 +2,5 @@ electron.exe
 /dist
 /.vs
 /.vscode
+Code/Voice Activation Extension/obj/Debug/net9.0/Voice Activation Extension.AssemblyInfo.cs
+Code/Voice Activation Extension/obj/Debug/net9.0/Voice Activation Extension.AssemblyInfoInputs.cache
