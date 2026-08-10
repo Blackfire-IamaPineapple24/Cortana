@@ -3,5 +3,25 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="Resources/Styles/index.css">
+        <script src="Resources/Scripts/index.js"></script>
     </head>
+    <body>
+        <div id="sidebar">
+            <button class="sidebar-button" onclick="ToggleSidebar();">  </button> <!-- Hamburger Icon -->
+            <button class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(0);">  </button> <!-- Chat bubble Icon -->
+            <button class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(1);">  </button> <!-- Journal Icon -->
+            <button id="settings-button" class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(2);">  </button> <!-- Gear Icon -->
+        </div>
+        <div id="content" onclick="ForceCloseSidebar();">
+            <div id="chat">
+                Chat
+            </div>
+            <div id="notebook">
+                Notebook
+            </div>
+            <div id="settings">
+                Settings
+            </div>
+        </div>
+    </body>
 </html>

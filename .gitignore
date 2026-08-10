@@ -1,5 +1,5 @@
 electron.exe
-/dist
+/Code/Cortana/dist
 /.vs
 /.vscode
 Code/Voice Activation Extension/obj/

@@ -5,13 +5,25 @@
   "license": "UNLICENSED",
   "author": "IamaPineapple24",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
     "start-voice": "electron . --voice",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dist": "electron-builder"
   },
   "dependencies": {
-    "electron": "^43.3.0"
+    "electron-packager": "^17.1.2"
+  },
+  "devDependencies": {
+    "electron": "^43.3.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "productName": "Cortana",
+    "win": {
+      "appId": "com.ipin.cortana",
+      "executableName": "cortana",
+      "icon": "Resources/Images/Icon.ico"
+    }
   }
 }
