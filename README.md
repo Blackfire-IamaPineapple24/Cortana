@@ -4,6 +4,8 @@ This project aims to re-create the Cortana virtual assistant application bundled
 
 ---
 
+**Other**: [Technical Information](/Info/Pages/TECH-INFO.md)
+
 ## Legal & Attribution
 Training and model file for "Hey Cortana" wake word provided by [OpenWakeWord](https://github.com/dscripka/openWakeWord)
 

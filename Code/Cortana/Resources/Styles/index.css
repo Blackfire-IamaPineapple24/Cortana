@@ -36,14 +36,6 @@ img
 {
     background-color: rgba(76, 76, 76, 1);
 }
-#sidebar.open .sidebar-button:hover
-{
-    background-color: rgba(53, 53, 53, 0.5);
-}
-#sidebar.open .sidebar-button:active
-{
-    background-color: rgba(76, 76, 76, 0.5);
-}
 /* #endregion ----------------------------------- */
 
 
@@ -56,6 +48,7 @@ img
     user-select: none;
     width: 45px;
     height: 100vh;
+    z-index: 10000;
 }
 #sidebar.open
 {
@@ -64,6 +57,14 @@ img
     width: 245px;
     animation-name: openSidebar;
     animation-duration: 0.3s;
+}
+#sidebar.open .sidebar-button:hover
+{
+    background-color: rgba(53, 53, 53, 0.5);
+}
+#sidebar.open .sidebar-button:active
+{
+    background-color: rgba(76, 76, 76, 0.5);
 }
 
 #settings-button
@@ -78,6 +79,7 @@ img
 {
     padding-left: 45px;
     color: rgba(255, 255, 255, 1);
+    font-family: "Segoe UI Semilight";
 }
 
 #chat
@@ -97,8 +99,54 @@ img
 #settings
 {
     display: none;
-    background-color: rgba(0, 0, 255, 1);
     height: 100vh;
+    user-select: none;
+}
+
+#sett-header
+{
+    height: 64px;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#sett-about
+{
+    position: absolute;
+    width: inherit;
+    bottom: 5px;
+    padding-left: 10px;
+}
+#sett-about h4
+{
+    padding: 0px;
+    font-size: 15px;
+    font-family: "Segoe UI";
+    font-weight: 700;
+    margin: 0px;
+}
+#sett-about p
+{
+    margin: 0px;
+    padding: 0px;
+    font-size: 13px;
+}
+#sett-about a
+{
+    margin: 0px;
+    padding: 0px;
+    font-size: 13px;
+    color: rgba(0, 139, 247);
+    text-decoration: none;
+}
+#sett-about a:hover
+{
+    color: rgba(119, 119, 119, 1);
+}
+#sett-about a:active
+{
+    color: rgba(81, 81, 81, 1);
 }
 /* #endregion ----------------------------------- */
 
