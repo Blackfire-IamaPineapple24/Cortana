@@ -1,0 +1,38 @@
+{
+  "name": "cortana",
+  "version": "3.0.0",
+  "description": "Re-make of the Cortana desktop assistant discontinued in 2023.",
+  "license": "UNLICENSED",
+  "author": "IamaPineapple24",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "start-voice": "electron . --voice",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "electron-packager": "^17.1.2",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "electron": "^43.3.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "productName": "Cortana",
+    "win": {
+      "appId": "com.ipin.cortana",
+      "executableName": "cortana",
+      "icon": "Resources/Images/Icon.ico",
+      "legalTrademarks": "Microsoft Corporation"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true
+    }
+  }
+}

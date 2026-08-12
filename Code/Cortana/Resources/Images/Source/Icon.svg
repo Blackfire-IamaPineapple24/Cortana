@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="Icon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#000000"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="243.24473"
+     inkscape:cy="245.7196"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="264"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Logo"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline"
+     inkscape:highlight-color="#0078d7">
+    <ellipse
+       style="display:inline;fill:none;stroke:#ffffff;stroke-width:53.0829;stroke-dasharray:none;stroke-opacity:0.866667"
+       id="path1"
+       cx="256"
+       cy="256"
+       rx="229.4586"
+       ry="229.45857"
+       inkscape:label="Outer Circle" />
+    <ellipse
+       style="display:inline;fill:none;stroke:#ffffff;stroke-width:54.6939;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse1"
+       cx="256"
+       cy="256"
+       inkscape:label="Inner Circle"
+       rx="177.653"
+       ry="177.65347" />
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="Resources/Styles/index.css">
+        <script src="Resources/Scripts/index.js"></script>
+    </head>
+    <body>
+        <div id="sidebar">
+            <button class="sidebar-button" onclick="ToggleSidebar();">  </button> <!-- Hamburger Icon -->
+            <button class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(0);">  </button> <!-- Chat bubble Icon -->
+            <button class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(1);">  </button> <!-- Journal Icon -->
+            <button id="settings-button" class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(2);">  </button> <!-- Gear Icon -->
+        </div>
+        <div id="content" onclick="ForceCloseSidebar();">
+            <div id="chat">
+                Chat
+            </div>
+            <div id="notebook">
+                Notebook
+            </div>
+            <div id="settings">
+                <div id="sett-header">
+                    Settings
+                </div>
+                <div id="sett-main">
+                    <div class="setting">
+                        <p> Colour Mode </p>
+                    </div>
+                </div>
+                <div id="sett-about">
+                    <h4> About </h4>
+                    <p> Cortana v3.0.0 ALPHA </p>
+                    <p> By IamaPineapple24 </p>
+                    <a rel="external" href="https://github.com/Blackfire-IamaPineapple24/Cortana/tree/Remake" target="_blank"> GitHub </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
