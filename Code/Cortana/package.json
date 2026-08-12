@@ -12,7 +12,8 @@
     "dist": "electron-builder"
   },
   "dependencies": {
-    "electron-packager": "^17.1.2"
+    "electron-packager": "^17.1.2",
+    "fs": "^0.0.1-security"
   },
   "devDependencies": {
     "electron": "^43.3.0",

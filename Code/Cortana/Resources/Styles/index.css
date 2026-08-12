@@ -36,6 +36,12 @@ img
 {
     background-color: rgba(76, 76, 76, 1);
 }
+
+.setting
+{
+    padding-left: 10px;
+    padding-bottom: 15px;
+}
 /* #endregion ----------------------------------- */
 
 
@@ -164,3 +170,4 @@ img
         width: 245px;
     }
 }
+/* #endregion ----------------------------------- */
