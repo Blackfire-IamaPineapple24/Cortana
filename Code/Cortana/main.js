@@ -44,7 +44,10 @@ function CreateMainWindow()
         autoHideMenuBar: true,
         icon: path.join(__dirname, 'Resources/Images/', 'icon.png'),
         title: "Cortana",
-        alwaysOnTop: true // I have genuinely no clue why the old version had this line separate from the win declaration
+        alwaysOnTop: true, // I have genuinely no clue why the old version had this line separate from the win declaration
+        webPreferences: {
+            spellcheck: false,
+        },
     });
 
     /* This exists to stop in-app links like the GitHub link in settings

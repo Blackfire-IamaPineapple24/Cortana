@@ -10,6 +10,7 @@
             <button class="sidebar-button" onclick="ToggleSidebar();">  </button> <!-- Hamburger Icon -->
             <button class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(0);">  </button> <!-- Chat bubble Icon -->
             <button class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(1);">  </button> <!-- Journal Icon -->
+            <button id="feedback-button" class="sidebar-button" onclick="ForceCloseSidebar(); SimulateLink('https://github.com/Blackfire-IamaPineapple24/Cortana/issues');">  </button>
             <button id="settings-button" class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(2);">  </button> <!-- Gear Icon -->
         </div>
         <div id="content" onclick="ForceCloseSidebar();">
@@ -25,6 +26,10 @@
                 </div>
                 <div id="sett-main">
                     <div class="setting">
+                        <p> Name </p>
+                        <input id="userName" placeholder="What should Cortana call you?">
+                    </div>
+                    <div class="setting">
                         <p> Colour Mode </p>
                     </div>
                 </div>
@@ -32,7 +37,7 @@
                     <h4> About </h4>
                     <p> Cortana v3.0.0 ALPHA </p>
                     <p> By IamaPineapple24 </p>
-                    <a rel="external" href="https://github.com/Blackfire-IamaPineapple24/Cortana/tree/Remake" target="_blank"> GitHub </a>
+                    <a rel="external" href="https://github.com/Blackfire-IamaPineapple24/Cortana" target="_blank"> GitHub </a>
                 </div>
             </div>
         </div>

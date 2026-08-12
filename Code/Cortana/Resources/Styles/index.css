@@ -11,6 +11,11 @@ img
     pointer-events: none;
     user-select: none;
 }
+
+*:focus
+{
+    outline: none;
+}
 /* #endregion ----------------------------------- */
 
 
@@ -42,6 +47,22 @@ img
     padding-left: 10px;
     padding-bottom: 15px;
 }
+.setting input
+{
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 0px;
+    border-style: none;
+    width: calc(100% - 20px);
+    height: 32px;
+    font-size: 15px;
+    font-family: 'Segoe UI Semilight';
+    padding-left: 10px;
+}
+.setting p
+{
+    margin-bottom: 5px;
+    /* margin-top: 0px; */
+}
 /* #endregion ----------------------------------- */
 
 
@@ -71,6 +92,14 @@ img
 #sidebar.open .sidebar-button:active
 {
     background-color: rgba(76, 76, 76, 0.5);
+}
+
+#feedback-button
+{
+    position: absolute;
+    width: inherit;
+    left: 0;
+    bottom: 45px;
 }
 
 #settings-button
