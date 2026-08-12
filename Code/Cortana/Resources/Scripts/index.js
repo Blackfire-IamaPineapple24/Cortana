@@ -51,14 +51,3 @@ function SetPage(pageNumber)
     }
     currentPage = pageNumber;
 }
-
-// Simulate a click on an <a> element because something is deeply wrong with JavaScript
-function SimulateLink(location)
-{
-    let a = document.createElement('a');
-    a.href = location;
-    a.target = '_blank'; // To open in a new browser window
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-}
