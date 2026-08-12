@@ -24,7 +24,15 @@
     "win": {
       "appId": "com.ipin.cortana",
       "executableName": "cortana",
-      "icon": "Resources/Images/Icon.ico"
+      "icon": "Resources/Images/Icon.ico",
+      "legalTrademarks": "Microsoft Corporation"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true
     }
   }
 }

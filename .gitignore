@@ -3,3 +3,4 @@ electron.exe
 /.vs
 /.vscode
 Code/Voice Activation Extension/obj/
+/Code/Voice Activation Extension/obj/Debug
