@@ -81,7 +81,7 @@ img
     margin-bottom: 5px;
     margin-top: 3px;
 }
-/* Radio buttons! They are s complicated they need their own comment. */
+/* #region Radio buttons! They are s complicated they need their own comment. */
 .setting .radio-button-group
 {
     display: flex;
@@ -173,7 +173,7 @@ img
 }
 
 
-/* End of radio buttons. */
+/* #endregion End of radio buttons. */
 
 /* #endregion ----------------------------------- */
 
