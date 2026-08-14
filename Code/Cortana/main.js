@@ -22,7 +22,7 @@ function CreateMainWindow()
         const windowStateData = fs.readFileSync(windowStateFile, 'utf8'); // Load the saved window position
         windowState = JSON.parse(windowStateData); // Use it
     }
-    catch (_) {} // I believe what ths does is ignore the error. Please @ me on bluesky if i'm wrong, i'm trying to learn!
+    catch (_) {} // I believe what this does is ignore the error. Please @ me on bluesky if i'm wrong, i'm trying to learn!
 
     const primaryDisplay = screen.getPrimaryDisplay();
     const workArea = primaryDisplay.workArea; // Work area is the screen, excluding the taskbar.
@@ -33,7 +33,6 @@ function CreateMainWindow()
     const win = new BrowserWindow
     ({
         backgroundColor: '#000000',
-        devTools: false,
         minWidth: 400,
         minHeight: 750,
         x: x,
@@ -47,6 +46,7 @@ function CreateMainWindow()
         alwaysOnTop: true, // I have genuinely no clue why the old version had this line separate from the win declaration
         webPreferences: {
             spellcheck: false,
+            devTools: !app.isPackaged, // Chrome devtools are only enabled outwith the packaged app
         },
     });
 

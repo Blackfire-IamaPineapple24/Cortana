@@ -8,18 +8,22 @@
     <body>
         <div id="sidebar">
             <button class="sidebar-button" onclick="ToggleSidebar();">  </button> <!-- Hamburger Icon -->
-            <button class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(0);">  </button> <!-- Chat bubble Icon -->
-            <button class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(1);">  </button> <!-- Journal Icon -->
-            <button id="feedback-button" class="sidebar-button" onclick="ForceCloseSidebar(); window.open('https://github.com/Blackfire-IamaPineapple24/Cortana/issues');">  </button>
+            <button id="chat-button" class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(0);">  </button> <!-- Chat bubble Icon -->
+            <button id="notebook-button" class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(1);">  </button> <!-- Journal Icon -->
+            <button id="feedback-button" class="sidebar-button" onclick="ForceCloseSidebar(); window.open('https://github.com/Blackfire-IamaPineapple24/Cortana/issues');">  </button> <!-- Feedback icon -->
             <button id="settings-button" class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(2);">  </button> <!-- Gear Icon -->
         </div>
         <div id="content" onclick="ForceCloseSidebar();">
             <div id="chat">
                 Chat
             </div>
+
+
             <div id="notebook">
                 Notebook
             </div>
+
+
             <div id="settings">
                 <div id="sett-header">
                     Settings
@@ -31,6 +35,23 @@
                     </div>
                     <div class="setting">
                         <p> Colour Mode </p>
+                        <div class="radio-button-group" id="colour-mode-select">
+                            <label class="radio-option">
+                                <input type="radio" name="colour-mode" value="light">
+                                <div class="radio-custom"></div>
+                                <div class="radio-label"> Light </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="colour-mode" value="dark">
+                                <div class="radio-custom"></div>
+                                <div class="radio-label"> Dark </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="colour-mode" value="system" checked>
+                                <div class="radio-custom"></div>
+                                <div class="radio-label"> System </div>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div id="sett-about">

@@ -12,9 +12,12 @@ img
     user-select: none;
 }
 
-*:focus
+/* Sometimes I hate CSS, sometimes I love it. This is one of the times I love it. */
+*:focus-visible
 {
-    outline: none;
+    outline-style: solid;
+    outline-color: rgba(255, 255, 255, 1);
+    outline-width: 2px;
 }
 /* #endregion ----------------------------------- */
 
@@ -49,20 +52,129 @@ img
 }
 .setting input
 {
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(31, 31, 31, 1);
+    color: rgba(255, 255, 255, 1);
     border-radius: 0px;
     border-style: none;
     width: calc(100% - 20px);
-    height: 32px;
+    max-width: 308.5px;
+    height: 35px;
     font-size: 15px;
     font-family: 'Segoe UI Semilight';
     padding-left: 10px;
 }
+.setting input:hover
+{
+    background-color: rgba(26, 26, 26, 1);
+}
+.setting input:focus
+{
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(0, 0, 0, 1);
+}
+.setting input:focus-visible
+{
+    outline: none;
+}
 .setting p
 {
     margin-bottom: 5px;
-    /* margin-top: 0px; */
+    margin-top: 3px;
 }
+/* Radio buttons! They are s complicated they need their own comment. */
+.setting .radio-button-group
+{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 10px);
+}
+
+.setting .radio-option
+{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 12px;
+    cursor: normal;
+}
+.setting .radio-option input[type="radio"]
+{
+    /* Hide the default radio buttons */
+    display: none;
+}
+
+
+.setting .radio-custom
+{
+    position: relative;
+    height: 20px; /* Size of the outer ring */
+    width: 20px;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(198, 198, 198, 1);
+    margin-right: 12px;
+}
+
+/* Active (clicking) outer ring */
+.setting .radio-option:active .radio-custom
+{
+    border-color: rgba(153, 153, 135, 1) !important;
+}
+
+.setting .radio-label
+{
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* CHECKED outer ring */
+.setting .radio-option input[type="radio"]:checked + .radio-custom
+{
+    border-color: rgba(0, 139, 247, 1);
+}
+
+/* Inner dot */
+.setting .radio-custom::after
+{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 12px; /* Size of the inner dot */
+    width: 12px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* UNCHECKED Hover */
+.setting .radio-option:hover input[type="radio"]:not(:checked) + .radio-custom
+{
+    border-color: rgba(255, 255, 255, 1);
+}
+
+/* CHECKED inner dot (Revealed) */
+.setting .radio-option input[type="radio"]:checked + .radio-custom::after
+{
+    transform: translate(-50%, -50%);
+    background-color: rgba(198, 198, 198, 1);
+}
+
+/* CHECKED hover */
+.setting .radio-option:hover input[type="radio"]:checked + .radio-custom::after
+{
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* CHECKED active */
+.setting .radio-option:active input[type="radio"]:checked + .radio-custom::after
+{
+    background-color: rgba(153, 153, 153, 1);
+}
+
+
+/* End of radio buttons. */
+
 /* #endregion ----------------------------------- */
 
 
@@ -94,12 +206,41 @@ img
     background-color: rgba(76, 76, 76, 0.5);
 }
 
+#sidebar.open #chat-button::after
+{
+    position: fixed;
+    font-family: 'Segoe UI Semilight';
+    padding-left: 10px;
+    transform: translateY(-5px);
+    font-size: 16px;
+    content: "Chat";
+}
+
+#sidebar.open #notebook-button::after
+{
+    position: fixed;
+    font-family: 'Segoe UI Semilight';
+    padding-left: 10px;
+    transform: translateY(-5px);
+    font-size: 16px;
+    content: "Notebook";
+}
+
 #feedback-button
 {
     position: absolute;
     width: inherit;
     left: 0;
     bottom: 45px;
+}
+#sidebar.open #feedback-button::after
+{
+    position: fixed;
+    font-family: 'Segoe UI Semilight';
+    padding-left: 10px;
+    transform: translateY(-5px);
+    font-size: 16px;
+    content: "Feedback";
 }
 
 #settings-button
@@ -108,6 +249,15 @@ img
     width: inherit;
     left: 0;
     bottom: 0;
+}
+#sidebar.open #settings-button::after
+{
+    position: fixed;
+    font-family: 'Segoe UI Semilight';
+    padding-left: 10px;
+    transform: translateY(-5px);
+    font-size: 16px;
+    content: "Settings";
 }
 
 #content
