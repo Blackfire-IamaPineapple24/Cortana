@@ -76,12 +76,50 @@ img
 {
     outline: none;
 }
+.setting .input-clear
+{
+    visibility: hidden;
+    font-family: 'Segoe MDL2 Assets';
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 1);
+    border-radius: 0%;
+    border-style: none;
+    position: absolute;
+    height: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transform: translateX(-33px) translateY(+1px);
+    text-align: center;
+}
+.setting .input-clear:hover
+{
+    color: rgba(0, 139, 247, 1);
+}
+.setting .input-clear:active
+{
+    background-color: rgba(0, 139, 247, 1);
+    color: rgba(255, 255, 255, 1);
+}
+/* Originally, I used .setting input:not(:blank)::after but apparently input doesn't support ::after which seems really dumb to me */
+.setting input:not(:placeholder-shown) + .input-clear
+{
+    visibility: visible;
+}
+.setting input:not(:focus):not(:placeholder-shown) + .input-clear:not(:active)
+{
+    visibility: hidden;
+}
+.setting input:has(+ .input-clear:active) /* This is one of the times I hate CSS */
+{
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(0, 0, 0, 1);
+}
 .setting p
 {
     margin-bottom: 5px;
     margin-top: 3px;
 }
-/* #region Radio buttons! They are s complicated they need their own comment. */
+/* #region Radio buttons! They are so complicated they need their own comment. */
 .setting .radio-button-group
 {
     display: flex;

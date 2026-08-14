@@ -12,12 +12,11 @@ function ToggleSidebar()
     }
     else
     {
-        document.getElementById('sidebar').classList.remove('open');
-        sidebarIsOpen = false;
+        CloseSidebar();
     }
 }
 
-function ForceCloseSidebar()
+function CloseSidebar()
 {
     document.getElementById('sidebar').classList.remove('open');
     sidebarIsOpen = false;
@@ -50,4 +49,9 @@ function SetPage(pageNumber)
         settPage.style.display = 'block';
     }
     currentPage = pageNumber;
+}
+
+function ClearText(target)
+{
+    target.value = '';
 }

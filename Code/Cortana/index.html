@@ -8,10 +8,10 @@
     <body>
         <div id="sidebar">
             <button class="sidebar-button" onclick="ToggleSidebar();">  </button> <!-- Hamburger Icon -->
-            <button id="chat-button" class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(0);">  </button> <!-- Chat bubble Icon -->
-            <button id="notebook-button" class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(1);">  </button> <!-- Journal Icon -->
-            <button id="feedback-button" class="sidebar-button" onclick="ForceCloseSidebar(); window.open('https://github.com/Blackfire-IamaPineapple24/Cortana/issues');">  </button> <!-- Feedback icon -->
-            <button id="settings-button" class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(2);">  </button> <!-- Gear Icon -->
+            <button id="chat-button" class="sidebar-button" onclick="CloseSidebar(); SetPage(0);">  </button> <!-- Chat bubble Icon -->
+            <button id="notebook-button" class="sidebar-button" onclick="CloseSidebar(); SetPage(1);">  </button> <!-- Journal Icon -->
+            <button id="feedback-button" class="sidebar-button" onclick="CloseSidebar(); window.open('https://github.com/Blackfire-IamaPineapple24/Cortana/issues');">  </button> <!-- Feedback icon -->
+            <button id="settings-button" class="sidebar-button" onclick="CloseSidebar(); SetPage(2);">  </button> <!-- Gear Icon -->
         </div>
         <div id="content" onclick="ForceCloseSidebar();">
             <div id="chat">
@@ -32,6 +32,7 @@
                     <div class="setting">
                         <p> Name </p>
                         <input id="userName" placeholder="What should Cortana call you?">
+                        <button class="input-clear" onclick="ClearText(document.getElementById('userName'));">  </button>
                     </div>
                     <div class="setting">
                         <p> Colour Mode </p>
