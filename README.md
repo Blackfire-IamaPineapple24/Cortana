@@ -4,6 +4,8 @@ This project aims to re-create the Cortana virtual assistant application bundled
 
 ---
 
+The latest binary in the releases is 2.3.0, but if you'd like to try the pre-release versions (The new app), they are available.
+
 Support for additional languages is not implemented yet, but if you want to help with translating in the future, there is a Crowdin page linked here.
 
 ---
