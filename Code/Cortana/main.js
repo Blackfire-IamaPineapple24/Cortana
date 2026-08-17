@@ -1,11 +1,12 @@
 // Importing modules
-const { app, BrowserWindow, shell, screen } = require('electron');
+const { app, BrowserWindow, shell, screen, ipcMain } = require('electron');
 const path = require('path'); // For manipulating file paths.
 const fs = require('fs'); // Filesystem access
 
 // -- VARIABLES ---------------------------------
 const appData = app.getPath('userData'); // Makes the other file management stuff easier
 const windowStateFile = path.join(appData, 'window-state.json');
+const nameFile = path.join(appData, 'user-name.txt');
 // ----------------------------------------------
 
 // Function to instantiate main window
@@ -22,7 +23,7 @@ function CreateMainWindow()
         const windowStateData = fs.readFileSync(windowStateFile, 'utf8'); // Load the saved window position
         windowState = JSON.parse(windowStateData); // Use it
     }
-    catch (_) {} // I believe what ths does is ignore the error. Please @ me on bluesky if i'm wrong, i'm trying to learn!
+    catch (_) {} // Basically, ignore it if the file doesn't exist.
 
     const primaryDisplay = screen.getPrimaryDisplay();
     const workArea = primaryDisplay.workArea; // Work area is the screen, excluding the taskbar.
@@ -33,7 +34,6 @@ function CreateMainWindow()
     const win = new BrowserWindow
     ({
         backgroundColor: '#000000',
-        devTools: false,
         minWidth: 400,
         minHeight: 750,
         x: x,
@@ -42,10 +42,19 @@ function CreateMainWindow()
         height: windowState.height,
         maximizable: false,
         autoHideMenuBar: true,
-        icon: path.join(__dirname, 'Resources/Images/', 'icon.png'),
+        icon: path.join(__dirname, 'Resources/Images/icon.png'),
         title: "Cortana",
-        alwaysOnTop: true // I have genuinely no clue why the old version had this line separate from the win declaration
+        alwaysOnTop: true, // I have genuinely no clue why the old version had this line separate from the win declaration
+        // contextIsolation: true,
+        // nodeIntegration: false,
+        webPreferences: {
+            preload: path.join(__dirname, 'Resources/Scripts/preload-index.js'),
+            spellcheck: false,
+            devTools: !app.isPackaged, // Chrome devtools are only enabled outwith the packaged app
+        },
     });
+
+    win.loadFile('index.html');
 
     /* This exists to stop in-app links like the GitHub link in settings
        from opening IN the app. I'm not gonna ask why _self is still the
@@ -61,6 +70,11 @@ function CreateMainWindow()
     {
         win.show();
         win.focus();
+        try // Again, ignore it if the file doesn't exist - this only happens on first launch or ig the file is deleted
+        {
+            win.webContents.send('name-updated', fs.readFileSync(nameFile).toString()); // Load username
+        }
+        catch (_) {}
     });
 
     // Save window size and position on close.
@@ -68,11 +82,15 @@ function CreateMainWindow()
     {
         fs.writeFileSync(windowStateFile, JSON.stringify(win.getBounds()));
     });
-
-    win.loadFile('index.html');
 }
 
 app.whenReady().then(() =>
 {
     CreateMainWindow();
+});
+
+// IPC Listeners
+ipcMain.on('set-name', (event, name) =>
+{
+   fs.writeFileSync(nameFile, name); // Save the user name to a file
 });

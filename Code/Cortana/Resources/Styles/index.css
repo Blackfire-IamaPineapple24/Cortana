@@ -11,6 +11,14 @@ img
     pointer-events: none;
     user-select: none;
 }
+
+/* Sometimes I hate CSS, sometimes I love it. This is one of the times I love it. */
+*:focus-visible
+{
+    outline-style: solid;
+    outline-color: rgba(255, 255, 255, 1);
+    outline-width: 2px;
+}
 /* #endregion ----------------------------------- */
 
 
@@ -42,6 +50,172 @@ img
     padding-left: 10px;
     padding-bottom: 15px;
 }
+.setting input
+{
+    background-color: rgba(31, 31, 31, 1);
+    color: rgba(255, 255, 255, 1);
+    border-radius: 0px;
+    border-style: none;
+    width: calc(100% - 8.5px);
+    max-width: 320px;
+    height: 37px;
+    font-size: 15px;
+    font-family: 'Segoe UI Semilight';
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+.setting input:hover
+{
+    background-color: rgba(26, 26, 26, 1);
+}
+.setting input:focus
+{
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(0, 0, 0, 1);
+    padding-right: 37px;
+}
+.setting input:focus-visible
+{
+    outline: none;
+}
+.setting .input-clear
+{
+    visibility: hidden;
+    font-family: 'Segoe MDL2 Assets';
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 1);
+    border-radius: 0%;
+    border-style: none;
+    position: absolute;
+    height: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transform: translateX(-34px) translateY(+1px);
+    text-align: center;
+}
+.setting .input-clear:hover
+{
+    color: rgba(0, 139, 247, 1);
+}
+.setting .input-clear:active
+{
+    background-color: rgba(0, 139, 247, 1);
+    color: rgba(255, 255, 255, 1);
+}
+/* Originally, I used .setting input:not(:blank)::after but apparently input doesn't support ::after which seems really dumb to me */
+.setting input:not(:placeholder-shown) + .input-clear
+{
+    visibility: visible;
+}
+.setting input:not(:focus):not(:placeholder-shown) + .input-clear:not(:active)
+{
+    visibility: hidden;
+}
+.setting input:has(+ .input-clear:active) /* This is one of the times I hate CSS */
+{
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(0, 0, 0, 1);
+}
+.setting p
+{
+    margin-bottom: 5px;
+    margin-top: 3px;
+}
+/* #region Radio buttons! They are so complicated they need their own comment. */
+.setting .radio-button-group
+{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 10px);
+}
+
+.setting .radio-option
+{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 12px;
+    cursor: normal;
+}
+.setting .radio-option input[type="radio"]
+{
+    /* Hide the default radio buttons */
+    display: none;
+}
+
+
+.setting .radio-custom
+{
+    position: relative;
+    height: 20px; /* Size of the outer ring */
+    width: 20px;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(198, 198, 198, 1);
+    margin-right: 12px;
+}
+
+/* Active (clicking) outer ring */
+.setting .radio-option:active .radio-custom
+{
+    border-color: rgba(153, 153, 135, 1) !important;
+}
+
+.setting .radio-label
+{
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* CHECKED outer ring */
+.setting .radio-option input[type="radio"]:checked + .radio-custom
+{
+    border-color: rgba(0, 139, 247, 1);
+}
+
+/* Inner dot */
+.setting .radio-custom::after
+{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 12px; /* Size of the inner dot */
+    width: 12px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* UNCHECKED Hover */
+.setting .radio-option:hover input[type="radio"]:not(:checked) + .radio-custom
+{
+    border-color: rgba(255, 255, 255, 1);
+}
+
+/* CHECKED inner dot (Revealed) */
+.setting .radio-option input[type="radio"]:checked + .radio-custom::after
+{
+    transform: translate(-50%, -50%);
+    background-color: rgba(198, 198, 198, 1);
+}
+
+/* CHECKED hover */
+.setting .radio-option:hover input[type="radio"]:checked + .radio-custom::after
+{
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* CHECKED active */
+.setting .radio-option:active input[type="radio"]:checked + .radio-custom::after
+{
+    background-color: rgba(153, 153, 153, 1);
+}
+
+
+/* #endregion End of radio buttons. */
+
 /* #endregion ----------------------------------- */
 
 
@@ -73,12 +247,58 @@ img
     background-color: rgba(76, 76, 76, 0.5);
 }
 
+#sidebar.open #chat-button::after
+{
+    position: fixed;
+    font-family: 'Segoe UI Semilight';
+    padding-left: 10px;
+    transform: translateY(-5px);
+    font-size: 16px;
+    content: "Chat";
+}
+
+#sidebar.open #notebook-button::after
+{
+    position: fixed;
+    font-family: 'Segoe UI Semilight';
+    padding-left: 10px;
+    transform: translateY(-5px);
+    font-size: 16px;
+    content: "Notebook";
+}
+
+#feedback-button
+{
+    position: absolute;
+    width: inherit;
+    left: 0;
+    bottom: 45px;
+}
+#sidebar.open #feedback-button::after
+{
+    position: fixed;
+    font-family: 'Segoe UI Semilight';
+    padding-left: 10px;
+    transform: translateY(-5px);
+    font-size: 16px;
+    content: "Feedback";
+}
+
 #settings-button
 {
     position: absolute;
     width: inherit;
     left: 0;
     bottom: 0;
+}
+#sidebar.open #settings-button::after
+{
+    position: fixed;
+    font-family: 'Segoe UI Semilight';
+    padding-left: 10px;
+    transform: translateY(-5px);
+    font-size: 16px;
+    content: "Settings";
 }
 
 #content

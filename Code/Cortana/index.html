@@ -8,31 +8,58 @@
     <body>
         <div id="sidebar">
             <button class="sidebar-button" onclick="ToggleSidebar();">  </button> <!-- Hamburger Icon -->
-            <button class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(0);">  </button> <!-- Chat bubble Icon -->
-            <button class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(1);">  </button> <!-- Journal Icon -->
-            <button id="settings-button" class="sidebar-button" onclick="ForceCloseSidebar(); SetPage(2);">  </button> <!-- Gear Icon -->
+            <button id="chat-button" class="sidebar-button" onclick="CloseSidebar(); SetPage(0);">  </button> <!-- Chat bubble Icon -->
+            <button id="notebook-button" class="sidebar-button" onclick="CloseSidebar(); SetPage(1);">  </button> <!-- Journal Icon -->
+            <button id="feedback-button" class="sidebar-button" onclick="CloseSidebar(); window.open('https://github.com/Blackfire-IamaPineapple24/Cortana/issues');">  </button> <!-- Feedback icon -->
+            <button id="settings-button" class="sidebar-button" onclick="CloseSidebar(); SetPage(2);">  </button> <!-- Gear Icon -->
         </div>
-        <div id="content" onclick="ForceCloseSidebar();">
+        <div id="content" onclick="CloseSidebar();">
             <div id="chat">
                 Chat
             </div>
+
+
             <div id="notebook">
                 Notebook
             </div>
+
+
             <div id="settings">
                 <div id="sett-header">
                     Settings
                 </div>
                 <div id="sett-main">
                     <div class="setting">
+                        <p> Name </p>
+                        <input onclick="this.addEventListener('blur', ConfirmName());" id="user-name" placeholder="What should Cortana call you?">
+                        <button class="input-clear" onclick="ClearText(document.getElementById('user-name')); window.electronAPI.SetName('');">  </button>
+                    </div>
+                    <div class="setting">
                         <p> Colour Mode </p>
+                        <div class="radio-button-group" id="colour-mode-select">
+                            <label class="radio-option">
+                                <input type="radio" name="colour-mode" value="light">
+                                <div class="radio-custom"></div>
+                                <div class="radio-label"> Light </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="colour-mode" value="dark">
+                                <div class="radio-custom"></div>
+                                <div class="radio-label"> Dark </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="colour-mode" value="system" checked>
+                                <div class="radio-custom"></div>
+                                <div class="radio-label"> System </div>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div id="sett-about">
                     <h4> About </h4>
                     <p> Cortana v3.0.0 ALPHA </p>
                     <p> By IamaPineapple24 </p>
-                    <a rel="external" href="https://github.com/Blackfire-IamaPineapple24/Cortana/tree/Remake" target="_blank"> GitHub </a>
+                    <a rel="external" href="https://github.com/Blackfire-IamaPineapple24/Cortana" target="_blank"> GitHub </a>
                 </div>
             </div>
         </div>

@@ -12,12 +12,11 @@ function ToggleSidebar()
     }
     else
     {
-        document.getElementById('sidebar').classList.remove('open');
-        sidebarIsOpen = false;
+        CloseSidebar();
     }
 }
 
-function ForceCloseSidebar()
+function CloseSidebar()
 {
     document.getElementById('sidebar').classList.remove('open');
     sidebarIsOpen = false;
@@ -51,3 +50,37 @@ function SetPage(pageNumber)
     }
     currentPage = pageNumber;
 }
+
+function ClearText(target)
+{
+    target.value = '';
+}
+
+// Save the name to a file.
+function ConfirmName()
+{
+    const nameInput = document.getElementById('user-name');
+
+    if (nameInput && nameInput.value.trim() !== '')
+    {
+        window.electronAPI.SetName(nameInput.value.trim());
+    }
+}
+
+/* Once content has loaded, start saving text every time the content
+   of the text box changes. */
+window.addEventListener('DOMContentLoaded', () =>
+{
+    const nameInput = document.getElementById('user-name');
+
+    nameInput?.addEventListener('input', () =>
+    {
+        ConfirmName();
+    });
+});
+
+// IPC Listeners
+window.electronAPI.OnLoadName((name) =>
+{
+    document.getElementById('user-name').value = name;
+});
