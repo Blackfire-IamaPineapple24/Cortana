@@ -56,12 +56,14 @@ img
     color: rgba(255, 255, 255, 1);
     border-radius: 0px;
     border-style: none;
-    width: calc(100% - 20px);
-    max-width: 308.5px;
-    height: 35px;
+    width: calc(100% - 8.5px);
+    max-width: 320px;
+    height: 37px;
     font-size: 15px;
     font-family: 'Segoe UI Semilight';
     padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
 }
 .setting input:hover
 {
@@ -71,6 +73,7 @@ img
 {
     background-color: rgba(255, 255, 255, 1);
     color: rgba(0, 0, 0, 1);
+    padding-right: 37px;
 }
 .setting input:focus-visible
 {
@@ -88,7 +91,7 @@ img
     height: 35px;
     padding-left: 10px;
     padding-right: 10px;
-    transform: translateX(-33px) translateY(+1px);
+    transform: translateX(-34px) translateY(+1px);
     text-align: center;
 }
 .setting .input-clear:hover

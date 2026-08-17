@@ -13,7 +13,7 @@
             <button id="feedback-button" class="sidebar-button" onclick="CloseSidebar(); window.open('https://github.com/Blackfire-IamaPineapple24/Cortana/issues');">  </button> <!-- Feedback icon -->
             <button id="settings-button" class="sidebar-button" onclick="CloseSidebar(); SetPage(2);">  </button> <!-- Gear Icon -->
         </div>
-        <div id="content" onclick="ForceCloseSidebar();">
+        <div id="content" onclick="CloseSidebar();">
             <div id="chat">
                 Chat
             </div>
@@ -31,8 +31,8 @@
                 <div id="sett-main">
                     <div class="setting">
                         <p> Name </p>
-                        <input id="userName" placeholder="What should Cortana call you?">
-                        <button class="input-clear" onclick="ClearText(document.getElementById('userName'));">  </button>
+                        <input onclick="this.addEventListener('blur', ConfirmName());" id="user-name" placeholder="What should Cortana call you?">
+                        <button class="input-clear" onclick="ClearText(document.getElementById('user-name')); window.electronAPI.SetName('');">  </button>
                     </div>
                     <div class="setting">
                         <p> Colour Mode </p>
