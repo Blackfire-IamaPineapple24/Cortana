@@ -1,6 +1,6 @@
 // Variables ------------------------------------
 let sidebarIsOpen = false;
-let currentPage = 0;
+let currentPage = 'chat';
 // ----------------------------------------------
 
 function ToggleSidebar()
@@ -22,7 +22,7 @@ function CloseSidebar()
     sidebarIsOpen = false;
 }
 
-function SetPage(pageNumber)
+function SetPage(pageName)
 {
     // Quick references to the page divs
     chatPage = document.getElementById('chat');
@@ -30,25 +30,25 @@ function SetPage(pageNumber)
     settPage = document.getElementById('settings');
 
     // Set the page
-    if (pageNumber == 0)
+    if (pageName == 'chat')
     {
         chatPage.style.display = 'block';
         notePage.style.display = 'none';
         settPage.style.display = 'none';
     }
-    else if (pageNumber == 1)
+    else if (pageName == 'notebook')
     {
         chatPage.style.display = 'none';
         notePage.style.display = 'block';
         settPage.style.display = 'none';
     }
-    else
+    else if (pageName == 'settings')
     {
         chatPage.style.display = 'none';
         notePage.style.display = 'none';
         settPage.style.display = 'block';
     }
-    currentPage = pageNumber;
+    currentPage = pageName;
 }
 
 function ClearText(target)

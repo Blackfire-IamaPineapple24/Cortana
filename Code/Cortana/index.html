@@ -8,10 +8,10 @@
     <body>
         <div id="sidebar">
             <button class="sidebar-button" onclick="ToggleSidebar();">  </button> <!-- Hamburger Icon -->
-            <button id="chat-button" class="sidebar-button" onclick="CloseSidebar(); SetPage(0);">  </button> <!-- Chat bubble Icon -->
-            <button id="notebook-button" class="sidebar-button" onclick="CloseSidebar(); SetPage(1);">  </button> <!-- Journal Icon -->
+            <button id="chat-button" class="sidebar-button" onclick="CloseSidebar(); SetPage('chat');">  </button> <!-- Chat bubble Icon -->
+            <button id="notebook-button" class="sidebar-button" onclick="CloseSidebar(); SetPage('notebook');">  </button> <!-- Journal Icon -->
             <button id="feedback-button" class="sidebar-button" onclick="CloseSidebar(); window.open('https://github.com/Blackfire-IamaPineapple24/Cortana/issues');">  </button> <!-- Feedback icon -->
-            <button id="settings-button" class="sidebar-button" onclick="CloseSidebar(); SetPage(2);">  </button> <!-- Gear Icon -->
+            <button id="settings-button" class="sidebar-button" onclick="CloseSidebar(); SetPage('settings');">  </button> <!-- Gear Icon -->
         </div>
         <div id="content" onclick="CloseSidebar();">
             <div id="chat">
