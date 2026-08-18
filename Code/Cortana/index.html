@@ -31,24 +31,24 @@
                 <div id="sett-main">
                     <div class="setting">
                         <p> Name </p>
-                        <input onclick="this.addEventListener('blur', ConfirmName());" id="user-name" placeholder="What should Cortana call you?">
+                        <input id="user-name" placeholder="What should Cortana call you?">
                         <button class="input-clear" onclick="ClearText(document.getElementById('user-name')); window.electronAPI.SetName('');">  </button>
                     </div>
                     <div class="setting">
                         <p> Colour Mode </p>
                         <div class="radio-button-group" id="colour-mode-select">
                             <label class="radio-option">
-                                <input type="radio" name="colour-mode" value="light">
+                                <input type="radio" name="colour-mode" value="light" id="light-colour" onclick="SaveColourMode();">
                                 <div class="radio-custom"></div>
                                 <div class="radio-label"> Light </div>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" name="colour-mode" value="dark">
+                                <input type="radio" name="colour-mode" value="dark" id="dark-colour" onclick="SaveColourMode();">
                                 <div class="radio-custom"></div>
                                 <div class="radio-label"> Dark </div>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" name="colour-mode" value="system" checked>
+                                <input type="radio" name="colour-mode" value="system" id="system-colour" onclick="SaveColourMode();">
                                 <div class="radio-custom"></div>
                                 <div class="radio-label"> System </div>
                             </label>
@@ -57,7 +57,7 @@
                 </div>
                 <div id="sett-about">
                     <h4> About </h4>
-                    <p> Cortana v3.0.0 ALPHA </p>
+                    <p> Cortana v3.2.0 ALPHA </p>
                     <p> By IamaPineapple24 </p>
                     <a rel="external" href="https://github.com/Blackfire-IamaPineapple24/Cortana" target="_blank"> GitHub </a>
                 </div>

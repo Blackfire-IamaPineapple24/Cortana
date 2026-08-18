@@ -1,3 +1,4 @@
+/* #region MAIN ---------------------------------------------------------------------------------------- */
 /* #region -- BUILT IN -------------------------- */
 body
 {
@@ -391,3 +392,116 @@ img
     }
 }
 /* #endregion ----------------------------------- */
+/* #endregion MAIN ------------------------------------------------------------------------------------- */
+
+
+
+/* #region LIGHT MODE ---------------------------------------------------------------------------------- */
+body.light-mode
+{
+    /* #region BUILT-IN ----------------------------- */
+    background-color: rgba(255, 255, 255, 1);
+
+    *:focus-visible
+    {
+        outline-color: rgba(0, 0, 0, 1);
+    }
+    /* #endregion ----------------------------------- */
+
+
+
+    /* #region CLASSES ------------------------------ */
+    .sidebar-button
+    {
+        color: rgba(0, 0, 0, 1);
+    }
+    .sidebar-button:hover
+    {
+        background-color: rgba(207, 207, 207, 1);
+    }
+    .sidebar-button:active
+    {
+        background-color: rgba(184, 184, 184, 1);
+    }
+
+    .setting input
+    {
+        background-color: rgba(230, 230, 230, 1);
+        color: rgba(0, 0, 0, 1);
+    }
+    .setting input:hover
+    {
+        background-color: rgba(235, 235, 235, 1);
+    }
+    .setting input:focus
+    {
+        background-color: rgba(245, 245, 245, 1);
+    }
+    .setting input:has(+ .input-clear:active)
+    {
+        background-color: rgba(245, 245, 245, 1);
+    }
+
+    .setting .radio-custom
+    {
+        border-color: rgba(57, 57, 57, 1);
+    }
+    .setting .radio-option:active .radio-custom
+    {
+        border-color: rgba(102, 102, 102, 1);
+    }
+    .setting .radio-option:hover input[type="radio"]:not(:checked) + .radio-custom
+    {
+        border-color: rgba(0, 0, 0, 1);
+    }
+    .setting .radio-option input[type="radio"]:checked + .radio-custom::after
+    {
+        background-color: rgba(51, 51, 51, 1);
+    }
+    .setting .radio-option:hover input[type="radio"]:checked + .radio-custom::after
+    {
+        background-color: rgba(0, 0, 0, 1);
+    }
+    .setting .radio-option:active input[type="radio"]:checked + .radio-custom::after
+    {
+        background-color: rgba(102, 102, 102, 1);
+    }
+    /* #endregion ----------------------------------- */
+
+
+
+    /* #region IDs ---------------------------------- */
+    #sidebar
+    {
+        background-color: rgba(230, 230, 230, 1);
+    }
+    #sidebar.open
+    {
+        background-color: rgba(230, 230, 230, 0.8);
+        backdrop-filter: blur(50px); /* MUCH stronger blur for light mode */
+    }
+    #sidebar.open .sidebar-button:hover
+    {
+        background-color: rgba(207, 207, 207, 0.5);
+    }
+    #sidebar.open .sidebar-button:active
+    {
+        background-color: rgba(184, 184, 184, 0.5);
+    }
+
+    #content
+    {
+        color: rgba(0, 0, 0, 1);
+    }
+
+    #sett-about a:hover
+    {
+        color: rgba(118, 118, 118, 1);
+    }
+    #sett-about a:active
+    {
+        color: rgba(167, 167, 167, 1);
+    }
+    /* #endregion ----------------------------------- */
+}
+/* #endregion LIGHT MODE ------------------------------------------------------------------------------- */

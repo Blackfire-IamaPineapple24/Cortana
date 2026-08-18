@@ -67,6 +67,66 @@ function ConfirmName()
     }
 }
 
+function GetColourSetting()
+{
+    const radioGroup = document.getElementById('colour-mode-select');
+    const selected = radioGroup.querySelector('input[name="colour-mode"]:checked');
+    return selected ? selected.value : null;
+}
+
+function SaveColourMode()
+{
+    const colourMode = GetColourSetting();
+    if (colourMode) window.electronAPI.SetColour(colourMode);
+
+    SetColourMode();
+}
+
+async function SetColourMode()
+{
+    const mode = await window.electronAPI.GetTheme();
+
+    // Set the colour mode using CSS
+    if (mode == 'light')
+    {
+        document.body.classList.add('light-mode');
+    }
+    else
+    {
+        document.body.classList.remove('light-mode');
+    }
+}
+
+function LoadColourMode(mode, rawText) // mode is the colour mode to set, rawText is the button value.
+{
+    /* I did try to use document.querySelector here but it didn't
+       work. I still don't know why. */
+    document.getElementById(`${rawText}-colour`).checked = true;
+    
+    // Set the colour mode using CSS
+    if (mode == 'light')
+    {
+        document.body.classList.add('light-mode');
+    }
+    else
+    {
+        document.body.classList.remove('light-mode');
+    }
+}
+
+function UpdateSystemTheme(isDark)
+{
+    // Set the colour mode using CSS
+    if (!isDark)
+    {
+        document.body.classList.add('light-mode');
+    }
+    else
+    {
+        document.body.classList.remove('light-mode');
+    }
+}
+
 /* Once content has loaded, start saving text every time the content
    of the text box changes. */
 window.addEventListener('DOMContentLoaded', () =>
@@ -91,3 +151,13 @@ window.electronAPI.OnLoadName((name) =>
 {
     document.getElementById('user-name').value = name;
 });
+
+window.electronAPI.OnLoadColour((colourMode, rawText) =>
+{
+    LoadColourMode(colourMode, rawText);
+})
+
+window.electronAPI.OnSystemThemeUpdate((isDark) =>
+{
+    UpdateSystemTheme(isDark);
+})
