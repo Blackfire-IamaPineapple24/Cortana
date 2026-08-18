@@ -1,5 +1,5 @@
 // Importing modules
-const { app, BrowserWindow, shell, screen, ipcMain } = require('electron');
+const { app, BrowserWindow, shell, screen, ipcMain, nativeTheme } = require('electron');
 const path = require('path'); // For manipulating file paths.
 const fs = require('fs'); // Filesystem access
 
@@ -7,7 +7,64 @@ const fs = require('fs'); // Filesystem access
 const appData = app.getPath('userData'); // Makes the other file management stuff easier
 const windowStateFile = path.join(appData, 'window-state.json');
 const nameFile = path.join(appData, 'user-name.txt');
+const colourFile = path.join(appData, 'colour-mode.txt');
 // ----------------------------------------------
+
+function UpdateColourTheme(window)
+{
+    let theme = '';
+    let savedTheme = '';
+    try
+    {
+        savedTheme = fs.readFileSync(colourFile).toString();
+    }
+    catch (_) {}
+
+    if (savedTheme == 'system')
+    {
+        if (nativeTheme.shouldUseDarkColors)
+        {
+            theme = "dark";
+        }
+        else
+        {
+            theme = "light";
+        }
+    }
+    else
+    {
+        theme = savedTheme;
+    }
+
+    window.webContents.send('colour-updated', theme, savedTheme);
+}
+
+/* This function is identical to UpdateColourTheme, exept this one
+   returns the colour theme so that the renderer can set the theme as
+   soon as you click the button. */
+async function HandleThemeRetrieval()
+{
+    let theme = '';
+    let savedTheme = fs.readFileSync(colourFile).toString();
+
+    if (savedTheme == 'system')
+    {
+        if (nativeTheme.shouldUseDarkColors)
+        {
+            theme = "dark";
+        }
+        else
+        {
+            theme = "light";
+        }
+    }
+    else
+    {
+        theme = savedTheme;
+    }
+
+    return theme;
+}
 
 // Function to instantiate main window
 function CreateMainWindow()
@@ -45,8 +102,8 @@ function CreateMainWindow()
         icon: path.join(__dirname, 'Resources/Images/icon.png'),
         title: "Cortana",
         alwaysOnTop: true, // I have genuinely no clue why the old version had this line separate from the win declaration
-        // contextIsolation: true,
-        // nodeIntegration: false,
+        contextIsolation: true,
+        nodeIntegration: false,
         webPreferences: {
             preload: path.join(__dirname, 'Resources/Scripts/preload-index.js'),
             spellcheck: false,
@@ -75,6 +132,7 @@ function CreateMainWindow()
             win.webContents.send('name-updated', fs.readFileSync(nameFile).toString()); // Load username
         }
         catch (_) {}
+        UpdateColourTheme(win);
     });
 
     // Save window size and position on close.
@@ -86,6 +144,27 @@ function CreateMainWindow()
 
 app.whenReady().then(() =>
 {
+    ipcMain.handle('getTheme', HandleThemeRetrieval);
+    try
+    {
+        fs.readFileSync(colourFile);
+    }
+    catch (_)
+    {
+        fs.writeFileSync(colourFile, 'system');
+    }
+    nativeTheme.on('updated', () =>
+    {
+        if (fs.readFileSync(colourFile).toString() == 'system')
+        {
+            const mainWindow = BrowserWindow.getAllWindows().find(win => win.getTitle() === 'Cortana');
+            if (mainWindow)
+            {
+                const isDark = nativeTheme.shouldUseDarkColors;
+                mainWindow.webContents.send('system-theme-update', isDark);
+            }
+        }
+    });
     CreateMainWindow();
 });
 
@@ -93,4 +172,9 @@ app.whenReady().then(() =>
 ipcMain.on('set-name', (event, name) =>
 {
    fs.writeFileSync(nameFile, name); // Save the user name to a file
+});
+
+ipcMain.on('set-colour', (event, colourMode) =>
+{
+    fs.writeFileSync(colourFile, colourMode);
 });
