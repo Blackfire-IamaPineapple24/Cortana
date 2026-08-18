@@ -75,7 +75,14 @@ window.addEventListener('DOMContentLoaded', () =>
 
     nameInput?.addEventListener('input', () =>
     {
-        ConfirmName();
+        if (nameInput.value == '')
+        {
+            window.electronAPI.SetName('');
+        }
+        else
+        {
+            ConfirmName();
+        }
     });
 });
 
