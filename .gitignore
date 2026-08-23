@@ -2,5 +2,6 @@ electron.exe
 /Code/Cortana/dist
 /.vs
 /.vscode
+/node-modules
 Code/Voice Activation Extension/obj/
 /Code/Voice Activation Extension/obj/Debug
